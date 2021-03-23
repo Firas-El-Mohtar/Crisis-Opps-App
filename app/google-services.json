@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "731146496503",
+    "project_id": "crisis-opps-app",
+    "storage_bucket": "crisis-opps-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731146496503:android:4a6173734a971457e9e6f2",
+        "android_client_info": {
+          "package_name": "com.example.crisisoppsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731146496503-ra3dopfej6pdbcjf924ktrdaq6n48l50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuPbROsX5sLtWv5_qjPYyDhUJ4H5bikNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731146496503-ra3dopfej6pdbcjf924ktrdaq6n48l50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731146496503:android:045e28c6262d28d1e9e6f2",
+        "android_client_info": {
+          "package_name": "com.example.crisisopsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731146496503-ra3dopfej6pdbcjf924ktrdaq6n48l50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuPbROsX5sLtWv5_qjPYyDhUJ4H5bikNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731146496503-ra3dopfej6pdbcjf924ktrdaq6n48l50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

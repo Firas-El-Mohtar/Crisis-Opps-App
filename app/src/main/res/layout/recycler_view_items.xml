@@ -6,13 +6,12 @@
     android:layout_height="120dp"
     app:cardCornerRadius="3dp"
     android:layout_margin="2dp"
-
+    android:clickable="true"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/name_holder"
@@ -91,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/markazeye_text"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/pending_for_approval_icon" />
+            app:srcCompat="@drawable/pending_icon" />
 
         <ImageView
             android:id="@+id/ayn_wzayn_icon"
@@ -155,5 +154,4 @@
             app:layout_constraintStart_toEndOf="@+id/phone_number_holder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>
