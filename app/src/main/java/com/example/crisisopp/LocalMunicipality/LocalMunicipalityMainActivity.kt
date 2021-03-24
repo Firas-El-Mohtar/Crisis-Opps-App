@@ -22,7 +22,7 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
             .commitNow()
         var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
         newFormButton.setOnClickListener(
-            su
+
         )
 
     }
