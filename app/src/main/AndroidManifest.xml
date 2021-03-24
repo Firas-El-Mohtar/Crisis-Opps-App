@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.crisisopp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,16 +14,27 @@
         android:theme="@style/Theme.CrisisOpp">
         <activity android:name=".MainMunicipality.MainMunicipalityMainActivity"></activity>
         <activity android:name=".AinWazein.AinWazeinMainActivity" />
-        <activity android:name=".FarahFoundation.FarahFoundationMainActivity" />
+        <activity android:name=".FarahFoundation.FarahFoundationMainActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".LocalMunicipality.LocalMunicipalityMainActivity"></activity>
         <activity android:name=".LogIn.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            >
+
         </activity>
+
+        <service android:name=".notifications.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+        </service>
     </application>
 
 </manifest>
