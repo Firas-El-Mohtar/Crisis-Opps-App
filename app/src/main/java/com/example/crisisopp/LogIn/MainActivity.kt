@@ -85,24 +85,20 @@ class MainActivity : AppCompatActivity() {
         val localRef = "@local"
         val farahRef = "@farah"
         if(userEmail.contains(mainRef)){
-            val message = "Main Municipality"
-            val intent = Intent(this, MainMunicipalityMainActivity::class.java).apply {
+            val intent = Intent(this, MainMunicipalityMainActivity::class.java)
                 startActivity(intent)
-            }
+
         }else if(userEmail.contains(localRef)){
-            val message = "Local Municipality"
             val intent = Intent(this, LocalMunicipalityMainActivity::class.java)
                 startActivity(intent)
 
         }else if(userEmail.contains(farahRef)){
-            val message = "Farah Foundation"
             val intent = Intent(this, FarahFoundationMainActivity::class.java)
                 startActivity(intent)
 
         }
 
     }
-
 
 
     public override fun onStop() {

@@ -10,11 +10,6 @@ import com.example.crisisopp.R
 
 class CreateForm : DialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,9 +19,20 @@ class CreateForm : DialogFragment() {
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = CreateForm()
+    override fun onStart() {
+        super.onStart()
+        dialog?.let {
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            it.window?.setLayout(width, height)
+        }
     }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+//        setWidthPercent(85)
+    }
+
 
 }
