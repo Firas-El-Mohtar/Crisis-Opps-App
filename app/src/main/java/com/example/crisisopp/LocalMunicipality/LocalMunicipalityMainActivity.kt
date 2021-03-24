@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.RecyclerViewFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
+//import com.google.firebase.storage.FirebaseStorage
+//import com.google.firebase.storage.StorageReference
+//import com.google.firebase.storage.UploadTask
 import java.io.File
 
 
@@ -21,9 +21,11 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
             .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
             .commitNow()
         var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
-        newFormButton.setOnClickListener(
-            su
-        )
+
+        newFormButton.setOnClickListener{
+            var dialog = CreateForm()
+            dialog.show(supportFragmentManager, "Creating a new form")
+        }
 
     }
 //        val mStorageRef = FirebaseStorage.getInstance().getReference();
