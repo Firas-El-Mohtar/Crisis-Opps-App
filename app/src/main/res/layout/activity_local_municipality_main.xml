@@ -5,6 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LocalMunicipality.LocalMunicipalityMainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home Care"
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PCR"
+            />
+    </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
         android:id="@+id/RecyclerViewHolder"
@@ -16,16 +38,89 @@
 
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:tint="@color/black"
-        android:contentDescription="submit"
-        app:srcCompat="@drawable/floating_action_button_add"
-        app:fabSize="normal"/>
 
+        <TextView
+            android:id="@+id/text_view_home_care"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="186dp"
+            android:layout_marginEnd="88dp"
+            android:background="#212121"
+            android:padding="8dp"
+            android:text="Home Care"
+            android:textColor="#ffffff"
+            android:visibility="gone" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_home_care"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="176dp"
+            android:layout_marginEnd="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:elevation="16dp"
+            android:focusable="true"
+            android:visibility="gone"
+            app:backgroundTint="#ffffff"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/floating_action_button_add" />
+
+        <TextView
+            android:id="@+id/text_view_pcr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="116dp"
+            android:layout_marginEnd="88dp"
+            android:background="#212121"
+            android:padding="8dp"
+            android:text="PCR"
+            android:textColor="#ffffff"
+            android:visibility="gone" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_pcr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="106dp"
+            android:layout_marginEnd="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:elevation="16dp"
+            android:focusable="true"
+            android:visibility="gone"
+            app:backgroundTint="#ffffff"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/floating_action_button_add" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/main_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:elevation="16dp"
+            android:focusable="true"
+            android:visibility="visible"
+            app:backgroundTint="#ffffff"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/floating_action_button_add" />
+
+
+
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
