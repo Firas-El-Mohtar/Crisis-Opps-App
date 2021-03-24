@@ -32,10 +32,10 @@ class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter
             itemView.setOnClickListener { v: View-> 
                 val position: Int = adapterPosition
 
-                Toast.makeText(, "", Toast.LENGTH_SHORT).show()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
-                    .commitNow()
+//                Toast.makeText(, "", Toast.LENGTH_SHORT).show()
+//                supportFragmentManager.beginTransaction()
+//                    .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
+//                    .commitNow()
             }
         }
     }

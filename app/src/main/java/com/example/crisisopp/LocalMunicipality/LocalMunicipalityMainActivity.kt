@@ -17,15 +17,13 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_municipality_main)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
-            .commitNow()
-        var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
-        newFormButton.setOnClickListener(
-            su
-        )
-
-    }
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
+//            .commitNow()
+//        var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
+//        newFormButton.setOnClickListener()
+//
+//    }
 //        val mStorageRef = FirebaseStorage.getInstance().getReference();
 //
 //        val file: Uri = Uri.fromFile(File("Desktop/download.jfif"))
@@ -46,5 +44,5 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
 //            }
 //    }
 
-
+    }
 }
