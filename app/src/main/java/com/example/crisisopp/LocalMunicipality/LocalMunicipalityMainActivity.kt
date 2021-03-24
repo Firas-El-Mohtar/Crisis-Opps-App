@@ -20,10 +20,11 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
             .commitNow()
-        var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
-        newFormButton.setOnClickListener(
-
-        )
+    }
+//        var newFormButton : FloatingActionButton = findViewById(R.id.floating_action_button)
+//        newFormButton.setOnClickListener(
+//
+//        )
 
     }
 //        val mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -47,4 +48,4 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
 //    }
 
 
-}
+

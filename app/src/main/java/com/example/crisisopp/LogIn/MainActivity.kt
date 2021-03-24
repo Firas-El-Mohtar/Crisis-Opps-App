@@ -10,7 +10,9 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.crisisopp.FarahFoundation.FarahFoundationMainActivity
 import com.example.crisisopp.LocalMunicipality.LocalMunicipalityMainActivity
+import com.example.crisisopp.MainMunicipality.MainMunicipalityMainActivity
 import com.example.crisisopp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
+
         signInButton.setOnClickListener(){
             auth.signInWithEmailAndPassword(username.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "signInWithEmail:success")
                         val user = auth.currentUser
                         changeButtontext()
+                        LayoutSelecter(user.email)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -74,6 +78,29 @@ class MainActivity : AppCompatActivity() {
 
     fun hideProgressBar() {
         progressBar?.visibility = View.INVISIBLE
+    }
+
+    fun LayoutSelecter(userEmail: String){
+        val mainRef = "@main"
+        val localRef = "@local"
+        val farahRef = "@farah"
+        if(userEmail.contains(mainRef)){
+            val message = "Main Municipality"
+            val intent = Intent(this, MainMunicipalityMainActivity::class.java).apply {
+                startActivity(intent)
+            }
+        }else if(userEmail.contains(localRef)){
+            val message = "Local Municipality"
+            val intent = Intent(this, LocalMunicipalityMainActivity::class.java)
+                startActivity(intent)
+
+        }else if(userEmail.contains(farahRef)){
+            val message = "Farah Foundation"
+            val intent = Intent(this, FarahFoundationMainActivity::class.java)
+                startActivity(intent)
+
+        }
+
     }
 
 

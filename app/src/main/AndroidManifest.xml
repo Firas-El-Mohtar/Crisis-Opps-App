@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CrisisOpp">
-        <activity android:name=".AinWazein.AinWazeinMainActivity"></activity>
+        <activity android:name=".MainMunicipality.MainMunicipalityMainActivity"></activity>
+        <activity android:name=".AinWazein.AinWazeinMainActivity" />
         <activity android:name=".FarahFoundation.FarahFoundationMainActivity" />
-        <activity android:name=".LocalMunicipality.LocalMunicipalityMainActivity">
-        </activity>
+        <activity android:name=".LocalMunicipality.LocalMunicipalityMainActivity"></activity>
         <activity android:name=".LogIn.MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            >
         </activity>
     </application>
 
