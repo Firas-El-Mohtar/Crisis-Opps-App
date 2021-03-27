@@ -18,12 +18,14 @@
         <activity android:name=".FarahFoundation.FarahFoundationMainActivity" >
 
         </activity>
-        <activity android:name=".LocalMunicipality.LocalMunicipalityMainActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LocalMunicipality.LocalMunicipalityMainActivity"></activity>
+        <activity android:name=".logIn.view.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".LogIn.MainActivity">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <service android:name=".notifications.FirebaseService"
