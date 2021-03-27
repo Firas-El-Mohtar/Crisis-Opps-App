@@ -20,9 +20,11 @@ import com.example.crisisopp.FarahFoundation.FarahFoundationMainActivity
 import com.example.crisisopp.LocalMunicipality.LocalMunicipalityMainActivity
 import com.example.crisisopp.MainMunicipality.MainMunicipalityMainActivity
 import com.example.crisisopp.R
+import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.logIn.repository.LoginRepository
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
+import com.example.crisisopp.user.UserTYPE
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -36,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     private var progressBar: ProgressBar? = null
     // Initialize Firebase Auth
 
-    val TAG = ""
+    val TAG = "1234"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +49,13 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
 
-        signInButton.setOnClickListener() {
-            viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
-        }
+
+
+
+        Log.d(TAG, UserTYPE.FARAH.toString())
+        Log.d(TAG, UserTYPE.MAIN.toString())
+        Log.d(TAG, UserTYPE.LOCAL.toString())
+
     }
 //        signInButton.setOnClickListener(){
 //            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
@@ -132,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
             //Complete and destroy login activity once successful
             finish()
         })
-
+        viewModel.loginWithCoroutines("user1@local.com", "123456")
     }
     private fun updateUiWithUser() {
 
