@@ -21,7 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 val TAG = "" //todo
-const val TOPIC = "/topics/myTopic2"
+const val TOPIC = "/t" +
+        "" +
+        "opics/myTopic2"
 
 class FarahFoundationMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
