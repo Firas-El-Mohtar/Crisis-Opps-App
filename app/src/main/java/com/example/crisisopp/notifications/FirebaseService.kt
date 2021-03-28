@@ -10,10 +10,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
+import android.preference.PreferenceManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.content.edit
 import com.example.crisisopp.FarahFoundation.FarahFoundationMainActivity
 import com.example.crisisopp.R
+import com.example.crisisopp.logIn.models.User
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlin.random.Random
@@ -22,21 +25,11 @@ private const val CHANNEL_ID = "my_channel"
 
 class FirebaseService : FirebaseMessagingService() {
 
-    companion object {
-        var sharedPref: SharedPreferences? = null
-
-        var token: String?
-            get() {
-                return sharedPref?.getString("token", "")
-            }
-            set(value) {
-                sharedPref?.edit()?.putString("token", value)?.apply()
-            }
-    }
-
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
-        token = newToken
+        getSharedPreferences("shredPref", MODE_PRIVATE).edit().apply {
+            putString("token", newToken)?.apply()
+        }
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
