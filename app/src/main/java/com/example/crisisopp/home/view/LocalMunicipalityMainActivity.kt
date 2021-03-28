@@ -1,22 +1,37 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.home.view
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
+import com.example.crisisopp.LocalMunicipality.CreateForm
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.RecyclerViewFragment
+import com.example.crisisopp.home.viewmodel.HomeViewModel
+import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
+import com.example.crisisopp.logIn.viewmodel.LoginViewModel
+import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class LocalMunicipalityMainActivity : AppCompatActivity() {
 
+    val TAG = "JNCICUBIUBQRV"
+    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!) }
+
+    val db = Firebase.firestore
+
+    val userType = intent.getStringExtra("User")
+    // todo get usetype(mutable) from intent
+//  val y = userType
     private lateinit var mainFab: FloatingActionButton
     private lateinit var homeCareFab: FloatingActionButton
     private lateinit var pcrFab: FloatingActionButton
@@ -52,7 +67,6 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
         pcrFab.setOnClickListener {
 
         }
-
 
 
         }
@@ -110,5 +124,21 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
         }
     }
 
+
+
+
+
+    fun floatingActionButtonStatus(userType: String, mainFAB: FloatingActionButton) {
+        if (userType == "local") {
+
+            Log.d(TAG, "OJBROUWBCOUYVQOUVCQR")
+        } else if (userType == "main") {
+//            mainFAB.visibility = View.GONE
+        }
+    }
+
+    fun getUserTypeFromFirebase(){
+//        db.collection("users").document().get
+    }
 
 }

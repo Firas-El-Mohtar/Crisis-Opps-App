@@ -17,7 +17,7 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
 
     private var token: String?
              get() {
-                return sharedPref?.getString("token", "")
+                return sharedPref?.getString("token", null)
             }
             set(value) {
                 sharedPref?.edit()?.putString("token", value)?.apply()
@@ -67,6 +67,7 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
 
     suspend fun updateUserInfo(userId: String, userType: String) {
         val user = User(token, userId, userType)
+
         dataSource.updateUserInfo(user)
         setLoggedInUser(user)
     }
