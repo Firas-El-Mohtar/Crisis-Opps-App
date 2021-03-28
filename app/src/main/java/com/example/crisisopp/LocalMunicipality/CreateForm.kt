@@ -1,32 +1,36 @@
 package com.example.crisisopp.LocalMunicipality
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.ComponentName
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.crisisopp.R
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.installations.Utils
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.File
 import java.io.IOException
-import android.content.Context
-import android.widget.Toast
-import androidx.annotation.NonNull
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.storage.OnProgressListener
-import com.google.firebase.storage.UploadTask
-import java.lang.Exception
 import java.util.*
+
 
 class CreateForm : DialogFragment() {
     private var btnSubmit: Button? = null
@@ -41,16 +45,16 @@ class CreateForm : DialogFragment() {
     // request code
     private val PICK_IMAGE_REQUEST = 22
 
+
     // instance for firebase storage and StorageReference
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
 
 
-
-
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_create_form, container, false)
@@ -73,54 +77,20 @@ class CreateForm : DialogFragment() {
         return view
     }
 
+
     private fun attachImage() {
+        imageView?.visibility = View.VISIBLE
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(
-            Intent.createChooser(
-                intent,
-                "Select Image from here..."
-            ),
-            PICK_IMAGE_REQUEST
+                Intent.createChooser(
+                        intent,
+                        "Select Image from here..."
+                ),
+                PICK_IMAGE_REQUEST
         )
     }
-    override fun onActivityResult(
-            requestCode: Int,
-            resultCode: Int,
-            data: Intent?
-    ) {
-        super.onActivityResult(
-                requestCode,
-                resultCode,
-                data
-        )
-
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
-        // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
-
-            // Get the Uri of data
-            filePath = data.data
-            try {
-
-                // Setting image on image view using Bitmap
-                val bitmap: Bitmap = MediaStore.Images.Media
-                        .getBitmap(
-                                activity?.contentResolver,
-                                filePath
-                        )
-                imageView!!.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                // Log the exception
-                e.printStackTrace()
-            }
-        }
-    }
-
-
     // UploadImage method
     private fun uploadImage() {
         if (filePath != null) {
@@ -177,14 +147,6 @@ class CreateForm : DialogFragment() {
     }
 
 
-
-
-
-
-
-
-
-
     override fun onStart() {
         super.onStart()
         dialog?.let {
@@ -194,11 +156,38 @@ class CreateForm : DialogFragment() {
         }
     }
 
+    override fun onActivityResult(
+            requestCode: Int,
+            resultCode: Int,
+            data: Intent?
+    ) {
+        super.onActivityResult(
+                requestCode,
+                resultCode,
+                data
+        )
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        setWidthPercent(85)
+        // checking request code and result code
+        // if request code is PICK_IMAGE_REQUEST and
+        // resultCode is RESULT_OK
+        // then set image in the image view
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
+
+            // Get the Uri of data
+            filePath = data.data
+            try {
+
+                // Setting image on image view using Bitmap
+                val bitmap: Bitmap = MediaStore.Images.Media
+                        .getBitmap(
+                                activity?.contentResolver,
+                                filePath
+                        )
+                imageView!!.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                // Log the exception
+                e.printStackTrace()
+            }
+        }
     }
-
-
 }
