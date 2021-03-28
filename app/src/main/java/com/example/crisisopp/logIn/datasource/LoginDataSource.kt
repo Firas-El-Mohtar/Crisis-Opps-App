@@ -1,5 +1,6 @@
 package com.example.crisisopp.logIn.datasource
 
+import android.util.Log
 import com.example.crisisopp.logIn.models.LoggedInUser
 import com.example.crisisopp.logIn.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -12,8 +13,8 @@ import java.io.IOException
 
 class LoginDataSource {
     private var auth: FirebaseAuth = Firebase.auth
-    private val usersCollectionRef = Firebase.firestore.collection("users")
 
+    private val usersCollectionRef = Firebase.firestore
 
 
     /**
@@ -22,10 +23,10 @@ class LoginDataSource {
      * @return The absolute value.
      */
     suspend fun login(email: String, password: String): LoggedInUser {
-        try{
+        try {
             val result = auth.signInWithEmailAndPassword(email, password).await()
             return LoggedInUser(result.user.uid, result.user.email)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             throw e
         }
     }
@@ -38,17 +39,19 @@ class LoginDataSource {
         try {
             val instanceIdResult = FirebaseInstanceId.getInstance().instanceId.await()
             return instanceIdResult.token
-        }catch (e: java.lang.Exception){
+        } catch (e: java.lang.Exception) {
             throw e
         }
     }
 
-    suspend fun updateUserInfo(user: User){
-        usersCollectionRef.add(user).await()
+    suspend fun updateUserInfo(user: User) {
+//        usersCollectionRef.add(user).await()
 
+        usersCollectionRef.collection("users").add(user).await()
     }
+}
+
 //
 //    fun changeUserType(string: String){
 //        usersCollectionRef.
 //    }
-}

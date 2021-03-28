@@ -18,7 +18,7 @@ class LoginViewModelFactory(val sharedPref: SharedPreferences) : ViewModelProvid
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
                     loginRepository = LoginRepository(
-                            dataSource = LoginDataSource(),
+                        dataSource = LoginDataSource(),
                         sharedPref = sharedPref
                     )
             ) as T

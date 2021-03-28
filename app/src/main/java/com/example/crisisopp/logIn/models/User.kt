@@ -1,9 +1,10 @@
 package com.example.crisisopp.logIn.models
 
 import com.google.firebase.firestore.IgnoreExtraProperties
+import java.io.Serializable
 
 @IgnoreExtraProperties
-data class User(var token: String? = "", var userId: String? = "", var userType: String? = "") {
+data class User(var token: String? = "", var userId: String? = "", var userType: String? = ""): Serializable {
 
     companion object {
 

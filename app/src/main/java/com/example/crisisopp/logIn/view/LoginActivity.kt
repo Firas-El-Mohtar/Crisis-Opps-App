@@ -10,18 +10,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.crisisopp.FarahFoundation.FarahFoundationMainActivity
-import com.example.crisisopp.LocalMunicipality.LocalMunicipalityMainActivity
+import com.example.crisisopp.home.view.LocalMunicipalityMainActivity
 import com.example.crisisopp.MainMunicipality.MainMunicipalityMainActivity
 import com.example.crisisopp.R
 import com.example.crisisopp.extensions.emailDomain
-import com.example.crisisopp.logIn.repository.LoginRepository
+import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.example.crisisopp.user.UserTYPE
@@ -35,9 +32,9 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> { LoginViewModelFactory(prefs) }
     private lateinit var auth: FirebaseAuth
     lateinit var prefs: SharedPreferences
+    private var firas: String? = null
     private var progressBar: ProgressBar? = null
     // Initialize Firebase Auth
-
     val TAG = "1234"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,11 +48,13 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
-        Log.d(TAG, UserTYPE.FARAH.toString())
-        Log.d(TAG, UserTYPE.MAIN.toString())
-        Log.d(TAG, UserTYPE.LOCAL.toString())
-
+        signInButton.setOnClickListener() {
+            val fff = viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
+            updateUiWithUser()
+            firas = email.text.toString()
+//            model.currentName.setValue(anotherName)
+//            viewModel.userType.observe()
+        }
     }
 //        signInButton.setOnClickListener(){
 //            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
@@ -138,12 +137,13 @@ class LoginActivity : AppCompatActivity() {
             //Complete and destroy login activity once successful
             finish()
         })
-        viewModel.loginWithCoroutines("user1@local.com", "123456")
+//        viewModel.loginWithCoroutines("user1@local.com", "123456")
     }
     private fun updateUiWithUser() {
 
-        val intent = Intent(this, FarahFoundationMainActivity::class.java)
-//        intent.putExtra("displayname", displayName)
+        val intent = Intent(this, LocalMunicipalityMainActivity::class.java)
+        val xxx = viewModel.userType.toString()
+        intent.putExtra("User", xxx)
         startActivity(intent)
     }
 
