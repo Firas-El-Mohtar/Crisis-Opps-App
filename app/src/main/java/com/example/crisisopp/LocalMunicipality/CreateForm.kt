@@ -13,13 +13,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.viewModels
+
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.crisisopp.R
+import com.example.crisisopp.home.models.Form
+import com.example.crisisopp.home.viewmodel.HomeViewModel
+import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -30,18 +41,37 @@ import java.util.*
 class CreateForm : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
-
     // view for image view
     private var imageView: ImageView? = null
-
     // Uri indicates, where the image will be picked from
     private var filePath: Uri? = null
+
 
 
     // instance for firebase storage and StorageReference
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
 
+
+    // instance for firebase storage and StorageReference
+    var storage: FirebaseStorage? = null
+    var storageReference: StorageReference? = null
+    var db = Firebase.firestore
+
+    //Edit Text References
+    private lateinit var etFullName: EditText
+    private lateinit var etMothersName: EditText
+    private lateinit var etBirthDate: EditText
+    private lateinit var etBloodType: EditText
+    private lateinit var etPlaceOfResidence: EditText
+    private lateinit var etPhoneNumber: EditText
+    private lateinit var etDateOfPrescription: EditText
+    private lateinit var etRecordNumber: EditText
+    private lateinit var etLastPcrDate: EditText
+    private lateinit var etDoctorName: EditText
+
+
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
@@ -55,17 +85,42 @@ class CreateForm : DialogFragment() {
         imageView = view.findViewById(R.id.imageView)
         btnAttach = view.findViewById(R.id.attach_image)
         btnSubmit = view.findViewById(R.id.submit)
+        //Edit Text References (initializing)
+        etFullName = view.findViewById(R.id.full_name)
+        etMothersName = view.findViewById(R.id.mothers_name)
+        etBirthDate = view.findViewById(R.id.birth_date)
+        etBloodType = view.findViewById(R.id.blood_type)
+        etPlaceOfResidence = view.findViewById(R.id.place_of_residency)
+        etPhoneNumber = view.findViewById(R.id.phone_number)
+        etDateOfPrescription = view.findViewById(R.id.date_of_prescription)
+        etRecordNumber = view.findViewById(R.id.record_number)
+        etLastPcrDate = view.findViewById(R.id.pcr_date)
+        etDoctorName = view.findViewById(R.id.doctor_name)
 
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
-
-
         // on pressing btnSelect SelectImage() is called
+
         btnAttach!!.setOnClickListener{ImagePicker.with(this).start()}
 
         // on pressing btnSubmit uploadimage() is called another functions may be added later
         btnSubmit!!.setOnClickListener{uploadImage()}
+
+        btnAttach!!.setOnClickListener{
+            ImagePicker.with(this).start()
+        }
+        // on pressing btnSubmit uploadimage() is called another functions may be added later
+        btnSubmit!!.setOnClickListener{
+            uploadImage()
+            val currentUserId = homeViewModel.getUserId()
+            var form = Form(et, etFullName.text.toString(), etMothersName.text.toString(), etBirthDate.text.toString(),
+            etBloodType.text.toString(), etPlaceOfResidence.text.toString(), etDateOfPrescription.text.toString(),
+                Integer.parseInt(etRecordNumber.getText().toString()), etLastPcrDate.text.toString(),
+                etPhoneNumber.text.toString(), etDoctorName.text.toString(), currentUserId)
+            homeViewModel.uploadForm(form)
+        }
+
         return view
     }
 
@@ -81,10 +136,12 @@ class CreateForm : DialogFragment() {
 
             // Defining the child of storageReference
             val ref: StorageReference? = storageReference
-                    ?.child(
-                        "images/"
-                                + UUID.randomUUID().toString()
-                    )
+
+                ?.child(
+                    "images/"
+                            + UUID.randomUUID().toString()
+                )
+
 
             // adding listeners on upload
             // or failure of imag
@@ -120,8 +177,40 @@ class CreateForm : DialogFragment() {
                         progressDialog.setMessage(
                             "Uploaded "
                                     + progress.toInt() + "%"
+
+                ?.addOnSuccessListener { // Image uploaded successfully
+                    // Dismiss dialog
+                    progressDialog.dismiss()
+                    Toast
+                        .makeText(
+                            activity,
+                            "Image Uploaded!!",
+                            Toast.LENGTH_SHORT
+
                         )
-                    }
+                        .show()
+                }
+                ?.addOnFailureListener { e -> // Error, Image not uploaded
+                    progressDialog.dismiss()
+                    Toast
+                        .makeText(
+                            activity,
+                            "Failed " + e.message,
+                            Toast.LENGTH_SHORT
+                        )
+                        .show()
+                }
+                ?.addOnProgressListener { taskSnapshot ->
+                    // Progress Listener for loading
+                    // percentage on the dialog box
+                    val progress: Double = (100.0
+                            * taskSnapshot.bytesTransferred
+                            / taskSnapshot.totalByteCount)
+                    progressDialog.setMessage(
+                        "Uploaded "
+                                + progress.toInt() + "%"
+                    )
+                }
         }
     }
 

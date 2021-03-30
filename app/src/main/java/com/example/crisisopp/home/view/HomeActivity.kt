@@ -18,18 +18,20 @@ import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class LocalMunicipalityMainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     val TAG = "JNCICUBIUBQRV"
     private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!) }
-
     val db = Firebase.firestore
 
     val userType = intent.getStringExtra("UserType")
+
+    private lateinit var userType: String
     // todo get usetype(mutable) from intent
 //  val y = userType
     private lateinit var mainFab: FloatingActionButton
@@ -45,6 +47,9 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_municipality_main)
+        intent.getStringExtra("UserType")?.let {
+            userType = it
+        }
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
@@ -68,7 +73,6 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
 
         }
 
-
         }
 //
 //            Toast.makeText(applicationContext, "this is toast message", Toast.LENGTH_SHORT).show()
@@ -79,6 +83,11 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
         setVisibility(clicked, pcrFab, pcrText, homeCareFab, homeCareText)
         setAnimation(clicked, pcrFab, pcrText, homeCareFab, homeCareText)
         clicked = !clicked
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.fABStatus(mainFab)
     }
 
     private fun setAnimation(clicked: Boolean, pcrFAB: FloatingActionButton, pcrText: TextView, homeCareFab: FloatingActionButton, homeCareText: TextView) {
