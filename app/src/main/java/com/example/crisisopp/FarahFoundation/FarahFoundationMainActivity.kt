@@ -44,9 +44,9 @@ class FarahFoundationMainActivity : AppCompatActivity() {
             val masterToken = it.token
 
 
-            etToken.setText(it.token)
-        }
-        //        FirebaseInstallations.getInstance().getToken(false).addOnSuccessListener {
+            //            etToken.setText(it.token)
+//        }
+//                FirebaseInstallations.getInstance().getToken(false).addOnSuccessListener {
 //            FirebaseService.token = it.token
 //            etToken.setText(it.token)
 //        }
@@ -66,23 +66,24 @@ class FarahFoundationMainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-        fun createUserToken(user: FirebaseUser) = CoroutineScope(Dispatchers.IO).launch {
+            fun createUserToken(user: FirebaseUser) = CoroutineScope(Dispatchers.IO).launch {
 
-        }
-
-        fun sendNotification(notification: PushNotification) =
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val response = RetrofitInstance.api.postNotification(notification)
-                    if (response.isSuccessful) {
-                        Log.d(TAG, "Response: ${Gson().toJson(response)}")
-                    } else {
-                        Log.e(TAG, response.errorBody().toString())
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
-                }
             }
+
+            fun sendNotification(notification: PushNotification) =
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val response = RetrofitInstance.api.postNotification(notification)
+                        if (response.isSuccessful) {
+                            Log.d(TAG, "Response: ${Gson().toJson(response)}")
+                        } else {
+                            Log.e(TAG, response.errorBody().toString())
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, e.toString())
+                    }
+                }
+        }
     }
 }
 
