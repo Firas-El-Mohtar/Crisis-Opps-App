@@ -29,7 +29,7 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
 
-    val userType = intent.getStringExtra("User")
+    val userType = intent.getStringExtra("UserType")
     // todo get usetype(mutable) from intent
 //  val y = userType
     private lateinit var mainFab: FloatingActionButton
@@ -70,19 +70,10 @@ class LocalMunicipalityMainActivity : AppCompatActivity() {
 
 
         }
-
-
-
-
-
-
-
-
 //
 //            Toast.makeText(applicationContext, "this is toast message", Toast.LENGTH_SHORT).show()
 //            var dialog = CreateForm()
 //            dialog.show(supportFragmentManager, "Create Form")
-
 
     private fun onAddButtonClicked(){
         setVisibility(clicked, pcrFab, pcrText, homeCareFab, homeCareText)

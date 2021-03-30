@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> { LoginViewModelFactory(prefs) }
     private lateinit var auth: FirebaseAuth
     lateinit var prefs: SharedPreferences
-    private var firas: String? = null
     private var progressBar: ProgressBar? = null
+    private var userType: String? = null
     // Initialize Firebase Auth
     val TAG = "1234"
 
@@ -47,11 +47,10 @@ class LoginActivity : AppCompatActivity() {
         val signInButton = findViewById<Button>(R.id.signup)
 
 
-
-        signInButton.setOnClickListener() {
+        signInButton.setOnClickListener{
             val fff = viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
-            updateUiWithUser()
-            firas = email.text.toString()
+            userType = email.text.toString().emailDomain
+            updateUiWithUser(userType.toString())
 //            model.currentName.setValue(anotherName)
 //            viewModel.userType.observe()
         }
@@ -139,11 +138,9 @@ class LoginActivity : AppCompatActivity() {
         })
 //        viewModel.loginWithCoroutines("user1@local.com", "123456")
     }
-    private fun updateUiWithUser() {
-
+    private fun updateUiWithUser(userType: String) {
         val intent = Intent(this, LocalMunicipalityMainActivity::class.java)
-        val xxx = viewModel.userType.toString()
-        intent.putExtra("User", xxx)
+        intent.putExtra("UserType", userType)
         startActivity(intent)
     }
 

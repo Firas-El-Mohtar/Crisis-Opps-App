@@ -1,17 +1,13 @@
 package com.example.crisisopp.LocalMunicipality
 
 import android.app.Activity
-import android.app.AlertDialog
+import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
-import android.content.ComponentName
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.crisisopp.R
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.installations.Utils
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -42,9 +37,6 @@ class CreateForm : DialogFragment() {
     // Uri indicates, where the image will be picked from
     private var filePath: Uri? = null
 
-    // request code
-    private val PICK_IMAGE_REQUEST = 22
-
 
     // instance for firebase storage and StorageReference
     var storage: FirebaseStorage? = null
@@ -53,8 +45,8 @@ class CreateForm : DialogFragment() {
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_create_form, container, false)
@@ -70,7 +62,7 @@ class CreateForm : DialogFragment() {
 
 
         // on pressing btnSelect SelectImage() is called
-        btnAttach!!.setOnClickListener{attachImage()}
+        btnAttach!!.setOnClickListener{ImagePicker.with(this).start()}
 
         // on pressing btnSubmit uploadimage() is called another functions may be added later
         btnSubmit!!.setOnClickListener{uploadImage()}
@@ -78,19 +70,6 @@ class CreateForm : DialogFragment() {
     }
 
 
-    private fun attachImage() {
-        imageView?.visibility = View.VISIBLE
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."
-                ),
-                PICK_IMAGE_REQUEST
-        )
-    }
     // UploadImage method
     private fun uploadImage() {
         if (filePath != null) {
@@ -103,8 +82,8 @@ class CreateForm : DialogFragment() {
             // Defining the child of storageReference
             val ref: StorageReference? = storageReference
                     ?.child(
-                            "images/"
-                                    + UUID.randomUUID().toString()
+                        "images/"
+                                + UUID.randomUUID().toString()
                     )
 
             // adding listeners on upload
@@ -115,9 +94,9 @@ class CreateForm : DialogFragment() {
                         progressDialog.dismiss()
                         Toast
                                 .makeText(
-                                        activity,
-                                        "Image Uploaded!!",
-                                        Toast.LENGTH_SHORT
+                                    activity,
+                                    "Image Uploaded!!",
+                                    Toast.LENGTH_SHORT
                                 )
                                 .show()
                     }
@@ -125,9 +104,9 @@ class CreateForm : DialogFragment() {
                         progressDialog.dismiss()
                         Toast
                                 .makeText(
-                                        activity,
-                                        "Failed " + e.message,
-                                        Toast.LENGTH_SHORT
+                                    activity,
+                                    "Failed " + e.message,
+                                    Toast.LENGTH_SHORT
                                 )
                                 .show()
                     }
@@ -139,8 +118,8 @@ class CreateForm : DialogFragment() {
                                 * taskSnapshot.bytesTransferred
                                 / taskSnapshot.totalByteCount)
                         progressDialog.setMessage(
-                                "Uploaded "
-                                        + progress.toInt() + "%"
+                            "Uploaded "
+                                    + progress.toInt() + "%"
                         )
                     }
         }
@@ -156,38 +135,24 @@ class CreateForm : DialogFragment() {
         }
     }
 
-    override fun onActivityResult(
-            requestCode: Int,
-            resultCode: Int,
-            data: Intent?
-    ) {
-        super.onActivityResult(
-                requestCode,
-                resultCode,
-                data
-        )
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            //Image Uri will not be null for RESULT_OK
+            filePath = data?.data
+            imageView?.setImageURI(filePath)
+            imageView?.visibility = View.VISIBLE
 
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
-        // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
+            //You can get File object from intent
+            val file: File = ImagePicker.getFile(data)!!
 
-            // Get the Uri of data
-            filePath = data.data
-            try {
-
-                // Setting image on image view using Bitmap
-                val bitmap: Bitmap = MediaStore.Images.Media
-                        .getBitmap(
-                                activity?.contentResolver,
-                                filePath
-                        )
-                imageView!!.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                // Log the exception
-                e.printStackTrace()
-            }
+            //You can also get File Path from intent
+            val filePath:String = ImagePicker.getFilePath(data)!!
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
+
 }

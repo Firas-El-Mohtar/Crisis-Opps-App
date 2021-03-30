@@ -1,6 +1,8 @@
 package com.example.crisisopp.user
 
-enum class UserTYPE {
+import java.io.Serializable
+
+enum class UserTYPE : Serializable{
     MAIN,
     LOCAL,
     FARAH
