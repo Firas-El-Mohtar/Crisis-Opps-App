@@ -3,6 +3,7 @@ package com.example.crisisopp.LocalMunicipality
 import android.app.DownloadManager
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
+import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -24,7 +25,6 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
         EventListener<QuerySnapshot> {
 
     private var registration: ListenerRegistration? = null
-
     private val snapshots = ArrayList<DocumentSnapshot>()
 
     override fun onEvent(documentSnapshots: QuerySnapshot?, e: FirebaseFirestoreException?) {
@@ -33,6 +33,8 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
             onError(e)
             return
         }
+
+        setQuery(query)
 
         if (documentSnapshots == null) {
             return
@@ -65,7 +67,7 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
         notifyDataSetChanged()
     }
 
-    fun setQuery(query: Query) {
+    fun setQuery(query: Query?) {
         // Stop listening
         stopListening()
 

@@ -30,7 +30,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
                 userType = email.emailDomain
                 userToken = loginRepository.fetchToken()
-                loginRepository.fetchToken()
                 loginRepository.updateUserInfo(result.userId, email.emailDomain)
                 Log.d(TAG, email.emailDomain)
                 loginRepository.user?.let {

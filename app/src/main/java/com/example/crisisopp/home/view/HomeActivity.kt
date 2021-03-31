@@ -25,6 +25,7 @@ import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -33,8 +34,6 @@ class HomeActivity : AppCompatActivity() {
 
     val TAG = "JNCICUBIUBQRV"
     private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!, userToken!!, municipalityName!!) }
-
-
     private lateinit var rVadapter: LocalMunicipalityAdapter
     val firestore = Firebase.firestore
     private lateinit var userType: String

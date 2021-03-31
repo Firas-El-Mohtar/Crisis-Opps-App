@@ -5,7 +5,10 @@ import com.example.crisisopp.logIn.models.LoggedInUser
 import com.example.crisisopp.logIn.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -45,9 +48,30 @@ class LoginDataSource {
     }
 
     suspend fun updateUserInfo(user: User) {
-//        usersCollectionRef.add(user).await()
+        user.userId?.let {
+            getUserDocument(it)?.apply {
+                reference.set(user).await()
+            } ?: addUserInfo(user)
+        }
+    }
 
+    suspend fun addUserInfo(user: User) {
         usersCollectionRef.collection("users").add(user).await()
+    }
+
+    suspend fun getUserInfo(userId: String): User? {
+        getUserDocument(userId)?.let {
+            return it.toObject<User>()
+        } ?: return null
+    }
+    private suspend fun getUserDocument(userId: String): DocumentSnapshot? {
+        val query =
+            usersCollectionRef.collection("users").whereEqualTo("userId", userId).get().await()
+        return if (query.isEmpty) {
+            null
+        } else {
+            query.documents.first()
+        }
     }
 }
 

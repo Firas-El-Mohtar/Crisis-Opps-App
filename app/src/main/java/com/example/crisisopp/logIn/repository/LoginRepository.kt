@@ -69,6 +69,7 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
         val user = User(token, userId, userType)
 
         dataSource.updateUserInfo(user)
+
         setLoggedInUser(user)
     }
 }
