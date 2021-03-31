@@ -76,9 +76,7 @@ class HomeActivity : AppCompatActivity() {
             adapter = exapmleAdapter.apply {
                 notifyDataSetChanged()
             }
-
         }
-
 
         mainFab = findViewById(R.id.main_fab)
         homeCareFab = findViewById(R.id.fab_home_care)
@@ -97,9 +95,7 @@ class HomeActivity : AppCompatActivity() {
         pcrFab.setOnClickListener {
 
         }
-
     }
-
 
     private fun onAddButtonClicked(){
         setVisibility(clicked, pcrFab, pcrText, homeCareFab, homeCareText)
