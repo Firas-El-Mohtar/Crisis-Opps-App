@@ -7,7 +7,8 @@ import com.example.crisisopp.home.repository.HomeRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
-    //todo var query (computed var)
+    //todo: var query (computed var)
+    //todo: pass the query to the getForId for the Repo then pass it to the Repository
 
 
     fun fABStatus(mainFAB: FloatingActionButton){
@@ -18,5 +19,8 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     }
     fun uploadForm(form: Form){
         homeRepository.uploadForm(form)
+    }
+    fun getFormId(): String{
+        return homeRepository.getFormId()
     }
 }

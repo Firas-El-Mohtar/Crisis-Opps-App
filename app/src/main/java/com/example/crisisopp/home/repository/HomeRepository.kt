@@ -7,7 +7,7 @@ import com.example.crisisopp.user.UserTYPE
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class HomeRepository(val homeDataSource: HomeDataSource, userType: String) {
+class HomeRepository(val homeDataSource: HomeDataSource, val userType: String) {
 
     fun floatingActionButtonStatus(mainFAB: FloatingActionButton){
         homeDataSource.master(userType, mainFAB)
@@ -18,6 +18,9 @@ class HomeRepository(val homeDataSource: HomeDataSource, userType: String) {
     }
     fun uploadForm(form: Form){
         homeDataSource.saveForm(form)
+    }
+    fun getFormId():String{
+        return homeDataSource.getFormId()
     }
 }
 

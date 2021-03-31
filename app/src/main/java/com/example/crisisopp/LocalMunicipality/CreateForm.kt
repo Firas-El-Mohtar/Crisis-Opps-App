@@ -17,7 +17,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
-
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -28,9 +27,9 @@ import com.example.crisisopp.home.models.Form
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -45,34 +44,25 @@ class CreateForm : DialogFragment() {
     private var imageView: ImageView? = null
     // Uri indicates, where the image will be picked from
     private var filePath: Uri? = null
-
-
-
-    // instance for firebase storage and StorageReference
-    var storage: FirebaseStorage? = null
-    var storageReference: StorageReference? = null
-
-
     // instance for firebase storage and StorageReference
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
     var db = Firebase.firestore
 
     //Edit Text References
-    private lateinit var etFullName: EditText
-    private lateinit var etMothersName: EditText
-    private lateinit var etBirthDate: EditText
-    private lateinit var etBloodType: EditText
-    private lateinit var etPlaceOfResidence: EditText
-    private lateinit var etPhoneNumber: EditText
-    private lateinit var etDateOfPrescription: EditText
-    private lateinit var etRecordNumber: EditText
-    private lateinit var etLastPcrDate: EditText
-    private lateinit var etDoctorName: EditText
+    private lateinit var etFullName: TextInputLayout
+    private lateinit var etMothersName: TextInputLayout
+    private lateinit var etBirthDate: TextInputLayout
+    private lateinit var etBloodType: TextInputLayout
+    private lateinit var etPlaceOfResidence: TextInputLayout
+    private lateinit var etPhoneNumber: TextInputLayout
+    private lateinit var etDateOfPrescription: TextInputLayout
+    private lateinit var etRecordNumber: TextInputLayout
+    private lateinit var etLastPcrDate: TextInputLayout
+    private lateinit var etDoctorName: TextInputLayout
 
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,12 +91,6 @@ class CreateForm : DialogFragment() {
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
         // on pressing btnSelect SelectImage() is called
-
-        btnAttach!!.setOnClickListener{ImagePicker.with(this).start()}
-
-        // on pressing btnSubmit uploadimage() is called another functions may be added later
-        btnSubmit!!.setOnClickListener{uploadImage()}
-
         btnAttach!!.setOnClickListener{
             ImagePicker.with(this).start()
         }
@@ -114,13 +98,13 @@ class CreateForm : DialogFragment() {
         btnSubmit!!.setOnClickListener{
             uploadImage()
             val currentUserId = homeViewModel.getUserId()
-            var form = Form(et, etFullName.text.toString(), etMothersName.text.toString(), etBirthDate.text.toString(),
-            etBloodType.text.toString(), etPlaceOfResidence.text.toString(), etDateOfPrescription.text.toString(),
-                Integer.parseInt(etRecordNumber.getText().toString()), etLastPcrDate.text.toString(),
-                etPhoneNumber.text.toString(), etDoctorName.text.toString(), currentUserId)
+            val formid = homeViewModel.getFormId()
+            var form = Form(formid, etFullName.editText?.text.toString(), etMothersName.editText?.text.toString(), etBirthDate.editText?.text.toString(),
+                etBloodType.editText?.text.toString(), etPlaceOfResidence.editText?.text.toString(), etDateOfPrescription.editText?.text.toString(),
+                Integer.parseInt(etRecordNumber.editText?.text.toString()), etLastPcrDate.editText?.text.toString(),
+                etPhoneNumber.editText?.text.toString(), etDoctorName.editText?.text.toString(), currentUserId)
             homeViewModel.uploadForm(form)
         }
-
         return view
     }
 
@@ -136,48 +120,14 @@ class CreateForm : DialogFragment() {
 
             // Defining the child of storageReference
             val ref: StorageReference? = storageReference
-
                 ?.child(
                     "images/"
                             + UUID.randomUUID().toString()
                 )
 
-
             // adding listeners on upload
             // or failure of imag
             ref?.putFile(filePath!!)
-                    ?.addOnSuccessListener { // Image uploaded successfully
-                        // Dismiss dialog
-                        progressDialog.dismiss()
-                        Toast
-                                .makeText(
-                                    activity,
-                                    "Image Uploaded!!",
-                                    Toast.LENGTH_SHORT
-                                )
-                                .show()
-                    }
-                    ?.addOnFailureListener { e -> // Error, Image not uploaded
-                        progressDialog.dismiss()
-                        Toast
-                                .makeText(
-                                    activity,
-                                    "Failed " + e.message,
-                                    Toast.LENGTH_SHORT
-                                )
-                                .show()
-                    }
-                    ?.addOnProgressListener { taskSnapshot ->
-
-                        // Progress Listener for loading
-                        // percentage on the dialog box
-                        val progress: Double = (100.0
-                                * taskSnapshot.bytesTransferred
-                                / taskSnapshot.totalByteCount)
-                        progressDialog.setMessage(
-                            "Uploaded "
-                                    + progress.toInt() + "%"
-
                 ?.addOnSuccessListener { // Image uploaded successfully
                     // Dismiss dialog
                     progressDialog.dismiss()
@@ -186,7 +136,6 @@ class CreateForm : DialogFragment() {
                             activity,
                             "Image Uploaded!!",
                             Toast.LENGTH_SHORT
-
                         )
                         .show()
                 }
@@ -231,7 +180,6 @@ class CreateForm : DialogFragment() {
             filePath = data?.data
             imageView?.setImageURI(filePath)
             imageView?.visibility = View.VISIBLE
-
             //You can get File object from intent
             val file: File = ImagePicker.getFile(data)!!
 
@@ -243,5 +191,6 @@ class CreateForm : DialogFragment() {
             Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

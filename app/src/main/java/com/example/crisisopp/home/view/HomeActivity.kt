@@ -24,12 +24,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class HomeActivity : AppCompatActivity() {
-
-    val TAG = "JNCICUBIUBQRV"
-    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!) }
-    val db = Firebase.firestore
-
-    val userType = intent.getStringExtra("UserType")
+    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType) }
 
     private lateinit var userType: String
     // todo get usetype(mutable) from intent
@@ -52,8 +47,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
-                .commitNow()
+            .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
+            .commitNow()
 
         mainFab = findViewById(R.id.main_fab)
         homeCareFab = findViewById(R.id.fab_home_care)
@@ -73,11 +68,8 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-        }
-//
-//            Toast.makeText(applicationContext, "this is toast message", Toast.LENGTH_SHORT).show()
-//            var dialog = CreateForm()
-//            dialog.show(supportFragmentManager, "Create Form")
+    }
+
 
     private fun onAddButtonClicked(){
         setVisibility(clicked, pcrFab, pcrText, homeCareFab, homeCareText)
@@ -125,20 +117,5 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    fun floatingActionButtonStatus(userType: String, mainFAB: FloatingActionButton) {
-        if (userType == "local") {
-
-            Log.d(TAG, "OJBROUWBCOUYVQOUVCQR")
-        } else if (userType == "main") {
-//            mainFAB.visibility = View.GONE
-        }
-    }
-
-    fun getUserTypeFromFirebase(){
-//        db.collection("users").document().get
-    }
 
 }
