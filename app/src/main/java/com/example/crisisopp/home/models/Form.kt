@@ -12,9 +12,11 @@ data class Form (
     var lastPcrDate: String?,
     var phoneNumber: String,
     var doctorsName: String,
-    var documentReference: String,
+    var documentReference: String?,
     var originatorId: String,
     var ainWzeinApproval: Int,
     var farahApproval: Int,
-    var mainApproval: Int
+    var mainApproval: Int,
+    var originatorToken: String,
+    var municipalityName: String
 )

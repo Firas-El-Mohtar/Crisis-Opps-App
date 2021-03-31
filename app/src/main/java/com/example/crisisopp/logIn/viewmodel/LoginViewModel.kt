@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crisisopp.extensions.emailDomain
+import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.logIn.models.LoginResult
 import com.example.crisisopp.logIn.repository.LoginRepository
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -15,6 +16,8 @@ import kotlinx.coroutines.launch
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel(){
     val TAG = "321"
     var userType: String? = null
+    var userToken: String? = null
+    var municipalityName: String? = null
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
@@ -22,7 +25,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         viewModelScope.launch {
             try {
                 val result = loginRepository.login(email, password)
+                val limit = 0
+                municipalityName = email.municipalityName
+
                 userType = email.emailDomain
+                userToken = loginRepository.fetchToken()
                 loginRepository.fetchToken()
                 loginRepository.updateUserInfo(result.userId, email.emailDomain)
                 Log.d(TAG, email.emailDomain)
@@ -40,6 +47,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                 }
             }
         }
+    }
+    suspend fun returnToken(): String{
+        return loginRepository.fetchToken()
     }
 
 //    fun updateUiWithUser(activity: LoginActivity) {

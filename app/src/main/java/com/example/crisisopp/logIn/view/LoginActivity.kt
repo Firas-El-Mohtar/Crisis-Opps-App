@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> { LoginViewModelFactory(prefs) }
     private lateinit var auth: FirebaseAuth
     lateinit var prefs: SharedPreferences
-    private var firas: String? = null
     private var progressBar: ProgressBar? = null
     // Initialize Firebase Auth
     val TAG = "1234"
@@ -77,11 +76,13 @@ class LoginActivity : AppCompatActivity() {
         })
     }
     private fun updateUiWithUser() {
-        viewModel.userType?.let {
+//        viewModel.userType?.let {
             val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("UserType", it)
+            intent.putExtra("UserType", viewModel.userType)
+            intent.putExtra("UserToken", viewModel.userToken)
+            intent.putExtra("MunicipalityName", viewModel.municipalityName)
             startActivity(intent)
-        }
+//        }
     }
 
     public override fun onStop() {

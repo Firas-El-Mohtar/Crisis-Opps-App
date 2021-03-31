@@ -9,7 +9,7 @@ import com.example.crisisopp.logIn.datasource.LoginDataSource
 import com.example.crisisopp.logIn.repository.LoginRepository
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 
-class HomeViewModelFactory(val userType: String) : ViewModelProvider.Factory {
+class HomeViewModelFactory(val userType: String, val userToken: String, val municipalityName: String) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -17,7 +17,9 @@ class HomeViewModelFactory(val userType: String) : ViewModelProvider.Factory {
             return HomeViewModel(
                 homeRepository = HomeRepository(
                     homeDataSource = HomeDataSource(),
-                    userType = userType
+                    userType = userType,
+                    userToken = userToken,
+                    municipalityName = municipalityName
                 )
             ) as T
         }
