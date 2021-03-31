@@ -68,7 +68,8 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
     suspend fun updateUserInfo(userId: String, userType: String) {
         val user = User(token, userId, userType)
 
-        dataSource.updateUserInfo(user)
+        var firasuser = dataSource.getUserInfo(userId)
+        dataSource.updateUserInfo(firasuser!!)
 
         setLoggedInUser(user)
     }

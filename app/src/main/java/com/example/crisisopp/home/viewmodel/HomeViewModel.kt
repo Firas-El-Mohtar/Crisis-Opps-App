@@ -35,4 +35,8 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         return homeRepository.querySelector()
 
     }
+
+    fun onFormClicked(){
+
+    }
 }
