@@ -43,7 +43,7 @@ class HomeDataSource {
     fun querySelector(usertype: String, municipalityName: String): Query?{
         var query: Query? = null
         if(usertype == "local"){
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formId", Query.Direction.DESCENDING).limit(50)
+            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
             var query1 = query
         }else {
             query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
