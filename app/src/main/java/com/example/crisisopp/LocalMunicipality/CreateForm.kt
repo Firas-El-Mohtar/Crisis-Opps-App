@@ -123,7 +123,8 @@ class CreateForm : DialogFragment() {
                 farahApproval = 0,
                 mainApproval = 0,
                 ainWzeinApproval = 0,
-                municipalityName = homeViewModel.getMunicipalityName() )
+                municipalityName = homeViewModel.getMunicipalityName() ,
+                formType = "PCR")
 
             homeViewModel.uploadForm(form)
             dialog?.dismiss()

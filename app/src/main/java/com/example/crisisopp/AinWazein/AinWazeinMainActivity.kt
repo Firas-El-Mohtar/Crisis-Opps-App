@@ -13,5 +13,7 @@ class AinWazeinMainActivity : AppCompatActivity() {
 //            supportFragmentManager.beginTransaction()
 //                .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
 //                .commitNow()
-        }
+        
+
+    }
 }

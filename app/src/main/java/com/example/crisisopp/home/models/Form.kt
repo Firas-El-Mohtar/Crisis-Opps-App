@@ -21,7 +21,8 @@ data class Form (
     var farahApproval: Int = 0,
     var mainApproval: Int = 0,
     var originatorToken: String = "",
-    var municipalityName: String = ""
+    var municipalityName: String = "",
+    var formType: String = ""
 )
 {
     companion object{
