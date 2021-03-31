@@ -1,8 +1,8 @@
 package com.example.crisisopp.LocalMunicipality
 
-import android.app.DownloadManager
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
@@ -12,13 +12,6 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.*
 
-/**
- * RecyclerView adapter for displaying the results of a Firestore [Query].
- *
- * Note that this class forgoes some efficiency to gain simplicity. For example, the result of
- * [DocumentSnapshot.toObject] is not cached so the same object may be deserialized
- * many times as the user scrolls.
- */
 abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(private var query: Query?) :
         RecyclerView.Adapter<VH>(),
         EventListener<QuerySnapshot> {
@@ -66,6 +59,7 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
     }
 
     fun setQuery(query: Query) {
+
         // Stop listening
         stopListening()
 

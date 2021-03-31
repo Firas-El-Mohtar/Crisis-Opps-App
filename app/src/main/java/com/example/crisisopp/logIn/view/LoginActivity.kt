@@ -90,8 +90,7 @@ class LoginActivity : AppCompatActivity() {
     }
     }
 
-    public override fun onStop() {
-        super.onStop()
-        hideProgressBar()
-    }
-}
+//    public override fun onStop() {
+//        super.onStop()
+//        hideProgressBar()
+//    }

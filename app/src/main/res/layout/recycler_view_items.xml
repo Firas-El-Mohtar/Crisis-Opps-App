@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/name_holder"
+            android:id="@+id/full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -24,16 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/family_name_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="Family Name: "
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_holder" />
 
         <TextView
             android:id="@+id/phone_number_holder"
@@ -44,7 +34,7 @@
             android:text="Phone Number: "
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/family_name_holder" />
+            app:layout_constraintTop_toBottomOf="@+id/full_name" />
 
         <TextView
             android:id="@+id/markazeye_text"
@@ -53,7 +43,7 @@
             android:layout_marginStart="36dp"
             android:text="Markazeya"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/name_holder"
+            app:layout_constraintBottom_toBottomOf="@+id/full_name"
             app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -66,7 +56,7 @@
             android:layout_marginTop="5dp"
             android:text="Ayn w Zayn"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/family_name_holder"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_number"
             app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toBottomOf="@+id/markazeye_text" />
 
@@ -132,8 +122,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/name_holder"
-            app:layout_constraintStart_toEndOf="@+id/name_holder" />
+            app:layout_constraintBottom_toBottomOf="@+id/full_name"
+            app:layout_constraintStart_toEndOf="@+id/full_name" />
 
         <TextView
             android:id="@+id/person_family_name"
@@ -141,8 +131,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/family_name_holder"
-            app:layout_constraintStart_toEndOf="@+id/family_name_holder" />
+            app:layout_constraintBottom_toBottomOf="@+id/phone_number"
+            app:layout_constraintStart_toEndOf="@+id/phone_number" />
 
         <TextView
             android:id="@+id/person_phone_number"

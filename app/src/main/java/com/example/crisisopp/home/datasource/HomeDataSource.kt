@@ -39,15 +39,12 @@ class HomeDataSource {
     fun saveForm(form: Form) {
         db.collection("forms").add(form)
     }
-    fun getFormId():String{
-        //Todo: query?
-    }
 
     fun querySelector(usertype: String, municipalityName: String): Query?{
         var query: Query? = null
         if(usertype == "local"){
             query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formId", Query.Direction.DESCENDING).limit(50)
-
+            var query1 = query
         }else {
             query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
         }
@@ -81,12 +78,3 @@ class HomeDataSource {
 }
 
 
-
-    //Fun1: Does the logic for FAB  DONE
-//    fun floatingActionButtonStatus(usertype){
-//
-//    }
-
-    //Fun2: Decides what value to change in firebase based on userType
-
-    //Fun3: Displays name on toolbar
