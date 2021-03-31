@@ -80,12 +80,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUiWithUser() {
-        viewModel.userType?.let {
+//        viewModel.userType?.let {
             val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("UserType", it)
+            intent.putExtra("UserType", viewModel.userType)
+            intent.putExtra("UserToken", viewModel.userToken)
+            intent.putExtra("MunicipalityName", viewModel.municipalityName)
             startActivity(intent)
-        }
 
+    }
     }
 
     public override fun onStop() {

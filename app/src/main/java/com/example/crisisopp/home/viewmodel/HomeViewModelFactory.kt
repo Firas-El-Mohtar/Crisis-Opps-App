@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.crisisopp.home.datasource.HomeDataSource
 import com.example.crisisopp.home.repository.HomeRepository
 
-class HomeViewModelFactory(val userType: String) : ViewModelProvider.Factory {
+class HomeViewModelFactory(val userType: String, val userToken: String, val municipalityName: String) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -13,7 +13,9 @@ class HomeViewModelFactory(val userType: String) : ViewModelProvider.Factory {
             return HomeViewModel(
                 homeRepository = HomeRepository(
                     homeDataSource = HomeDataSource(),
-                    userType = userType
+                    userType = userType,
+                    userToken = userToken,
+                    municipalityName = municipalityName
                 )
             ) as T
         }

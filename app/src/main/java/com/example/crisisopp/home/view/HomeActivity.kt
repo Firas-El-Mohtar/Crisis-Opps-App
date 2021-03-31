@@ -1,8 +1,11 @@
 package com.example.crisisopp.home.view
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
@@ -10,7 +13,10 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.LocalMunicipality.CreateForm
+import com.example.crisisopp.LocalMunicipality.LocalMunicipalityAdapter
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.RecyclerViewFragment
 import com.example.crisisopp.home.viewmodel.HomeViewModel
@@ -24,11 +30,16 @@ import com.google.firebase.ktx.Firebase
 
 
 class HomeActivity : AppCompatActivity() {
-    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType) }
 
+    val TAG = "JNCICUBIUBQRV"
+    private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!, userToken!!, municipalityName!!) }
+
+
+    private lateinit var rVadapter: LocalMunicipalityAdapter
+    val firestore = Firebase.firestore
     private lateinit var userType: String
-    // todo get usetype(mutable) from intent
-//  val y = userType
+    private lateinit var userToken: String
+    private lateinit var municipalityName: String
     private lateinit var mainFab: FloatingActionButton
     private lateinit var homeCareFab: FloatingActionButton
     private lateinit var pcrFab: FloatingActionButton
@@ -39,16 +50,37 @@ class HomeActivity : AppCompatActivity() {
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
     private var clicked= false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_municipality_main)
         intent.getStringExtra("UserType")?.let {
             userType = it
         }
+        intent.getStringExtra("UserToken")?.let {
+            userToken = it
+        }
+        intent.getStringExtra("MunicipalityName")?.let {
+            municipalityName = it
+        }
+
+        rVadapter = LocalMunicipalityAdapter(homeViewModel.querySelector()!!)
+        var recyclerView = findViewById<RecyclerView>(R.id.recycler_view_test)
+            recyclerView.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = rVadapter.apply {
+                    notifyDataSetChanged()
+                }
+                //todo fix adapter
+        }
+
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
             .commitNow()
+
+
 
         mainFab = findViewById(R.id.main_fab)
         homeCareFab = findViewById(R.id.fab_home_care)
@@ -116,6 +148,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        rVadapter.startListening()
+    }
 
+    override fun onStop() {
+        super.onStop()
+        rVadapter.stopListening()
+    }
 
 }

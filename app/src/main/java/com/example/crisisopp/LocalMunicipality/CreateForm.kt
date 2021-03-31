@@ -40,6 +40,8 @@ import java.util.*
 class CreateForm : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
+
+    private var documentReference: String? = null
     // view for image view
     private var imageView: ImageView? = null
     // Uri indicates, where the image will be picked from
@@ -48,6 +50,8 @@ class CreateForm : DialogFragment() {
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
     var db = Firebase.firestore
+
+    var imageId: String? = null
 
     //Edit Text References
     private lateinit var etFullName: TextInputLayout
@@ -98,12 +102,31 @@ class CreateForm : DialogFragment() {
         btnSubmit!!.setOnClickListener{
             uploadImage()
             val currentUserId = homeViewModel.getUserId()
-            val formid = homeViewModel.getFormId()
-            var form = Form(formid, etFullName.editText?.text.toString(), etMothersName.editText?.text.toString(), etBirthDate.editText?.text.toString(),
-                etBloodType.editText?.text.toString(), etPlaceOfResidence.editText?.text.toString(), etDateOfPrescription.editText?.text.toString(),
-                Integer.parseInt(etRecordNumber.editText?.text.toString()), etLastPcrDate.editText?.text.toString(),
-                etPhoneNumber.editText?.text.toString(), etDoctorName.editText?.text.toString(), currentUserId)
+
+            val formId = (0..1000).random().toString()
+            val currentUserToken = homeViewModel.getUserToken()
+            //constructor to build a Form object to then pass to firebase for saving
+            var form = Form(formId,
+                fullName =  etFullName.editText?.text.toString(),
+                mothersName =  etMothersName.editText?.text.toString(),
+                birthDate =  etBirthDate.editText?.text.toString(),
+                bloodType =  etBloodType.editText?.text.toString(),
+                placeOfResidence =  etPlaceOfResidence.editText?.text.toString(),
+                dateOfPrescription =  etDateOfPrescription.editText?.text.toString(),
+                recordNumber =  Integer.parseInt(etRecordNumber.editText?.text.toString()),
+                lastPcrDate =  etLastPcrDate.editText?.text.toString(),
+                phoneNumber =  etPhoneNumber.editText?.text.toString(),
+                doctorsName = etDoctorName.editText?.text.toString(),
+                documentReference = imageId,
+                originatorToken = currentUserToken,
+                originatorId = currentUserId,
+                farahApproval = 0,
+                mainApproval = 0,
+                ainWzeinApproval = 0,
+                municipalityName = homeViewModel.getMunicipalityName() )
+
             homeViewModel.uploadForm(form)
+            dialog?.dismiss()
         }
         return view
     }
@@ -117,16 +140,19 @@ class CreateForm : DialogFragment() {
             val progressDialog = ProgressDialog(this.context)
             progressDialog.setTitle("Uploading...")
             progressDialog.show()
+            imageId = UUID.randomUUID().toString()
+            //instead of the imageid var, the UUID line was passed in the following block
 
             // Defining the child of storageReference
             val ref: StorageReference? = storageReference
                 ?.child(
                     "images/"
-                            + UUID.randomUUID().toString()
+                            + imageId
                 )
 
+
             // adding listeners on upload
-            // or failure of imag
+            // or failure of image
             ref?.putFile(filePath!!)
                 ?.addOnSuccessListener { // Image uploaded successfully
                     // Dismiss dialog

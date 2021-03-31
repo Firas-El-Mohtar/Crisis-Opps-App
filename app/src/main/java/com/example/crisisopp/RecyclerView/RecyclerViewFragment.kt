@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.crisisopp.LocalMunicipality.FirestoreLocalMunicipalityAdapter
+import com.example.crisisopp.LocalMunicipality.LocalMunicipalityAdapter
 import com.example.crisisopp.R
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,17 +24,23 @@ private const val ARG_PARAM2 = "param2"
  * Use the [RecyclerViewFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RecyclerViewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class RecyclerViewFragment() : Fragment() {
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var rVadapter: LocalMunicipalityAdapter
+    val firestore = Firebase.firestore
+//    val query = firestore.collection("forms").orderBy("formId", Query.Direction.DESCENDING).limit("50")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+//        rVadapter = LocalMunicipalityAdapter(query)
+//        recyclerView = findViewById(R.id.fragment_recycler_view)
+//        recyclerView.apply {
+//            setHasFixedSize(true)
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = rVadapter.apply {
+//                notifyDataSetChanged()
+//            }
+//        }
     }
 
     override fun onCreateView(
