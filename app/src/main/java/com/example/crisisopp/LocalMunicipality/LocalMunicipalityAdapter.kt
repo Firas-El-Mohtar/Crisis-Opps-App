@@ -19,28 +19,22 @@ import com.google.firebase.firestore.ktx.toObject
 class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter<LocalMunicipalityAdapter.ViewHolder>(query) {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameHolder: TextView = itemView.findViewById(R.id.name_holder)
-        private val familyNameHolder: TextView = itemView.findViewById(R.id.family_name_holder)
+//        private val nameHolder: TextView = itemView.findViewById(R.id.full_name)
+//        private val familyNameHolder: TextView = itemView.findViewById(R.id.family_name_holder)
         private val phoneNumberHolder: TextView = itemView.findViewById(R.id.phone_number_holder)
-        private val markazeyeHolder: TextView = itemView.findViewById(R.id.markazeye_text)
-        private val ainWZeinHolder: TextView = itemView.findViewById(R.id.ayn_wzayn_text)
-        private val farahHolder: TextView = itemView.findViewById(R.id.farah_foundation_text)
         private val markazeyeIcon: TextView = itemView.findViewById(R.id.markazeyye_icon)
-        private val farahIcon: TextView = itemView.findViewById(R.id.farah_foundation_icon)
         private val ainWZeinIcon: TextView = itemView.findViewById(R.id.ayn_wzayn_icon)
+        private val farahIcon: TextView = itemView.findViewById(R.id.farah_foundation_icon)
+
 
 
         fun bind(snapshot: DocumentSnapshot) {
 
             val form = snapshot.toObject<Form>()
+//
+//            nameHolder.text = "Name: " + form?.fullName
+//            phoneNumberHolder.text = form?.phoneNumber
 
-            nameHolder.text = "Name: " + form?.fullName
-            phoneNumberHolder.text = form?.phoneNumber
-
-
-            //name.text = "Player Name: " + match?.playerName
-            //isWinner.text = "Winner: " + match?.isWinner
-            //matchDuration.text = "Match Duration: " + match?.duration?.toFormattedTimestamp()
         }
         init {  
             itemView.setOnClickListener { v: View-> 

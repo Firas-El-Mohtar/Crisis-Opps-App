@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var prefs: SharedPreferences
     private var progressBar: ProgressBar? = null
+    private var userType: String? = null
     // Initialize Firebase Auth
     val TAG = "1234"
 
@@ -43,8 +44,10 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
         signInButton.setOnClickListener() {
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
+
         }
     }
 
@@ -75,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
 
         })
     }
+
     private fun updateUiWithUser() {
 //        viewModel.userType?.let {
             val intent = Intent(this, HomeActivity::class.java)
@@ -82,11 +86,11 @@ class LoginActivity : AppCompatActivity() {
             intent.putExtra("UserToken", viewModel.userToken)
             intent.putExtra("MunicipalityName", viewModel.municipalityName)
             startActivity(intent)
-//        }
+
+    }
     }
 
-    public override fun onStop() {
-        super.onStop()
-        hideProgressBar()
-    }
-}
+//    public override fun onStop() {
+//        super.onStop()
+//        hideProgressBar()
+//    }

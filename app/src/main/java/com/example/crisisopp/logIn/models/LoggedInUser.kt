@@ -1,7 +1,7 @@
 package com.example.crisisopp.logIn.models
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
+/**eved from L
+ * Data class that captures user information for logged in users retrioginRepository
  */
 data class LoggedInUser(
         val userId: String,
