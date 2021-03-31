@@ -10,8 +10,8 @@ class AinWazeinMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ain_wazein_main)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
-            .commitNow()
-    }
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
+//                .commitNow()
+        }
 }

@@ -1,5 +1,6 @@
 package com.example.crisisopp.home.datasource
 
+
 import android.view.View
 import android.widget.Toast
 import com.example.crisisopp.home.models.Form
@@ -44,7 +45,6 @@ class HomeDataSource {
         var query: Query? = null
         if(usertype == "local"){
             query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
-            var query1 = query
         }else {
             query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
         }
@@ -77,5 +77,4 @@ class HomeDataSource {
     }
 
 }
-
 

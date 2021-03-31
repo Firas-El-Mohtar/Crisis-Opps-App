@@ -28,16 +28,6 @@
                 android:text="PCR" />
         </com.google.android.material.tabs.TabLayout>
 
-        <FrameLayout
-            android:id="@+id/RecyclerViewHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
-
 
         <TextView
             android:id="@+id/text_view_home_care"
@@ -122,9 +112,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_test"
             android:layout_width="match_parent"
-            android:layout_height="483dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="45dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="79dp"
             tools:listitem="@layout/recycler_view_items" />
 
 

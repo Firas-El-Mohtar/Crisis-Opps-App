@@ -51,15 +51,5 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return loginRepository.fetchToken()
     }
 
-//    fun updateUiWithUser(activity: LoginActivity) {
-//        loginRepository.
-//        val intent = Intent(activity, LocalMunicipalityMainActivity::class.java)
-//        intent.putExtra("usertype", userType)
-//        startActivity(intent)
-//    }
-
-//    fun updateLiveData(string: String){
-//        userType.value(string)
-//    }
 
 }
