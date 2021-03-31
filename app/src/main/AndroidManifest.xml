@@ -14,21 +14,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CrisisOpp">
+        android:theme="@style/Theme.CrisisOpp"
+        android:requestLegacyExternalStorage="true" >
         <activity android:name=".MainMunicipality.MainMunicipalityMainActivity"></activity>
         <activity android:name=".AinWazein.AinWazeinMainActivity" />
         <activity android:name=".FarahFoundation.FarahFoundationMainActivity" >
-
         </activity>
+        <activity android:name=".home.view.LocalMunicipalityMainActivity"/>
+
         <activity android:name=".home.view.HomeActivity"></activity>
         <activity android:name=".logIn.view.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+
         </activity>
+
 
         <service android:name=".notifications.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND">

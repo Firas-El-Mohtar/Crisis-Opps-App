@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.LocalMunicipality.CreateForm
+import com.example.crisisopp.LocalMunicipality.ExampleAdapter
+import com.example.crisisopp.LocalMunicipality.ExampleItem
 import com.example.crisisopp.LocalMunicipality.LocalMunicipalityAdapter
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.RecyclerViewFragment
@@ -35,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
     private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!, userToken!!, municipalityName!!) }
 
 
-    private lateinit var rVadapter: LocalMunicipalityAdapter
+
     val firestore = Firebase.firestore
     private lateinit var userType: String
     private lateinit var userToken: String
@@ -50,6 +52,8 @@ class HomeActivity : AppCompatActivity() {
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
     private var clicked= false
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var exapmleAdapter: ExampleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,20 +68,17 @@ class HomeActivity : AppCompatActivity() {
             municipalityName = it
         }
 
-        rVadapter = LocalMunicipalityAdapter(homeViewModel.querySelector()!!)
-        var recyclerView = findViewById<RecyclerView>(R.id.recycler_view_test)
-            recyclerView.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
-                adapter = rVadapter.apply {
-                    notifyDataSetChanged()
-                }
-                //todo fix adapter
+        exapmleAdapter = ExampleAdapter(homeViewModel.querySelector()!!)
+        recyclerView = findViewById(R.id.recycler_view_test)
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = exapmleAdapter.apply {
+                notifyDataSetChanged()
+            }
+
         }
 
-//        supportFragmentManager.beginTransaction()
-//                .replace(R.id.RecyclerViewHolder, RecyclerViewFragment())
-//                .commitNow()
 
         mainFab = findViewById(R.id.main_fab)
         homeCareFab = findViewById(R.id.fab_home_care)
@@ -97,12 +98,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-        }
-
-//
-//            Toast.makeText(applicationContext, "this is toast message", Toast.LENGTH_SHORT).show()
-//            var dialog = CreateForm()
-//            dialog.show(supportFragmentManager, "Create Form")
+    }
 
 
     private fun onAddButtonClicked(){
@@ -152,12 +148,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        rVadapter.startListening()
+        exapmleAdapter.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        rVadapter.stopListening()
+        exapmleAdapter.stopListening()
     }
 
 }

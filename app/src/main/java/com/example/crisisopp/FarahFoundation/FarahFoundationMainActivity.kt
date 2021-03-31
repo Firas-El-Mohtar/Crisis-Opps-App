@@ -28,6 +28,7 @@ val TAG = "" //todo
 const val TOPIC = "/topics/myTopic2"
 private val usersCollectionRef = Firebase.firestore.collection("users")
 
+
 class FarahFoundationMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

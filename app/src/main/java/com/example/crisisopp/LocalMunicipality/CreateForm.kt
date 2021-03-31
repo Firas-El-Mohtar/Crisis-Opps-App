@@ -102,6 +102,7 @@ class CreateForm : DialogFragment() {
         btnSubmit!!.setOnClickListener{
             uploadImage()
             val currentUserId = homeViewModel.getUserId()
+
             val formId = (0..1000).random().toString()
             val currentUserToken = homeViewModel.getUserToken()
             //constructor to build a Form object to then pass to firebase for saving
@@ -123,6 +124,7 @@ class CreateForm : DialogFragment() {
                 mainApproval = 0,
                 ainWzeinApproval = 0,
                 municipalityName = homeViewModel.getMunicipalityName() )
+
             homeViewModel.uploadForm(form)
             dialog?.dismiss()
         }

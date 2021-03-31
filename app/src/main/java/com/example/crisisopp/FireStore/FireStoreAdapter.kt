@@ -1,20 +1,13 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.testingthings.history
 
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
-import java.util.*
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.*
+import java.util.ArrayList
 
-abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(private var query: Query?) :
-        RecyclerView.Adapter<VH>(),
-        EventListener<QuerySnapshot> {
+abstract class FirestoreAdapter<VH : RecyclerView.ViewHolder>(private var query: Query?) :
+    RecyclerView.Adapter<VH>(),
+    EventListener<QuerySnapshot> {
 
     private var registration: ListenerRegistration? = null
 
@@ -30,7 +23,7 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
         if (documentSnapshots == null) {
             return
         }
-
+        setQuery(query)
         // Dispatch the event
         Log.d(TAG, "onEvent:numChanges:" + documentSnapshots.documentChanges.size)
         for (change in documentSnapshots.documentChanges) {
@@ -58,16 +51,10 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
         notifyDataSetChanged()
     }
 
-    fun setQuery(query: Query) {
-
-        // Stop listening
+    fun setQuery(query: Query?) {
         stopListening()
-
-        // Clear existing data
         snapshots.clear()
         notifyDataSetChanged()
-
-        // Listen to new query
         this.query = query
         startListening()
     }
@@ -110,7 +97,6 @@ abstract class FirestoreLocalMunicipalityAdapter<VH : RecyclerView.ViewHolder>(p
     }
 
     companion object {
-
         private const val TAG = "FirestoreAdapter"
     }
 }
