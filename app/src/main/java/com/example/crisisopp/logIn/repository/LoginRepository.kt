@@ -14,7 +14,6 @@ import javax.sql.DataSource
 
 class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPreferences) {
     val TAG = "LOGIN"
-
     private var token: String?
              get() {
                 return sharedPref?.getString("token", null)

@@ -1,7 +1,10 @@
 package com.example.crisisopp.home.datasource
 
+
 import android.util.Log
 import com.example.crisisopp.FarahFoundation.TAG
+import android.view.View
+import android.widget.Toast
 import com.example.crisisopp.home.models.Form
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.logIn.models.User
@@ -38,13 +41,12 @@ class HomeDataSource {
 
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
-        if (usertype == "local") {
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName)
-                .orderBy("formID", Query.Direction.DESCENDING).limit(50)
-            var query1 = query
-        } else {
-            query =
-                db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
+
+        if(usertype == "local"){
+            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
+        }else {
+            query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
+
         }
         return query
     }
@@ -121,5 +123,4 @@ class HomeDataSource {
             }
         }
 }
-
 

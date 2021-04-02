@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
-
+        progressBar = findViewById(R.id.loading)
 
 
 
@@ -65,15 +65,14 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
 
-//            loading.visibility = View.GONE
-//            if (loginResult.error != null) {
-//                showLoginFailed(loginResult.error)
-//            }
+            progressBar?.visibility = View.GONE
+            if (loginResult.error != null) {
+                (loginResult.error)
+            }
             if (loginResult.success != null) {
                 updateUiWithUser()
             }
             setResult(Activity.RESULT_OK)
-            //Complete and destroy login activity once successful
             finish()
 
         })

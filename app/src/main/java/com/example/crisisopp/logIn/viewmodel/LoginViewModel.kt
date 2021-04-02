@@ -66,4 +66,5 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 //        userType.value(string)
 //    }
 
+
 }
