@@ -80,7 +80,7 @@ class CreateForm : DialogFragment() {
         etDateOfPrescription = view.findViewById(R.id.date_of_prescription)
         etRecordNumber = view.findViewById(R.id.record_number)
         etLastPcrDate = view.findViewById(R.id.pcr_date)
-        etDoctorName = view.findViewById(R.id.date_of_infection)
+        etDoctorName = view.findViewById(R.id.doctors_name)
 
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance()
