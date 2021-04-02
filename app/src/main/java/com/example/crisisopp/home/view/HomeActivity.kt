@@ -1,11 +1,6 @@
 package com.example.crisisopp.home.view
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Log
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
@@ -13,20 +8,16 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.solver.GoalRow
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.LocalMunicipality.CreateForm
+import com.example.crisisopp.LocalMunicipality.CreatePcrForm
 import com.example.crisisopp.LocalMunicipality.ExampleAdapter
-import com.example.crisisopp.LocalMunicipality.ExampleItem
-import com.example.crisisopp.LocalMunicipality.LocalMunicipalityAdapter
 import com.example.crisisopp.R
-import com.example.crisisopp.RecyclerView.RecyclerViewFragment
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
-import com.example.crisisopp.logIn.viewmodel.LoginViewModel
-import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -41,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
     val firestore = Firebase.firestore
     private lateinit var userType: String
     private lateinit var userToken: String
+    private lateinit var userId: String
     private lateinit var municipalityName: String
     private lateinit var mainFab: FloatingActionButton
     private lateinit var homeCareFab: FloatingActionButton
@@ -79,21 +71,25 @@ class HomeActivity : AppCompatActivity() {
         }
 
         mainFab = findViewById(R.id.main_fab)
+        if(homeViewModel.canCreateForm()){
+            mainFab.visibility = VISIBLE
+            mainFab.setOnClickListener{
+                onAddButtonClicked()
+            }
+        } else mainFab.visibility = GONE
+
         homeCareFab = findViewById(R.id.fab_home_care)
         pcrFab = findViewById(R.id.fab_pcr)
         pcrText = findViewById(R.id.text_view_pcr)
         homeCareText = findViewById(R.id.text_view_home_care)
 
-        mainFab.setOnClickListener{
-            onAddButtonClicked()
-
-        }
         homeCareFab.setOnClickListener{
             val dialog = CreateForm()
             dialog.show(supportFragmentManager, "Create Form")
         }
         pcrFab.setOnClickListener {
-
+            val pcrDialog = CreatePcrForm()
+            pcrDialog.show(supportFragmentManager, "Create PCR Form" )
         }
     }
 
@@ -105,7 +101,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.fABStatus(mainFab)
     }
 
     private fun setAnimation(clicked: Boolean, pcrFAB: FloatingActionButton, pcrText: TextView, homeCareFab: FloatingActionButton, homeCareText: TextView) {
@@ -151,5 +146,4 @@ class HomeActivity : AppCompatActivity() {
         super.onStop()
         exapmleAdapter.stopListening()
     }
-
 }

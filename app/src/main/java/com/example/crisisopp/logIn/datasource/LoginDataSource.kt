@@ -69,6 +69,7 @@ class LoginDataSource {
             usersCollectionRef.collection("users").whereEqualTo("userId", userId).get().await()
         return if (query.isEmpty) {
             null
+            //should add the user instead of returning null
         } else {
             query.documents.first()
         }

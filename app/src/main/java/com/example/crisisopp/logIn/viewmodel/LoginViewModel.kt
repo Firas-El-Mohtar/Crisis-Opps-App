@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.logIn.models.LoginResult
+import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.logIn.repository.LoginRepository
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -25,7 +26,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         viewModelScope.launch {
             try {
                 val result = loginRepository.login(email, password)
-                val limit = 0
                 municipalityName = email.municipalityName
 
                 userType = email.emailDomain
@@ -47,9 +47,23 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             }
         }
     }
-    suspend fun returnToken(): String{
+    suspend fun returnLoggedInUserToken(): String{
         return loginRepository.fetchToken()
     }
 
+    suspend fun returnUserInfoFromFirebase(userId: String): User?{
+        return loginRepository.returnUserInfoFromFirestore(userId)
+    }
+
+//    fun updateUiWithUser(activity: LoginActivity) {
+//        loginRepository.
+//        val intent = Intent(activity, LocalMunicipalityMainActivity::class.java)
+//        intent.putExtra("usertype", userType)
+//        startActivity(intent)
+//    }
+
+//    fun updateLiveData(string: String){
+//        userType.value(string)
+//    }
 
 }

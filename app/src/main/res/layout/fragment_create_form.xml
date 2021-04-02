@@ -38,7 +38,9 @@
             android:hint="Full Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patient">
+            app:layout_constraintTop_toBottomOf="@id/patient"
+            app:startIconDrawable="@drawable/fullname_icon"
+            app:startIconContentDescription="fullname_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -57,7 +59,9 @@
             android:hint="Mothers Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/full_name">
+            app:layout_constraintTop_toBottomOf="@id/full_name"
+            app:startIconDrawable="@drawable/mother_name_icon"
+            app:startIconContentDescription="mother_name_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -76,7 +80,9 @@
             android:hint="Birth Date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mothers_name">
+            app:layout_constraintTop_toBottomOf="@id/mothers_name"
+            app:startIconDrawable="@drawable/birthdate_icon"
+            app:startIconContentDescription="birthdate icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -95,7 +101,9 @@
             android:hint="Blood Type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/birth_date">
+            app:layout_constraintTop_toBottomOf="@id/birth_date"
+            app:startIconDrawable="@drawable/bloodtype_icon"
+            app:startIconContentDescription="bloodtype_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -114,7 +122,9 @@
             android:hint="Place of Residence"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/blood_type">
+            app:layout_constraintTop_toBottomOf="@id/blood_type"
+            app:startIconDrawable="@drawable/place_of_residence_icon"
+            app:startIconContentDescription="place_of_residence_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -133,7 +143,9 @@
             android:hint="Phone Number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/place_of_residency">
+            app:layout_constraintTop_toBottomOf="@id/place_of_residency"
+            app:startIconDrawable="@drawable/phone_number_icon"
+            app:startIconContentDescription="phone_number_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -152,7 +164,9 @@
             android:hint="Date of Prescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phone_number">
+            app:layout_constraintTop_toBottomOf="@id/phone_number"
+            app:startIconDrawable="@drawable/date_of_prescription_icon"
+            app:startIconContentDescription="date_of_prescription_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -171,7 +185,9 @@
             android:hint="Record Number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/date_of_prescription">
+            app:layout_constraintTop_toBottomOf="@id/date_of_prescription"
+            app:startIconDrawable="@drawable/record_number_icon"
+            app:startIconContentDescription="record_number_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -190,7 +206,9 @@
             android:hint="Last PCR Date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/record_number">
+            app:layout_constraintTop_toBottomOf="@id/record_number"
+            app:startIconDrawable="@drawable/covid_icon"
+            app:startIconContentDescription="last_pcr_test_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -199,7 +217,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/doctor_name"
+            android:id="@+id/doctors_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="61dp"
@@ -209,7 +227,9 @@
             android:hint="Doctor Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pcr_date">
+            app:layout_constraintTop_toBottomOf="@id/pcr_date"
+            app:startIconDrawable="@drawable/doctor_name_icon"
+            app:startIconContentDescription="doctor_name_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -227,7 +247,7 @@
         android:text="Attach Image"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/doctor_name" />
+        app:layout_constraintTop_toBottomOf="@id/doctors_name" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -239,7 +259,7 @@
         android:text="Submit"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/doctor_name" />
+        app:layout_constraintTop_toBottomOf="@id/doctors_name" />
 
     <ImageView
         android:id="@+id/imageView"

@@ -1,31 +1,23 @@
 package com.example.crisisopp.LocalMunicipality
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.crisisopp.R
 import com.example.crisisopp.home.models.Form
 import com.example.crisisopp.home.viewmodel.HomeViewModel
-import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.ktx.firestore
@@ -33,7 +25,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
-import java.io.IOException
 import java.util.*
 
 
@@ -89,7 +80,7 @@ class CreateForm : DialogFragment() {
         etDateOfPrescription = view.findViewById(R.id.date_of_prescription)
         etRecordNumber = view.findViewById(R.id.record_number)
         etLastPcrDate = view.findViewById(R.id.pcr_date)
-        etDoctorName = view.findViewById(R.id.doctor_name)
+        etDoctorName = view.findViewById(R.id.doctors_name)
 
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance()
@@ -124,9 +115,10 @@ class CreateForm : DialogFragment() {
                 mainApproval = 0,
                 ainWzeinApproval = 0,
                 municipalityName = homeViewModel.getMunicipalityName() ,
-                formType = "PCR")
+                formType = "Homecare")
 
             homeViewModel.uploadForm(form)
+            homeViewModel.onFormUploadSendNotification(currentUserToken)
             dialog?.dismiss()
         }
         return view
@@ -218,6 +210,4 @@ class CreateForm : DialogFragment() {
             Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }
