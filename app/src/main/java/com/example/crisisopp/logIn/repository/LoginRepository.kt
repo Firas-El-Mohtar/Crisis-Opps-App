@@ -66,11 +66,13 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
     }
 
     suspend fun updateUserInfo(userId: String, userType: String) {
+
         val user = User(token, userId, userType)
-
-        var firasuser = dataSource.getUserInfo(userId)
-        dataSource.updateUserInfo(firasuser!!)
-
+        dataSource.updateUserInfo(user!!)
         setLoggedInUser(user)
+    }
+
+    suspend fun returnUserInfoFromFirestore(userId: String): User?{
+        return dataSource.getUserInfo(userId)
     }
 }
