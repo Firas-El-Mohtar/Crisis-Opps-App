@@ -1,10 +1,10 @@
 package com.example.crisisopp.home.models
 
 import com.google.firebase.firestore.IgnoreExtraProperties
+import java.io.Serializable
 
 @IgnoreExtraProperties
-data class Form (
-    var formID: String = "",
+data class HomeCareForm (
     var fullName: String = "",
     var mothersName: String = "",
     var birthDate: String = "",
@@ -22,8 +22,9 @@ data class Form (
     var mainApproval: Int = 0,
     var originatorToken: String = "",
     var municipalityName: String = "",
-    var formType: String = ""
-)
+    override var formType: String = "",
+    override var formID: String = ""
+): IForm, Serializable
 {
     companion object{
         const val FIELD_FORM_NAME = "fullName"

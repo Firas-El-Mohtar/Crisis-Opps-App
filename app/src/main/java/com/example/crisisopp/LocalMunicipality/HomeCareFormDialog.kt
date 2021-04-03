@@ -16,7 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
-import com.example.crisisopp.home.models.Form
+import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
@@ -28,7 +28,7 @@ import java.io.File
 import java.util.*
 
 
-class CreateForm : DialogFragment() {
+class HomeCareFormDialog : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
 
@@ -97,7 +97,7 @@ class CreateForm : DialogFragment() {
             val formId = (0..1000).random().toString()
             val currentUserToken = homeViewModel.getUserToken()
             //constructor to build a Form object to then pass to firebase for saving
-            var form = Form(formId,
+            var form = HomeCareForm(formID = formId,
                 fullName =  etFullName.editText?.text.toString(),
                 mothersName =  etMothersName.editText?.text.toString(),
                 birthDate =  etBirthDate.editText?.text.toString(),
@@ -117,7 +117,7 @@ class CreateForm : DialogFragment() {
                 municipalityName = homeViewModel.getMunicipalityName() ,
                 formType = "Homecare")
 
-            homeViewModel.uploadForm(form)
+            homeViewModel.uploadHomeCareForm(form)
             homeViewModel.onFormUploadSendNotification(currentUserToken)
             dialog?.dismiss()
         }

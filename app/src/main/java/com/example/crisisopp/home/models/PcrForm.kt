@@ -1,7 +1,6 @@
 package com.example.crisisopp.home.models
 
 data class PcrForm (
-    var formID: String = "",
     var fullName: String = "",
     var mothersName: String = "",
     var birthDate: String = "",
@@ -14,5 +13,6 @@ data class PcrForm (
     var originatorId: String = "",
     var ainWzeinApproval: Int = 0,
     var additionalNotes: String = "",
-    var formType: String = ""
-    )
+    override var formType: String,
+    override var formID: String
+) :IForm

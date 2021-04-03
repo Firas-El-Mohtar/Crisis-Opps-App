@@ -1,19 +1,42 @@
 package com.example.crisisopp.home.viewmodel
 
-import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.crisisopp.home.models.Form
+import androidx.lifecycle.viewModelScope
+import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.IForm
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.repository.HomeRepository
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.Query
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     //todo var query (computed var)
     var query: Query? = null
 
+    private val _selectedForm = MutableLiveData<Int>()
+    val selectedForm: LiveData<Int>
+        get() = _selectedForm
 
+
+    private lateinit var parentForm: IForm
+
+    fun setSelectedForm(form: IForm){
+         this.parentForm = form
+        _selectedForm.value = 1
+    }
+    fun getHomeCareForm(): HomeCareForm? {
+      return parentForm as? HomeCareForm
+    }
+    fun getPcrForm(): PcrForm? {
+        return parentForm as? PcrForm
+    }
+
+    fun formId(): String{
+        return (0..1000).random().toString()
+    }
     fun canCreateForm(): Boolean{
         return homeRepository.userType == "local"
     }
@@ -23,13 +46,22 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     fun getUserToken(): String{
         return homeRepository.userToken
     }
-    fun uploadForm(form: Form){
-        homeRepository.uploadForm(form)
+    fun uploadHomeCareForm(homeCareForm : HomeCareForm){
+        homeRepository.uploadHomeCareForm(homeCareForm)
     }
     fun uploadPcrForm(pcrForm: PcrForm){
         homeRepository.uploadPcrForm(pcrForm)
     }
-
+    fun approveForm() {
+        viewModelScope.launch {
+            homeRepository.updateFormApproval(parentForm, true)
+        }
+    }
+    fun declineForm(){
+        viewModelScope.launch {
+            homeRepository.updateFormApproval(parentForm, false)
+        }
+    }
 
     fun onFormUploadSendNotification(token: String){
         homeRepository.onFormUploadSendNotification(token)
@@ -54,7 +86,4 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         return query
     }
 
-    fun onFormClicked(){
-
-    }
 }
