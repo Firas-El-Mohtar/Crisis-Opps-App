@@ -8,12 +8,13 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.solver.GoalRow
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crisisopp.LocalMunicipality.CreateForm
+import com.example.crisisopp.LocalMunicipality.HomeCareFormDialog
 import com.example.crisisopp.LocalMunicipality.CreatePcrForm
 import com.example.crisisopp.LocalMunicipality.ExampleAdapter
+import com.example.crisisopp.LocalMunicipality.FormContentDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
@@ -22,11 +23,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
 
     val TAG = "JNCICUBIUBQRV"
     private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!, userToken!!, municipalityName!!) }
-
 
 
     val firestore = Firebase.firestore
@@ -60,7 +60,13 @@ class HomeActivity : AppCompatActivity() {
             municipalityName = it
         }
 
-        exapmleAdapter = ExampleAdapter(homeViewModel.querySelector()!!)
+
+        homeViewModel.selectedForm.observe(this@HomeActivity, Observer {
+                val dialog = FormContentDialog()
+                dialog.show(supportFragmentManager, "View Form")
+        })
+
+        exapmleAdapter = ExampleAdapter(homeViewModel)
         recyclerView = findViewById(R.id.recycler_view_test)
         recyclerView.apply {
             setHasFixedSize(true)
@@ -84,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
         homeCareText = findViewById(R.id.text_view_home_care)
 
         homeCareFab.setOnClickListener{
-            val dialog = CreateForm()
+            val dialog = HomeCareFormDialog()
             dialog.show(supportFragmentManager, "Create Form")
         }
         pcrFab.setOnClickListener {
@@ -146,4 +152,7 @@ class HomeActivity : AppCompatActivity() {
         super.onStop()
         exapmleAdapter.stopListening()
     }
+
+
+
 }

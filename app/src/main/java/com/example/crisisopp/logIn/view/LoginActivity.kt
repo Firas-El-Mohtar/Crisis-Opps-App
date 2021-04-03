@@ -43,11 +43,10 @@ class LoginActivity : AppCompatActivity() {
         val signInButton = findViewById<Button>(R.id.signup)
         progressBar = findViewById(R.id.loading)
 
-
-
         signInButton.setOnClickListener() {
+            showProgressBar()
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
-
+            hideProgressBar()
         }
     }
 

@@ -6,6 +6,16 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_margin="12dp"
+        android:id="@+id/form_title"
+        android:text="Home Care Form"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
         android:id="@+id/full_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -14,7 +24,7 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/form_title" />
 
     <TextView
         android:id="@+id/mothers_name_tv"
@@ -39,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
 
     <TextView
-        android:id="@+id/place_of_residency_tv"
+        android:id="@+id/blood_type_tv"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -48,6 +58,17 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
+
+    <TextView
+        android:id="@+id/place_of_residency_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
 
     <TextView
         android:id="@+id/phone_number_tv"
@@ -106,10 +127,9 @@
 
     <ImageView
         android:id="@+id/hawiyye_scan_iv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginEnd="142dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv"
@@ -117,13 +137,29 @@
 
     <ImageView
         android:id="@+id/doctors_prescription_iv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="141dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hawiyye_scan_iv"
         tools:srcCompat="@tools:sample/avatars" />
+    <Button
+        android:id="@+id/approve_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Approve"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
+    <Button
+        android:id="@+id/decline_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decline"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

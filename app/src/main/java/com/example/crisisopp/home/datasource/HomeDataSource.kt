@@ -1,10 +1,9 @@
 package com.example.crisisopp.home.datasource
 
-import android.view.View
-import android.widget.Toast
 import android.util.Log
 import com.example.crisisopp.FarahFoundation.TAG
-import com.example.crisisopp.home.models.Form
+import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.IForm
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.notifications.NotificationData
@@ -13,6 +12,7 @@ import com.example.crisisopp.notifications.RetrofitInstance
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -27,12 +27,38 @@ class HomeDataSource {
     val db = Firebase.firestore
     val currentUser = Firebase.auth.currentUser
 
+    val hashMap:HashMap<String,String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
+
+    suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean){
+        hashMap.get(form.formType)?.let {
+            val value = if(isApproved) 1 else -1
+            val querySnapshot = db.collection(it).whereEqualTo("formID",form.formID).get().await()
+            val document = querySnapshot.documents.firstOrNull()
+            when(userType.toLowerCase()){
+                "farah" ->{
+                    val farahApproval = hashMapOf("farahApproval" to value)
+                    document?.reference?.set(farahApproval, SetOptions.merge())
+                }
+                "main" ->{
+                    val mainApproval = hashMapOf("mainApproval" to value)
+                    document?.reference?.set(mainApproval, SetOptions.merge())
+                }
+                "ainWzeinApproval" ->{
+                    val aynWZaynApproval = hashMapOf("ainWzeinApproval" to value)
+                    document?.reference?.set(aynWZaynApproval)
+                }
+                else -> return
+            }
+        }
+    }
+
+
     fun getCurrentUserId(): String {
         return currentUser.uid
     }
 
-    fun saveForm(form: Form) {
-        db.collection("forms").add(form)
+    fun saveForm(homeCareForm: HomeCareForm) {
+        db.collection("forms").add(homeCareForm)
     }
     fun savePcrForm(pcrForm: PcrForm){
         db.collection("pcrforms").add(pcrForm)
@@ -82,15 +108,9 @@ class HomeDataSource {
         }
     }
 
-    fun approveForm(formId: String, userType: String) {
-
-    }
-
-
     fun autoSendNotification(userType: String, token: String) {
 
         when (userType) {
-
             "ainwzein" -> {
                 PushNotification(
                     NotificationData("تمت الموافقة على طلبك", "اضغط لرؤية تاريخ الموعد"),
