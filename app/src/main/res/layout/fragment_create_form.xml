@@ -8,13 +8,22 @@
     tools:context=".LocalMunicipality.HomeCareFormDialog"
     android:orientation="horizontal">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
         <TextView
             android:id="@+id/patient"
             android:layout_width="76dp"
@@ -270,8 +279,12 @@
         app:layout_constraintStart_toEndOf="@+id/attach_image"
         tools:src="@tools:sample/avatars" />
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 

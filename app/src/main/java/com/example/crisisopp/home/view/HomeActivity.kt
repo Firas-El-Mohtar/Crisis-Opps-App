@@ -18,6 +18,8 @@ import com.example.crisisopp.LocalMunicipality.FormContentDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -39,6 +41,7 @@ class HomeActivity : AppCompatActivity(){
     private lateinit var pcrFab: FloatingActionButton
     private lateinit var pcrText: TextView
     private lateinit var homeCareText: TextView
+    private lateinit var topAppBar: MaterialToolbar
     private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim) }
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim) }
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
@@ -96,6 +99,31 @@ class HomeActivity : AppCompatActivity(){
         pcrFab.setOnClickListener {
             val pcrDialog = CreatePcrForm()
             pcrDialog.show(supportFragmentManager, "Create PCR Form" )
+        }
+
+
+
+        topAppBar = findViewById(R.id.topAppBar)
+
+        topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+        }
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.favorite -> {
+                    // Handle favorite icon press
+                    true
+                }
+                R.id.search -> {
+                    // Handle search icon press
+                    true
+                }
+                R.id.more -> {
+                    // Handle more item (inside overflow menu) press
+                    true
+                }
+                else -> false
+            }
         }
     }
 

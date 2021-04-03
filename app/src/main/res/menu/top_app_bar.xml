@@ -1,0 +1,29 @@
+
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/covid_icon"
+            android:title="favorite"
+            android:contentDescription="content_description_favorite"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/name_of_source_icon"
+            android:title="search"
+            android:contentDescription="content_description_search"
+
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/more"
+            android:icon="@drawable/name_of_source_icon"
+            android:title="more"
+            android:contentDescription="content_description_more"
+            app:showAsAction="never" />
+
+    </menu>
+

@@ -31,7 +31,9 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
     suspend fun autoSendNotification(userId: String) {
 
-        return homeDataSource.autoSendNotification(userType, getFormSenderToken(userId)!!)
+        getFormSenderToken(userId)?.let {
+            homeDataSource.autoSendNotification(userType, it)
+        }
     }
 
     fun querySelector(): Query?{

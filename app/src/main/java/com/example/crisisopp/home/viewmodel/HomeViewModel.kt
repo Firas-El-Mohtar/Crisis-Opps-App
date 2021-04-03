@@ -4,8 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+<<<<<<< Updated upstream
 import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.models.IForm
+=======
+import com.example.crisisopp.home.models.Form
+>>>>>>> Stashed changes
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.repository.HomeRepository
 
@@ -49,6 +53,7 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     fun uploadHomeCareForm(homeCareForm : HomeCareForm){
         homeRepository.uploadHomeCareForm(homeCareForm)
     }
+
     fun uploadPcrForm(pcrForm: PcrForm){
         homeRepository.uploadPcrForm(pcrForm)
     }
@@ -67,8 +72,10 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         homeRepository.onFormUploadSendNotification(token)
     }
 
-    suspend fun autoSendNotification(userId: String){
-        return homeRepository.autoSendNotification(userId)
+    fun autoSendNotification(userId: String){
+        viewModelScope.launch {
+            homeRepository.autoSendNotification(userId)
+        }
         //The notificationTitle and notificationContent will come from an edit text in a dialogue fragment
     }
 

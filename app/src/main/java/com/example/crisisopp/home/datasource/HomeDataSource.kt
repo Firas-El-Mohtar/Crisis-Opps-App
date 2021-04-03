@@ -66,19 +66,27 @@ class HomeDataSource {
 
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
+<<<<<<< Updated upstream
         if(usertype == "local"){
             query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
         }else {
             query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
+=======
+        if (usertype == "local") {
+            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName)
+                .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+            var query1 = query
+        } else {
+            query =
+                db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
+>>>>>>> Stashed changes
         }
         return query
     }
 
-    fun onFormUploadSendNotification(
-        token: String,
-    ) {
+    fun onFormUploadSendNotification(token: String) {
         PushNotification(
-            NotificationData("تم إرسال طلبك بنجاح", ""),
+            NotificationData("خلية الأزمة","تم إرسال طلبك بنجاح"),
             token
         ).also {
             sendNotificationRetrofit(it)
