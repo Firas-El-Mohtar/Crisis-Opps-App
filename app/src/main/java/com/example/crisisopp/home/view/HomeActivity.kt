@@ -1,26 +1,31 @@
 package com.example.crisisopp.home.view
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.crisisopp.LocalMunicipality.HomeCareFormDialog
 import com.example.crisisopp.LocalMunicipality.CreatePcrForm
-import com.example.crisisopp.LocalMunicipality.ExampleAdapter
 import com.example.crisisopp.LocalMunicipality.FormContentDialog
+import com.example.crisisopp.LocalMunicipality.PcrFormDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
-import com.google.android.material.appbar.AppBarLayout
+import com.example.crisisopp.viewpager.ViewPagerAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -29,7 +34,6 @@ class HomeActivity : AppCompatActivity(){
 
     val TAG = "JNCICUBIUBQRV"
     private val homeViewModel by viewModels<HomeViewModel> { HomeViewModelFactory(userType!!, userToken!!, municipalityName!!) }
-
 
     val firestore = Firebase.firestore
     private lateinit var userType: String
@@ -47,12 +51,29 @@ class HomeActivity : AppCompatActivity(){
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
     private var clicked= false
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var exapmleAdapter: ExampleAdapter
+
+    private lateinit var drawerLayout :DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var drawerLogo: ImageView
+    private lateinit var tvDrawerUsername: TextView
+    private lateinit var tvDrawerEmail: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_municipality_main)
+
+        val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager = findViewById<ViewPager2>(R.id.view_pager)
+        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+
+        viewPager.adapter = adapter
+        TabLayoutMediator(tabLayout, viewPager){tab, position ->
+            when(position){
+                0-> tab.text = "Home Care"
+                1-> tab.text = "PCR"
+            }
+        }.attach()
         intent.getStringExtra("UserType")?.let {
             userType = it
         }
@@ -64,21 +85,15 @@ class HomeActivity : AppCompatActivity(){
         }
 
 
-        homeViewModel.selectedForm.observe(this@HomeActivity, Observer {
+        homeViewModel.selectedHomeCareForm.observe(this@HomeActivity, Observer {
                 val dialog = FormContentDialog()
                 dialog.show(supportFragmentManager, "View Form")
         })
 
-        exapmleAdapter = ExampleAdapter(homeViewModel)
-        recyclerView = findViewById(R.id.recycler_view_test)
-        recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = exapmleAdapter.apply {
-                notifyDataSetChanged()
-            }
-        }
-
+        homeViewModel.selectedPcrForm.observe(this@HomeActivity, Observer {
+            val dialog = PcrFormDialog()
+            dialog.show(supportFragmentManager, "View Form")
+        })
         mainFab = findViewById(R.id.main_fab)
         if(homeViewModel.canCreateForm()){
             mainFab.visibility = VISIBLE
@@ -101,12 +116,26 @@ class HomeActivity : AppCompatActivity(){
             pcrDialog.show(supportFragmentManager, "Create PCR Form" )
         }
 
-
-
         topAppBar = findViewById(R.id.topAppBar)
+        setSupportActionBar(topAppBar)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navigationView = findViewById(R.id.navView)
 
         topAppBar.setNavigationOnClickListener {
-            // Handle navigation icon press
+            drawerLayout.openDrawer(Gravity.LEFT)
+
+            drawerLogo = findViewById(R.id.drawerLogo)
+            tvDrawerUsername = findViewById(R.id.tvDrawerUsername)
+            tvDrawerEmail = findViewById(R.id.tvDrawerEmail)
+
+            setDrawerInfo(userType, municipalityName)
+
+        }
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            // Handle menu item selected
+            menuItem.isChecked = true
+            drawerLayout.closeDrawers()
+            true
         }
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -125,6 +154,7 @@ class HomeActivity : AppCompatActivity(){
                 else -> false
             }
         }
+
     }
 
     private fun onAddButtonClicked(){
@@ -133,9 +163,6 @@ class HomeActivity : AppCompatActivity(){
         clicked = !clicked
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 
     private fun setAnimation(clicked: Boolean, pcrFAB: FloatingActionButton, pcrText: TextView, homeCareFab: FloatingActionButton, homeCareText: TextView) {
         if(!clicked){
@@ -170,15 +197,10 @@ class HomeActivity : AppCompatActivity(){
 
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        exapmleAdapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        exapmleAdapter.stopListening()
+    private fun setDrawerInfo(userType: String, municipalityName: String){
+        tvDrawerEmail.setText("$municipalityName@$userType.com")
+        tvDrawerUsername.setText(municipalityName[0].toUpperCase()+municipalityName.substring(1))
+        drawerLogo.setImageResource(R.drawable.ainwzeinlogo)
     }
 
 

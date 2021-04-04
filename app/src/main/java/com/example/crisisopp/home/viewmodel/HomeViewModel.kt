@@ -4,12 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-<<<<<<< Updated upstream
 import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.models.IForm
-=======
-import com.example.crisisopp.home.models.Form
->>>>>>> Stashed changes
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.repository.HomeRepository
 
@@ -20,16 +16,25 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     //todo var query (computed var)
     var query: Query? = null
 
-    private val _selectedForm = MutableLiveData<Int>()
-    val selectedForm: LiveData<Int>
-        get() = _selectedForm
+    private val _selectedHomeCareForm = MutableLiveData<Int>()
+    val selectedHomeCareForm: LiveData<Int>
+        get() = _selectedHomeCareForm
+
+    private val _selectedPcrForm = MutableLiveData<Int>()
+    val selectedPcrForm: LiveData<Int>
+        get() = _selectedPcrForm
+
 
 
     private lateinit var parentForm: IForm
 
-    fun setSelectedForm(form: IForm){
+    fun setSelectedHomeCareForm(form: IForm){
          this.parentForm = form
-        _selectedForm.value = 1
+        _selectedHomeCareForm.value = 1
+    }
+    fun setSelectedPcrForm(form: IForm){
+        this.parentForm = form
+        _selectedPcrForm.value = 1
     }
     fun getHomeCareForm(): HomeCareForm? {
       return parentForm as? HomeCareForm
@@ -43,6 +48,9 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     }
     fun canCreateForm(): Boolean{
         return homeRepository.userType == "local"
+    }
+    fun canApproveForm() : Boolean{
+        return homeRepository.userType == "ainwzein"
     }
     fun getUserId(): String{
         return homeRepository.getUserId()
@@ -91,6 +99,9 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     fun querySelector(): Query?{
         query = homeRepository.querySelector()
         return query
+    }
+    fun pcrQuerySelector(): Query?{
+        return homeRepository.pcrQuerySelector()
     }
 
 }

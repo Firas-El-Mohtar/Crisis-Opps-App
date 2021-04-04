@@ -14,20 +14,20 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 
 
-class ExampleAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapter<ExampleAdapter.ExampleViewHolder>(homeViewModel.querySelector()!!) {
+class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapter<HomeCareFormsAdapter.HomeCareFormViewHolder>(homeViewModel.querySelector()!!) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareFormViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_items, parent, false)
-        return ExampleViewHolder(itemView)
+        return HomeCareFormViewHolder(itemView)
     }
 
 
-    override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeCareFormViewHolder, position: Int) {
         return holder.bind(getSnapshot(position))
     }
 
-    inner class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class HomeCareFormViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val _aynwzayn: ImageView = itemView.findViewById(R.id.ayn_wzayn_icon)
         val _mainapproval: ImageView = itemView.findViewById(R.id.markazeyye_icon)
@@ -64,7 +64,7 @@ class ExampleAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
         }
         override fun onClick(v: View?) {
             getSnapshot(adapterPosition).toObject<HomeCareForm>()?.let {
-                homeViewModel.setSelectedForm(it)
+                homeViewModel.setSelectedHomeCareForm(it)
             }
             }
         }

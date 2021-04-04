@@ -43,9 +43,9 @@ class HomeDataSource {
                     val mainApproval = hashMapOf("mainApproval" to value)
                     document?.reference?.set(mainApproval, SetOptions.merge())
                 }
-                "ainWzeinApproval" ->{
+                "ainwzein" ->{
                     val aynWZaynApproval = hashMapOf("ainWzeinApproval" to value)
-                    document?.reference?.set(aynWZaynApproval)
+                    document?.reference?.set(aynWZaynApproval, SetOptions.merge())
                 }
                 else -> return
             }
@@ -66,20 +66,10 @@ class HomeDataSource {
 
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
-<<<<<<< Updated upstream
         if(usertype == "local"){
             query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
         }else {
             query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
-=======
-        if (usertype == "local") {
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName)
-                .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
-            var query1 = query
-        } else {
-            query =
-                db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
->>>>>>> Stashed changes
         }
         return query
     }
@@ -147,5 +137,16 @@ class HomeDataSource {
                 Log.e(TAG, e.toString())
             }
         }
+    fun pcrQuerySelector(usertype: String, municipalityName: String): Query? {
+        var query: Query? = null
+        when (usertype.toLowerCase()) {
+            "local" -> query =
+                db.collection("pcrforms").whereEqualTo("municipalityName", municipalityName)
+                    .orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+            "ainwzein" -> query =
+                db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+        }
+        return query
+    }
 }
 

@@ -26,6 +26,7 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
         homeDataSource.updateFormApproval(userType, form, isApproved)
     }
 
+
     fun onFormUploadSendNotification(token: String){
         homeDataSource.onFormUploadSendNotification(token)
     }
@@ -42,6 +43,9 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
     suspend fun getFormSenderToken(userId: String): String?{
         return homeDataSource.getUserToken(userId)
+    }
+    fun pcrQuerySelector(): Query?{
+        return homeDataSource.pcrQuerySelector(userType, municipalityName)
     }
 
 }

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
+import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 class FormContentDialog: DialogFragment() {
@@ -25,6 +26,7 @@ class FormContentDialog: DialogFragment() {
     private lateinit var tRecordNumber: TextView
     private lateinit var tLastPcrDate: TextView
     private lateinit var tDoctorName: TextView
+    private lateinit var form: HomeCareForm
 
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
@@ -34,6 +36,9 @@ class FormContentDialog: DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.form_content_dialog, container, false)
+        homeViewModel.getHomeCareForm()?.let {
+            form = it
+        }
         tFormTitle = view.findViewById(R.id.form_title)
         tFullName = view.findViewById(R.id.full_name_tv)
         tMothersName = view.findViewById(R.id.mothers_name_tv)
@@ -49,17 +54,17 @@ class FormContentDialog: DialogFragment() {
         declineButton = view.findViewById(R.id.decline_button)
 
 
-        tFormTitle.text= homeViewModel.getHomeCareForm()?.fullName + " Home Care Form"
-        tFullName.text = "Full Name: " + homeViewModel.getHomeCareForm()?.fullName
-        tMothersName.text = "Mothers Name: "+homeViewModel.getHomeCareForm()?.mothersName
-        tBirthDate.text = "Date Of Birth: "+homeViewModel.getHomeCareForm()?.birthDate
-        tBloodType.text = "Blood Type: " + homeViewModel.getHomeCareForm()?.bloodType
-        tPlaceOfResidence.text = homeViewModel.getHomeCareForm()?.placeOfResidence
-        tPhoneNumber.text = homeViewModel.getHomeCareForm()?.phoneNumber
-        tDateOfPrescription.text = homeViewModel.getHomeCareForm()?.dateOfPrescription
-        tRecordNumber.text = homeViewModel.getHomeCareForm()?.recordNumber.toString()
-        tLastPcrDate.text = homeViewModel.getHomeCareForm()?.lastPcrDate
-        tDoctorName.text = homeViewModel.getHomeCareForm()?.doctorsName
+        tFormTitle.text= form.fullName + " Home Care Form"
+        tFullName.text = "Full Name: " + form.fullName
+        tMothersName.text = "Mothers Name: "+ form.mothersName
+        tBirthDate.text = "Date Of Birth: "+ form.birthDate
+        tBloodType.text = "Blood Type: " + form.bloodType
+        tPlaceOfResidence.text = "Place Of Resendence: " + form.placeOfResidence
+        tPhoneNumber.text ="Phone Number: " + form.phoneNumber
+        tDateOfPrescription.text = "Date Of Prescription: " + form.dateOfPrescription
+        tRecordNumber.text = "Record Number: "+  form.recordNumber.toString()
+        tLastPcrDate.text = "Last PCR Date: " + form.lastPcrDate
+        tDoctorName.text = "Doctors Name: " + form.doctorsName
 
         if(!homeViewModel.canCreateForm()){
             approveButton.visibility = VISIBLE
