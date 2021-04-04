@@ -38,7 +38,9 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
 
     fun querySelector(): Query?{
         return homeDataSource.querySelector(userType, municipalityName)
-
+    }
+    fun pcrQuerySelector(): Query?{
+        return homeDataSource.pcrQuerySelector(userType, municipalityName)
     }
     suspend fun getFormSenderToken(userId: String): String?{
         return homeDataSource.getUserToken(userId)

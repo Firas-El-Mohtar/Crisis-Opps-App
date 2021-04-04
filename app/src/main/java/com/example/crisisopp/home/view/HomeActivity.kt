@@ -1,13 +1,21 @@
 package com.example.crisisopp.home.view
 
+import android.content.Context
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.preference.PreferenceManager
+import android.util.AttributeSet
+import android.view.Gravity
+import android.view.View
+import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.CheckBox
+import android.widget.CompoundButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,11 +26,14 @@ import com.example.crisisopp.LocalMunicipality.FormContentDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
+import com.example.crisisopp.logIn.view.LoginActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import io.grpc.InternalChannelz.id
 
 
 class HomeActivity : AppCompatActivity(){
@@ -49,12 +60,19 @@ class HomeActivity : AppCompatActivity(){
     private var clicked= false
     private lateinit var recyclerView: RecyclerView
     private lateinit var exapmleAdapter: ExampleAdapter
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var drawerLogo: ImageView
+    private lateinit var tvDrawerUsername: TextView
+    private lateinit var tvDrawerEmail: TextView
+    private lateinit var rememberCheckBox: CheckBox
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_municipality_main)
         intent.getStringExtra("UserType")?.let {
-            userType = it
+             userType = it
         }
         intent.getStringExtra("UserToken")?.let {
             userToken = it
@@ -62,6 +80,12 @@ class HomeActivity : AppCompatActivity(){
         intent.getStringExtra("MunicipalityName")?.let {
             municipalityName = it
         }
+        //referrences for drawer items
+
+
+
+
+
 
 
         homeViewModel.selectedForm.observe(this@HomeActivity, Observer {
@@ -83,6 +107,7 @@ class HomeActivity : AppCompatActivity(){
         if(homeViewModel.canCreateForm()){
             mainFab.visibility = VISIBLE
             mainFab.setOnClickListener{
+                drawerLayout.closeDrawers()
                 onAddButtonClicked()
             }
         } else mainFab.visibility = GONE
@@ -93,10 +118,12 @@ class HomeActivity : AppCompatActivity(){
         homeCareText = findViewById(R.id.text_view_home_care)
 
         homeCareFab.setOnClickListener{
+            drawerLayout.closeDrawers()
             val dialog = HomeCareFormDialog()
             dialog.show(supportFragmentManager, "Create Form")
         }
         pcrFab.setOnClickListener {
+            drawerLayout.closeDrawers()
             val pcrDialog = CreatePcrForm()
             pcrDialog.show(supportFragmentManager, "Create PCR Form" )
         }
@@ -104,10 +131,28 @@ class HomeActivity : AppCompatActivity(){
 
 
         topAppBar = findViewById(R.id.topAppBar)
+        setSupportActionBar(topAppBar)
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navigationView = findViewById(R.id.navView)
 
         topAppBar.setNavigationOnClickListener {
-            // Handle navigation icon press
+
+            drawerLayout.openDrawer(Gravity.LEFT)
+
+            drawerLogo = findViewById(R.id.drawerLogo)
+            tvDrawerUsername = findViewById(R.id.tvDrawerUsername)
+            tvDrawerEmail = findViewById(R.id.tvDrawerEmail)
+
+            setDrawerInfo(userType, municipalityName)
+
         }
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            // Handle menu item selected
+            menuItem.isChecked = true
+            drawerLayout.closeDrawers()
+            true
+        }
+
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.favorite -> {
@@ -135,6 +180,7 @@ class HomeActivity : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+        topAppBar.visibility = VISIBLE
     }
 
     private fun setAnimation(clicked: Boolean, pcrFAB: FloatingActionButton, pcrText: TextView, homeCareFab: FloatingActionButton, homeCareText: TextView) {
@@ -171,6 +217,12 @@ class HomeActivity : AppCompatActivity(){
         }
     }
 
+    private fun setDrawerInfo(userType: String, municipalityName: String){
+        tvDrawerEmail.setText("$municipalityName@$userType.com")
+        tvDrawerUsername.setText(municipalityName[0].toUpperCase()+municipalityName.substring(1))
+        drawerLogo.setImageResource(R.drawable.ainwzeinlogo)
+    }
+
     override fun onStart() {
         super.onStart()
         exapmleAdapter.startListening()
@@ -180,7 +232,5 @@ class HomeActivity : AppCompatActivity(){
         super.onStop()
         exapmleAdapter.stopListening()
     }
-
-
 
 }

@@ -27,23 +27,23 @@ class HomeDataSource {
     val db = Firebase.firestore
     val currentUser = Firebase.auth.currentUser
 
-    val hashMap:HashMap<String,String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
+    val hashMap: HashMap<String, String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
 
-    suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean){
+    suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean) {
         hashMap.get(form.formType)?.let {
-            val value = if(isApproved) 1 else -1
-            val querySnapshot = db.collection(it).whereEqualTo("formID",form.formID).get().await()
+            val value = if (isApproved) 1 else -1
+            val querySnapshot = db.collection(it).whereEqualTo("formID", form.formID).get().await()
             val document = querySnapshot.documents.firstOrNull()
-            when(userType.toLowerCase()){
-                "farah" ->{
+            when (userType.toLowerCase()) {
+                "farah" -> {
                     val farahApproval = hashMapOf("farahApproval" to value)
                     document?.reference?.set(farahApproval, SetOptions.merge())
                 }
-                "main" ->{
+                "main" -> {
                     val mainApproval = hashMapOf("mainApproval" to value)
                     document?.reference?.set(mainApproval, SetOptions.merge())
                 }
-                "ainWzeinApproval" ->{
+                "ainWzeinApproval" -> {
                     val aynWZaynApproval = hashMapOf("ainWzeinApproval" to value)
                     document?.reference?.set(aynWZaynApproval)
                 }
@@ -60,33 +60,43 @@ class HomeDataSource {
     fun saveForm(homeCareForm: HomeCareForm) {
         db.collection("forms").add(homeCareForm)
     }
-    fun savePcrForm(pcrForm: PcrForm){
+
+    fun savePcrForm(pcrForm: PcrForm) {
         db.collection("pcrforms").add(pcrForm)
     }
 
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
-<<<<<<< Updated upstream
-        if(usertype == "local"){
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
-        }else {
-            query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
-=======
-        if (usertype == "local") {
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName)
-                .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
-            var query1 = query
-        } else {
-            query =
-                db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
->>>>>>> Stashed changes
+            when (usertype.toLowerCase()) {
+                "local" -> query =
+                    db.collection("forms").whereEqualTo("municipalityName", municipalityName)
+                        .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                "farah" -> query = db.collection("forms").whereEqualTo("mainApproval", 1)
+                    .whereEqualTo("ainWzeinApproval", 1)
+                    .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                else -> query =
+                    db.collection("forms").orderBy("farahApproval", Query.Direction.DESCENDING)
+                        .limit(50)
+            }
+            return query
+        }
+
+
+    fun pcrQuerySelector(usertype: String, municipalityName: String): Query? {
+        var query: Query? = null
+        when (usertype.toLowerCase()) {
+            "local" -> query =
+                db.collection("pcrforms").whereEqualTo("municipalityName", municipalityName)
+                    .orderBy("ainWZeinApproval", Query.Direction.DESCENDING)
+            "ainwzein" -> query =
+                db.collection("pcrforms").orderBy("ainWZeinApproval", Query.Direction.DESCENDING)
         }
         return query
     }
 
     fun onFormUploadSendNotification(token: String) {
         PushNotification(
-            NotificationData("خلية الأزمة","تم إرسال طلبك بنجاح"),
+            NotificationData("خلية الأزمة", "تم إرسال طلبك بنجاح"),
             token
         ).also {
             sendNotificationRetrofit(it)
@@ -148,4 +158,5 @@ class HomeDataSource {
             }
         }
 }
+
 

@@ -4,12 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-<<<<<<< Updated upstream
 import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.models.IForm
-=======
-import com.example.crisisopp.home.models.Form
->>>>>>> Stashed changes
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.repository.HomeRepository
 
@@ -26,6 +22,10 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
 
 
     private lateinit var parentForm: IForm
+
+    fun setDrawerInfo(userType: String, municipalityName: String){
+
+    }
 
     fun setSelectedForm(form: IForm){
          this.parentForm = form
@@ -91,6 +91,9 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     fun querySelector(): Query?{
         query = homeRepository.querySelector()
         return query
+    }
+    fun pcrQuerySelector(): Query?{
+        return homeRepository.pcrQuerySelector()
     }
 
 }
