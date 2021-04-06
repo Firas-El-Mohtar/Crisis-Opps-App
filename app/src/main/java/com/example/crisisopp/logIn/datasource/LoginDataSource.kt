@@ -64,6 +64,8 @@ class LoginDataSource {
             return it.toObject<User>()
         } ?: return null
     }
+
+
     private suspend fun getUserDocument(userId: String): DocumentSnapshot? {
         val query =
             usersCollectionRef.collection("users").whereEqualTo("userId", userId).get().await()

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="blue_ish_grey">#e2f3f5</color>
+    <color name="light_blue">#22d1ee</color>
+    <color name="medium_blue">#3d5af1</color>
+    <color name="dark_blue">#0e153a</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

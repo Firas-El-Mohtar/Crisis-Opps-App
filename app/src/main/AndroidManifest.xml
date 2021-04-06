@@ -20,7 +20,7 @@
         <activity android:name=".AinWazein.AinWazeinMainActivity" />
         <activity android:name=".FarahFoundation.FarahFoundationMainActivity" >
         </activity>
-        <activity android:name=".home.view.LocalMunicipalityMainActivity"/>
+
 
         <activity android:name=".home.view.HomeActivity"></activity>
         <activity android:name=".logIn.view.LoginActivity">

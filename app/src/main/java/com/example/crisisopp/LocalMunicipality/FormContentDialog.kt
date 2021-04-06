@@ -3,15 +3,22 @@ package com.example.crisisopp.LocalMunicipality
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
 import com.example.crisisopp.R
+import com.example.crisisopp.glide.GlideApp
 import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
+import com.google.firebase.storage.FirebaseStorage
 
 class FormContentDialog: DialogFragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -27,6 +34,8 @@ class FormContentDialog: DialogFragment() {
     private lateinit var tLastPcrDate: TextView
     private lateinit var tDoctorName: TextView
     private lateinit var form: HomeCareForm
+    private lateinit var doctorsPrescription: ImageView
+    private lateinit var storageLocation: String
 
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
@@ -39,6 +48,7 @@ class FormContentDialog: DialogFragment() {
         homeViewModel.getHomeCareForm()?.let {
             form = it
         }
+
         tFormTitle = view.findViewById(R.id.form_title)
         tFullName = view.findViewById(R.id.full_name_tv)
         tMothersName = view.findViewById(R.id.mothers_name_tv)
@@ -52,6 +62,8 @@ class FormContentDialog: DialogFragment() {
         tDoctorName = view.findViewById(R.id.doctor_name_tv)
         approveButton = view.findViewById(R.id.approve_button)
         declineButton = view.findViewById(R.id.decline_button)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar_home_care)
+        doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
 
 
         tFormTitle.text= form.fullName + " Home Care Form"
@@ -65,6 +77,11 @@ class FormContentDialog: DialogFragment() {
         tRecordNumber.text = "Record Number: "+  form.recordNumber.toString()
         tLastPcrDate.text = "Last PCR Date: " + form.lastPcrDate
         tDoctorName.text = "Doctors Name: " + form.doctorsName
+        form.documentReference?.let {
+            doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
+            GlideApp.with(this).load(homeViewModel.getStorageReference(form)).into(doctorsPrescription)
+        }
+
 
         if(!homeViewModel.canCreateForm()){
             approveButton.visibility = VISIBLE
@@ -72,10 +89,14 @@ class FormContentDialog: DialogFragment() {
         }
 
         approveButton.setOnClickListener {
+            progressBar.visibility = VISIBLE
             homeViewModel.approveForm()
+            progressBar.visibility = GONE
         }
         declineButton.setOnClickListener {
+            progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
+            progressBar.visibility = GONE
         }
         return view
     }
@@ -83,7 +104,7 @@ class FormContentDialog: DialogFragment() {
         super.onStart()
         dialog?.let {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
-            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.WRAP_CONTENT
             it.window?.setLayout(width, height)
         }
     }

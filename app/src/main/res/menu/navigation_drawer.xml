@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-
     <group
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item1"
+            android:id="@+id/appointments"
+            android:icon="@drawable/date_of_prescription_icon"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/change_language"
+            android:icon="@drawable/ic_translate"
+            android:title="Change Language" />
+        <item
+            android:id="@+id/logout"
             android:checked="true"
-            android:icon="@drawable/birthdate_icon"
-            android:title="title_1" />
-        <item
-            android:id="@+id/item2"
-            android:icon="@drawable/birthdate_icon"
-            android:title="title_2" />
-        <item
-            android:id="@+id/item3"
-            android:icon="@drawable/birthdate_icon"
-            android:title="title_3" />
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
     </group>
 
 
-    <group
-        android:id="@+id/header_group"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/subtitle"
-            android:title="">
-            <menu>
-                <item
-                    android:id="@+id/Logout"
-                    android:icon="@drawable/place_of_residence_icon"
-                    android:title="Item 4" />
-            </menu>
-        </item>
-    </group>
 
 </menu>

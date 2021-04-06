@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +18,7 @@ class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) : Firestore
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareFormViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_items, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.home_care_recycler_items, parent, false)
         return HomeCareFormViewHolder(itemView)
     }
 
@@ -41,8 +41,8 @@ class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) : Firestore
 
         fun bind(snapshot: DocumentSnapshot) {
             val form = snapshot.toObject<HomeCareForm>()
-            personName.text = "Full Name: " + form?.fullName
-            phoneNumber.text = "Phone Number: " + form?.phoneNumber
+            personName.text = form?.fullName
+            phoneNumber.text = form?.phoneNumber
 
             when (form?.farahApproval) {
                 -1 -> _farahapproval.setImageResource(R.drawable.rejected_icon)

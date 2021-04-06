@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecyclerView.PcrFormsFragment">
+    tools:context=".RecyclerView.PcrFormsFragment"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_test_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/pcr_recycler_view" />
+        tools:listitem="@layout/pcr_recycler_view_items" />
 
 
 

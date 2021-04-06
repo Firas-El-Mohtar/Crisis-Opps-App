@@ -10,12 +10,15 @@ import com.example.crisisopp.notifications.NotificationData
 import com.example.crisisopp.notifications.PushNotification
 import com.example.crisisopp.notifications.RetrofitInstance
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,24 +29,38 @@ class HomeDataSource {
 
     val db = Firebase.firestore
     val currentUser = Firebase.auth.currentUser
+    val hashMap:HashMap<String, String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
 
-    val hashMap:HashMap<String,String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
+    var storage: FirebaseStorage? = null
+    var storageReference: StorageReference? = null
+
+    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference{
+        return FirebaseStorage.getInstance().getReferenceFromUrl(getImageReference(homeCareForm))
+    }
+    fun getImageReference(homeCareForm: HomeCareForm): String{
+        return "gs://crisis-opps-app.appspot.com/images/${homeCareForm.documentReference}"
+    }
+    fun uploadImageToStorage(uuid: String): StorageReference?{
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage!!.reference
+        return storageReference?.child("images/" + uuid)
+    }
 
     suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean){
         hashMap.get(form.formType)?.let {
             val value = if(isApproved) 1 else -1
-            val querySnapshot = db.collection(it).whereEqualTo("formID",form.formID).get().await()
+            val querySnapshot = db.collection(it).whereEqualTo("formID", form.formID).get().await()
             val document = querySnapshot.documents.firstOrNull()
             when(userType.toLowerCase()){
-                "farah" ->{
+                "farah" -> {
                     val farahApproval = hashMapOf("farahApproval" to value)
                     document?.reference?.set(farahApproval, SetOptions.merge())
                 }
-                "main" ->{
+                "main" -> {
                     val mainApproval = hashMapOf("mainApproval" to value)
                     document?.reference?.set(mainApproval, SetOptions.merge())
                 }
-                "ainwzein" ->{
+                "ainwzein" -> {
                     val aynWZaynApproval = hashMapOf("ainWzeinApproval" to value)
                     document?.reference?.set(aynWZaynApproval, SetOptions.merge())
                 }
@@ -67,16 +84,21 @@ class HomeDataSource {
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
         if(usertype == "local"){
-            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName ).orderBy("formID", Query.Direction.DESCENDING).limit(50)
+            query = db.collection("forms").whereEqualTo("municipalityName", municipalityName).orderBy(
+                "formID",
+                Query.Direction.DESCENDING
+            ).limit(50)
         }else {
-            query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(50)
+            query = db.collection("forms").orderBy("recordNumber", Query.Direction.DESCENDING).limit(
+                50
+            )
         }
         return query
     }
 
     fun onFormUploadSendNotification(token: String) {
         PushNotification(
-            NotificationData("خلية الأزمة","تم إرسال طلبك بنجاح"),
+            NotificationData("خلية الأزمة", "تم إرسال طلبك بنجاح"),
             token
         ).also {
             sendNotificationRetrofit(it)
@@ -96,9 +118,7 @@ class HomeDataSource {
     }
 
     suspend fun getUserDocument(userId: String): DocumentSnapshot? {
-
-        val query =
-            db.collection("users").whereEqualTo("userId", userId).get().await()
+        val query = db.collection("users").whereEqualTo("userId", userId).get().await()
         return if (query.isEmpty) {
             null
         } else {
@@ -137,6 +157,7 @@ class HomeDataSource {
                 Log.e(TAG, e.toString())
             }
         }
+
     fun pcrQuerySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
         when (usertype.toLowerCase()) {

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crisisopp.LocalMunicipality.HomeCareFormsAdapter
+import com.example.crisisopp.adapters.HomeCareFormsAdapter
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 

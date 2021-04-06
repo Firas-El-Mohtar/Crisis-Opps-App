@@ -6,12 +6,20 @@ import com.example.crisisopp.home.models.IForm
 
 import com.example.crisisopp.home.models.PcrForm
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, val userToken: String, val municipalityName: String) {
 
 
 
+    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference{
+        return homeDataSource.getStorageReference(homeCareForm)
+    }
+    fun uploadImageToStorage(uuid: String): StorageReference?{
+        return homeDataSource.uploadImageToStorage(uuid)
+    }
     fun getUserId(): String{
         return homeDataSource.getCurrentUserId()
     }

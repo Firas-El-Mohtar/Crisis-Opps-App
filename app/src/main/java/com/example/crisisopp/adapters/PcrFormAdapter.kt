@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PcrFormViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.pcr_recycler_view, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.pcr_recycler_view_items, parent, false)
         return PcrFormViewHolder(itemView)
     }
 
@@ -39,12 +39,15 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
         }
 
         fun bind(snapshot: DocumentSnapshot) {
-            val form = snapshot.toObject<PcrForm>()
-            personName.text = "Full Name: " + form?.fullName
-            placeOfResidency.text = "PLace Of Residency: " + form?.placeOfResidence
-            phoneNumber.text = "Phone Number: " + form?.phoneNumber
-            nameOfSource.text = "Name Of Source: " + form?.nameOfSource
-            bloodType.text = "Blood Type: " + form?.bloodType
+            snapshot.toObject<PcrForm>()?.let {
+                val form = it
+                personName.text = form.fullName
+                placeOfResidency.text = form.placeOfResidence
+                phoneNumber.text = form.phoneNumber
+                nameOfSource.text =  form.nameOfSource
+                bloodType.text = form.bloodType
+            }
+
         }
         override fun onClick(v: View?) {
             getSnapshot(adapterPosition).toObject<PcrForm>()?.let {

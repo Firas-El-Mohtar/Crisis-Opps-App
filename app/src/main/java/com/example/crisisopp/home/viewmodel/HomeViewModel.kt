@@ -10,6 +10,8 @@ import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.repository.HomeRepository
 
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
@@ -25,9 +27,11 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         get() = _selectedPcrForm
 
 
-
     private lateinit var parentForm: IForm
 
+    fun uploadImageToStorage(uuid: String): StorageReference?{
+        return homeRepository.uploadImageToStorage(uuid)
+    }
     fun setSelectedHomeCareForm(form: IForm){
          this.parentForm = form
         _selectedHomeCareForm.value = 1
@@ -51,6 +55,9 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     }
     fun canApproveForm() : Boolean{
         return homeRepository.userType == "ainwzein"
+    }
+    fun farahUser():Boolean{
+        return homeRepository.userType == "farah"
     }
     fun getUserId(): String{
         return homeRepository.getUserId()
@@ -102,6 +109,10 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     }
     fun pcrQuerySelector(): Query?{
         return homeRepository.pcrQuerySelector()
+    }
+    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference {
+        return homeRepository.getStorageReference(homeCareForm)
+
     }
 
 }
