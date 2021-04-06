@@ -6,10 +6,13 @@ import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
+import com.example.crisisopp.glide.GlideApp
+import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 class FormContentDialog: DialogFragment() {
@@ -25,18 +28,25 @@ class FormContentDialog: DialogFragment() {
     private lateinit var tRecordNumber: TextView
     private lateinit var tLastPcrDate: TextView
     private lateinit var tDoctorName: TextView
-
+    private lateinit var tMunicipalityName: TextView
+    private lateinit var form: HomeCareForm
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
+    private lateinit var doctorsPrescription: ImageView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.form_content_dialog, container, false)
+        homeViewModel.getHomeCareForm()?.let {
+            form = it
+        }
+
         tFormTitle = view.findViewById(R.id.form_title)
         tFullName = view.findViewById(R.id.full_name_tv)
         tMothersName = view.findViewById(R.id.mothers_name_tv)
+        tMunicipalityName = view.findViewById(R.id.municipality_name)
         tBirthDate = view.findViewById(R.id.birth_date_tv)
         tBloodType = view.findViewById(R.id.blood_type_tv)
         tPlaceOfResidence = view.findViewById(R.id.place_of_residency_tv)
@@ -49,17 +59,23 @@ class FormContentDialog: DialogFragment() {
         declineButton = view.findViewById(R.id.decline_button)
 
 
-        tFormTitle.text= homeViewModel.getHomeCareForm()?.fullName + " Home Care Form"
-        tFullName.text = "Full Name: " + homeViewModel.getHomeCareForm()?.fullName
-        tMothersName.text = "Mothers Name: "+homeViewModel.getHomeCareForm()?.mothersName
-        tBirthDate.text = "Date Of Birth: "+homeViewModel.getHomeCareForm()?.birthDate
-        tBloodType.text = "Blood Type: " + homeViewModel.getHomeCareForm()?.bloodType
-        tPlaceOfResidence.text = homeViewModel.getHomeCareForm()?.placeOfResidence
-        tPhoneNumber.text = homeViewModel.getHomeCareForm()?.phoneNumber
-        tDateOfPrescription.text = homeViewModel.getHomeCareForm()?.dateOfPrescription
-        tRecordNumber.text = homeViewModel.getHomeCareForm()?.recordNumber.toString()
-        tLastPcrDate.text = homeViewModel.getHomeCareForm()?.lastPcrDate
-        tDoctorName.text = homeViewModel.getHomeCareForm()?.doctorsName
+
+        tFormTitle.text= form.fullName + " Home Care Form"
+        tFullName.text = "Full Name: " + form.fullName
+        tMothersName.text = "Mothers Name: "+ form.mothersName
+        tBirthDate.text = "Date Of Birth: "+ form.birthDate
+        tBloodType.text = "Blood Type: " + form.bloodType
+        tPlaceOfResidence.text = "Place Of Resendence: " + form.placeOfResidence
+        tPhoneNumber.text ="Phone Number: " + form.phoneNumber
+        tDateOfPrescription.text = "Date Of Prescription: " + form.dateOfPrescription
+        tRecordNumber.text = "Record Number: "+  form.recordNumber.toString()
+        tLastPcrDate.text = "Last PCR Date: " + form.lastPcrDate
+        tDoctorName.text = "Doctors Name: " + form.doctorsName
+        form.documentReference?.let {
+            doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
+            GlideApp.with(this).load(homeViewModel.getStorageReference(form)).into(doctorsPrescription)
+        }
+
 
         if(!homeViewModel.canCreateForm()){
             approveButton.visibility = VISIBLE
@@ -68,9 +84,12 @@ class FormContentDialog: DialogFragment() {
 
         approveButton.setOnClickListener {
             homeViewModel.approveForm()
+            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
         }
         declineButton.setOnClickListener {
             homeViewModel.declineForm()
+            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, false)
+
         }
         return view
     }

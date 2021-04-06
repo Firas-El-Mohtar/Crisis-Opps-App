@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,21 +13,20 @@ import com.example.testingthings.history.FirestoreAdapter
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 
+class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) :
+    FirestoreAdapter<HomeCareFormsAdapter.HomeCareFormViewHolder>(homeViewModel.homecareQuerySelector()!!) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareFormViewHolder {
 
-class ExampleAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapter<ExampleAdapter.ExampleViewHolder>(homeViewModel.homecareQuerySelector()!!) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.homecare_recycler_items, parent, false)
-        return ExampleViewHolder(itemView)
+        return HomeCareFormViewHolder(itemView)
     }
 
-
-    override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeCareFormViewHolder, position: Int) {
         return holder.bind(getSnapshot(position))
     }
 
-    inner class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class HomeCareFormViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val _aynwzayn: ImageView = itemView.findViewById(R.id.ayn_wzayn_icon)
         val _mainapproval: ImageView = itemView.findViewById(R.id.markazeyye_icon)
@@ -41,33 +40,33 @@ class ExampleAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
 
         fun bind(snapshot: DocumentSnapshot) {
             val form = snapshot.toObject<HomeCareForm>()
-            personName.text = "Full Name: " + form?.fullName
-            phoneNumber.text = "Phone Number: " + form?.phoneNumber
-
+            personName.text = form?.fullName
+            phoneNumber.text = form?.phoneNumber
             when (form?.farahApproval) {
                 -1 -> _farahapproval.setImageResource(R.drawable.rejected_icon)
                 0 -> _farahapproval.setImageResource(R.drawable.pending_icon)
                 1 -> _farahapproval.setImageResource(R.drawable.approved_icon)
             }
-
             when (form?.mainApproval) {
+
                 -1 -> _mainapproval.setImageResource(R.drawable.rejected_icon)
                 0 -> _mainapproval.setImageResource(R.drawable.pending_icon)
                 1 -> _mainapproval.setImageResource(R.drawable.approved_icon)
             }
-
             when (form?.ainWzeinApproval) {
                 -1 -> _aynwzayn.setImageResource(R.drawable.rejected_icon)
                 0 -> _aynwzayn.setImageResource(R.drawable.pending_icon)
                 1 -> _aynwzayn.setImageResource(R.drawable.approved_icon)
             }
         }
+
         override fun onClick(v: View?) {
+
             getSnapshot(adapterPosition).toObject<HomeCareForm>()?.let {
-                homeViewModel.setSelectedForm(it)
-            }
+                homeViewModel.setSelectedHomeCareForm(it)
             }
         }
+    }
 }
 
 

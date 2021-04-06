@@ -4,7 +4,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 import java.io.Serializable
 
 @IgnoreExtraProperties
-data class User(var token: String? = "", var userId: String? = "", var userType: String? = ""): Serializable {
+data class User(var token: String? = "", var userId: String? = "", var userType: String? = "", var municipalityName: String? = ""): Serializable {
 
     companion object {
 

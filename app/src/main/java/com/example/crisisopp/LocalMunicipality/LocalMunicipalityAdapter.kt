@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.toObject
 
 class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter<LocalMunicipalityAdapter.ViewHolder>(query) {
 
@@ -43,7 +42,7 @@ class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_items, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.homecare_recycler_items, parent, false)
         return ViewHolder(view)
     }
 

@@ -6,17 +6,17 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/form_title_pcr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:id="@+id/form_title"
-        android:text="Home Care Form"
+        android:text="PCR Form"
         android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/full_name_tv"
+        android:id="@+id/full_name_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -24,10 +24,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_title" />
+        app:layout_constraintTop_toBottomOf="@id/form_title_pcr" />
 
     <TextView
-        android:id="@+id/mothers_name_tv"
+        android:id="@+id/mothers_name_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -35,10 +35,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
+        app:layout_constraintTop_toBottomOf="@id/full_name_tv_pcr" />
 
     <TextView
-        android:id="@+id/municipality_name"
+        android:id="@+id/birth_date_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -46,10 +46,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
+        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv_pcr" />
 
     <TextView
-        android:id="@+id/birth_date_tv"
+        android:id="@+id/blood_type_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -57,10 +57,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/municipality_name" />
+        app:layout_constraintTop_toBottomOf="@id/birth_date_tv_pcr" />
 
     <TextView
-        android:id="@+id/blood_type_tv"
+        android:id="@+id/place_of_residency_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -68,10 +68,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
+        app:layout_constraintTop_toBottomOf="@id/blood_type_tv_pcr" />
 
     <TextView
-        android:id="@+id/place_of_residency_tv"
+        android:id="@+id/phone_number_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -79,10 +79,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
+        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv_pcr" />
 
     <TextView
-        android:id="@+id/phone_number_tv"
+        android:id="@+id/record_number_tv_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -90,10 +90,12 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
+        app:layout_constraintTop_toBottomOf="@id/phone_number_tv_pcr" />
+
+    [7:32 PM] FIRAS M. EL MOHTAR
 
     <TextView
-        android:id="@+id/date_of_prescription_tv"
+        android:id="@+id/date_of_infection_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -101,10 +103,10 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
+        app:layout_constraintTop_toBottomOf="@id/record_number_tv_pcr" />
 
     <TextView
-        android:id="@+id/record_number_tv"
+        android:id="@+id/name_of_source_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -112,65 +114,40 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
+        app:layout_constraintTop_toBottomOf="@id/date_of_infection_pcr" />
 
     <TextView
-        android:id="@+id/last_pcr_date_tv"
+        android:id="@+id/additional_notes_pcr"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
+        app:layout_constraintTop_toBottomOf="@id/name_of_source_pcr" />
 
-    <TextView
-        android:id="@+id/doctor_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
-
-    <ImageView
-        android:id="@+id/hawiyye_scan_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/doctors_prescription_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hawiyye_scan_iv"
-        tools:srcCompat="@tools:sample/avatars" />
     <Button
-        android:id="@+id/approve_button"
+        android:id="@+id/approve_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Approve"
+        android:layout_margin="15dp"
+        android:text="approve"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
+        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
+
     <Button
-        android:id="@+id/decline_button"
+        android:id="@+id/decline_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decline"
-        android:visibility="gone"
+        android:layout_margin="15dp"
+        android:text="decline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
+        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
