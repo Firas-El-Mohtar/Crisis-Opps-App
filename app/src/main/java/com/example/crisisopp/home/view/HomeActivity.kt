@@ -1,23 +1,21 @@
 package com.example.crisisopp.home.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.crisisopp.LocalMunicipality.HomeCareFormDialog
 import com.example.crisisopp.LocalMunicipality.CreatePcrForm
 import com.example.crisisopp.LocalMunicipality.FormContentDialog
+import com.example.crisisopp.LocalMunicipality.HomeCareFormDialog
 import com.example.crisisopp.LocalMunicipality.PcrFormDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.HomeCareFormsFragment
@@ -28,15 +26,14 @@ import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.example.crisisopp.viewpager.ViewPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 
 class HomeActivity : AppCompatActivity() {
     val TAG = "JNCICUBIUBQRV"
@@ -162,7 +159,7 @@ class HomeActivity : AppCompatActivity() {
 //        materialToolbar = findViewById(R.id.app_bar_layout_test)
 //        setSupportActionBar(materialToolbar)
 //        drawerLayout = findViewById(R.id.drawerLayout)
-//        navigationView = findViewById(R.id.navView)
+        navigationView = findViewById(R.id.nav_view)
 //
 //        materialToolbar.setNavigationOnClickListener {​​​​​
 //            drawerLayout.openDrawer(Gravity.LEFT)
@@ -173,13 +170,30 @@ class HomeActivity : AppCompatActivity() {
 //
 //            setDrawerInfo(userType, municipalityName)
 //
-//        }​​​​​
-//        navigationView.setNavigationItemSelectedListener {​​​​​ menuItem ->
-//            // Handle menu item selected
-//            menuItem.isChecked = true
-//            drawerLayout.closeDrawers()
-//            true
-//        }​​​​​
+
+
+        navigationView.setNavigationItemSelectedListener {
+            // Handle menu item selected
+            when(it.itemId){
+                R.id.logout -> {
+                    homeViewModel.logout()
+                    drawerLayout.closeDrawers()
+                    val intent = Intent(Intent.ACTION_MAIN)
+                    intent.addCategory(Intent.CATEGORY_HOME)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                }
+                R.id.change_language -> {
+
+                }
+                R.id.appointments -> {
+
+                }
+            }
+            true
+        }
+
+
 //        materialToolbar.setOnMenuItemClickListener {​​​​​ menuItem ->
 //            when (menuItem.itemId) {​​​​​
 //                R.id.favorite -> {​​​​​

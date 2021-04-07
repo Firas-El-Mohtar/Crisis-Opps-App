@@ -65,7 +65,6 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("UserType", viewModel.userType)
-        intent.putExtra("UserToken", viewModel.userToken)
         intent.putExtra("MunicipalityName", viewModel.municipalityName)
         startActivity(intent)
     }

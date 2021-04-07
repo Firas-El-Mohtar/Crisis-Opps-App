@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/full_name_tv"
@@ -24,7 +24,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_title" />
+        app:layout_constraintTop_toBottomOf="@id/form_title"
+        android:drawableLeft="@drawable/fullname_icon"/>
 
     <TextView
         android:id="@+id/mothers_name_tv"
@@ -35,7 +36,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
+        app:layout_constraintTop_toBottomOf="@id/full_name_tv"
+        android:drawableLeft="@drawable/mother_name_icon"/>
 
     <TextView
         android:id="@+id/municipality_name"
@@ -46,7 +48,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
+        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv"
+        android:drawableLeft="@drawable/place_of_residence_icon"/>
 
     <TextView
         android:id="@+id/birth_date_tv"
@@ -57,7 +60,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/municipality_name" />
+        app:layout_constraintTop_toBottomOf="@id/municipality_name"
+        android:drawableLeft="@drawable/birthdate_icon"/>
 
     <TextView
         android:id="@+id/blood_type_tv"
@@ -68,7 +72,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
+        app:layout_constraintTop_toBottomOf="@id/birth_date_tv"
+        android:drawableLeft="@drawable/bloodtype_icon"/>
 
     <TextView
         android:id="@+id/place_of_residency_tv"
@@ -79,7 +84,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
+        app:layout_constraintTop_toBottomOf="@id/blood_type_tv"
+        android:drawableLeft="@drawable/place_of_residence_icon"/>
 
     <TextView
         android:id="@+id/phone_number_tv"
@@ -90,7 +96,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
+        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv"
+        android:drawableLeft="@drawable/phone_number_icon"/>
 
     <TextView
         android:id="@+id/date_of_prescription_tv"
@@ -101,7 +108,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
+        app:layout_constraintTop_toBottomOf="@id/phone_number_tv"
+        android:drawableLeft="@drawable/date_of_prescription_icon"/>
 
     <TextView
         android:id="@+id/record_number_tv"
@@ -112,7 +120,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
+        app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv"
+        android:drawableLeft="@drawable/record_number_icon"/>
 
     <TextView
         android:id="@+id/last_pcr_date_tv"
@@ -123,7 +132,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
+        app:layout_constraintTop_toBottomOf="@id/record_number_tv"
+        />
 
     <TextView
         android:id="@+id/doctor_name_tv"

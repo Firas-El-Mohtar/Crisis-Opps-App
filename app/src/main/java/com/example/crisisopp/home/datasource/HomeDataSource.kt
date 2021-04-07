@@ -90,9 +90,9 @@ class HomeDataSource {
         when (usertype.toLowerCase()) {
             "local" -> query =
                 db.collection("pcrforms").whereEqualTo("municipalityName", municipalityName)
-                    .orderBy("ainWZeinApproval", Query.Direction.DESCENDING)
+                    .orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
             "ainwzein" -> query =
-                db.collection("pcrforms").orderBy("ainWZeinApproval", Query.Direction.DESCENDING)
+                db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
         }
         return query
     }

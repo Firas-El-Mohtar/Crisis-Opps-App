@@ -13,6 +13,6 @@ data class PcrForm (
     var originatorId: String = "",
     var ainWzeinApproval: Int = 0,
     var additionalNotes: String = "",
-    override var formType: String,
-    override var formID: String
+    override var formType: String = "PCR",
+    override var formID: String = ""
 ) :IForm
