@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_ish_grey"
+    tools:context=".logIn.view.LoginActivity"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".logIn.view.LoginActivity">
+    android:background="@color/blue_ish_grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,142 +41,116 @@
         </LinearLayout>
     </RelativeLayout>
 
-
     <RelativeLayout
+        android:elevation="36dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="@drawable/card_background"
-        android:elevation="36dp">
-
+        android:background="@drawable/card_background">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="36dp"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:text="LOGIN"
             android:textColor="@color/blue_ish_grey"
-            android:textSize="26dp" />
-
+            android:textSize="26dp"
+            android:text="LOGIN"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:layout_marginTop="36dp"
+            android:layout_marginStart="48dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
             <EditText
                 android:id="@+id/username"
+                android:textColorHint="@color/blue_ish_grey"
+                android:drawableEnd="@drawable/ic_account"
+                android:drawableTint="@color/blue_ish_grey"
+                android:hint="someone@gmail.com"
+                android:textColor="@color/blue_ish_grey"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                android:background="@drawable/edit_text_background"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/segoe_ui_bold"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginRight="48dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableEnd="@drawable/account_icon"
-                android:drawableTint="@color/blue_ish_grey"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:hint="someone@gmail.com"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp"
-                android:textColor="@color/blue_ish_grey"
-                android:textColorHint="@color/blue_ish_grey" />
+                android:layout_marginRight="48dp" />
 
             <EditText
                 android:id="@+id/password"
+                android:textColorHint="@color/blue_ish_grey"
+                android:layout_marginTop="24dp"
+                android:drawableEnd="@drawable/ic_lock"
+                android:drawableTint="@color/blue_ish_grey"
+                android:hint="Password"
+                android:textColor="@color/blue_ish_grey"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                android:inputType="textPassword"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:background="@drawable/edit_text_background"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="48dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableEnd="@drawable/lock_icon"
-                android:drawableTint="@color/blue_ish_grey"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp"
-                android:textColor="@color/blue_ish_grey"
-                android:textColorHint="@color/blue_ish_grey" />
-
-            <CheckBox
-                android:id="@+id/rememberMeCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="18dp"
-                android:buttonTint="@color/blue_ish_grey"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:text="Remember Me!"
-                android:textColor="@color/blue_ish_grey"
-                android:textSize="18dp" />
-
+                android:layout_marginRight="48dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="48dp"
                 android:orientation="horizontal"
-                android:weightSum="2">
-
+                android:weightSum="2"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="48dp">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/segoe_ui_bold"
-                    android:text="Need Help?"
                     android:textColor="@color/blue_ish_grey"
-                    android:textSize="18dp" />
-
+                    android:textSize="18dp"
+                    android:text="Need Help?"
+                    android:fontFamily="@font/segoe_ui_bold"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1" />
                 <Button
                     android:id="@+id/signup"
                     android:layout_width="0dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/light_blue"
-                    android:fontFamily="@font/seg_ui_semibold"
                     android:text="Sign In"
                     android:textAllCaps="false"
                     android:textColor="@color/blue_ish_grey"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:fontFamily="@font/seg_ui_semibold"
+                    android:backgroundTint="@color/light_blue"
+                    />
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
+            android:layout_marginBottom="26dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="26dp"
             android:orientation="vertical">
-
             <ProgressBar
-                android:id="@+id/progres_bar"
+                android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone" />
-
+                android:visibility="gone"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:fontFamily="@font/seg_ui_semibold"
-                android:text="Learn more about us!"
                 android:textColor="@color/blue_ish_grey"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:text="Learn more about us!"
+                android:fontFamily="@font/seg_ui_semibold"
+                android:layout_marginLeft="12dp" />
+
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
-
-
-
-
-
-
-
 

@@ -42,9 +42,9 @@ class HomeCareFormDialog : DialogFragment() {
     private var filePath: Uri? = null
 
     // instance for firebase storage and StorageReference
-    var storage: FirebaseStorage? = null
-    var storageReference: StorageReference? = null
-    var db = Firebase.firestore
+//    var storage: FirebaseStorage? = null
+//    var storageReference: StorageReference? = null
+//    var db = Firebase.firestore
 
     var imageId: String? = null
 
@@ -88,8 +88,8 @@ class HomeCareFormDialog : DialogFragment() {
         etDoctorName = view.findViewById(R.id.doctors_name)
 
         // get the Firebase  storage reference
-        storage = FirebaseStorage.getInstance()
-        storageReference = storage!!.reference
+//        storage = FirebaseStorage.getInstance()
+//        storageReference = storage!!.reference
         // on pressing btnSelect SelectImage() is called
         btnAttach!!.setOnClickListener {
             ImagePicker.with(this).start()
@@ -126,12 +126,9 @@ class HomeCareFormDialog : DialogFragment() {
 
             homeViewModel.uploadHomeCareForm(form)
             homeViewModel.onFormUploadSendNotification(currentUserToken)
-            dialog?.dismiss()
         }
         return view
     }
-
-
     // UploadImage method
 
     private fun uploadImage() {
@@ -145,6 +142,7 @@ class HomeCareFormDialog : DialogFragment() {
                 val ref = homeViewModel.uploadImageToStorage(it)
                 ref?.putFile(filePath!!)
                     ?.addOnSuccessListener {// Image uploaded successfully
+
                         // Dismiss dialog
                         progressDialog.dismiss()
                         Toast.makeText(activity, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
@@ -156,16 +154,17 @@ class HomeCareFormDialog : DialogFragment() {
                         dialog?.dismiss()
                     }
                     ?.addOnProgressListener { taskSnapshot ->
-// Progress Listener for loading
+                        // Progress Listener for loading
                         // percentage on the dialog box
-                        val progress: Double =
-                            (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
+                        val progress: Double = (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
                         progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                     }
             }
-//instead of the imageid var, the UUID line was passed in the following block
+            //instead of the imageid var, the UUID line was passed in the following block
+
 
             // Defining the child of storageReference
+
             // adding listeners on upload
             // or failure of image
         }

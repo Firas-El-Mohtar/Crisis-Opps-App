@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.example.crisisopp.R
-import com.example.crisisopp.RecyclerView.RecyclerViewFragment
 import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.notifications.FirebaseService
 import com.example.crisisopp.notifications.NotificationData

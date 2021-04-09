@@ -5,7 +5,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.crisisopp.RecyclerView.HomeCareAppointmentFragment
+
+import com.example.crisisopp.RecyclerView.HomeCareFormsFragment
 import com.example.crisisopp.RecyclerView.PcrAppointmentFragment
+import com.example.crisisopp.RecyclerView.PcrFormsFragment
+
 
 class ViewPagerAppointmentsAdapter (fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle){
@@ -19,4 +23,5 @@ class ViewPagerAppointmentsAdapter (fm: FragmentManager, lifecycle: Lifecycle) :
             else -> Fragment()
         }
     }
+
 }

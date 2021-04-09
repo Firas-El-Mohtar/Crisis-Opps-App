@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
 import com.example.crisisopp.adapters.HomeCareAppointmentAdapter
+
+
+import com.example.crisisopp.adapters.PcrAppointmentAdapter
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 
@@ -17,6 +20,7 @@ class HomeCareAppointmentFragment: Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeCareAppointmentAdapter: HomeCareAppointmentAdapter
     private lateinit var recyclerView: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,13 +37,17 @@ class HomeCareAppointmentFragment: Fragment() {
             }
             return view
         }
+
     }
     override fun onStart() {
         super.onStart()
         homeCareAppointmentAdapter.startListening()
     }
+
     override fun onStop() {
         super.onStop()
         homeCareAppointmentAdapter.stopListening()
     }
+
 }
+
