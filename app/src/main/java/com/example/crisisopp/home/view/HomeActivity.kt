@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -18,12 +19,15 @@ import com.example.crisisopp.LocalMunicipality.FormContentDialog
 import com.example.crisisopp.LocalMunicipality.HomeCareFormDialog
 import com.example.crisisopp.LocalMunicipality.PcrFormDialog
 import com.example.crisisopp.R
+import com.example.crisisopp.RecyclerView.HomeCareAppointmentFragment
 import com.example.crisisopp.RecyclerView.HomeCareFormsFragment
 import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
+import com.example.crisisopp.logIn.view.LoginActivity
 import com.example.crisisopp.viewpager.ViewPagerAdapter
+import com.example.crisisopp.viewpager.ViewPagerAppointmentsAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -45,7 +49,6 @@ class HomeActivity : AppCompatActivity() {
     }
     val firestore = Firebase.firestore
     private lateinit var userType: String
-    private lateinit var userToken: String
     private lateinit var userId: String
     private lateinit var municipalityName: String
     private lateinit var mainFab: FloatingActionButton
@@ -100,9 +103,6 @@ class HomeActivity : AppCompatActivity() {
 
         intent.getStringExtra("UserType")?.let {
             userType = it
-        }
-        intent.getStringExtra("UserToken")?.let {
-            userToken = it
         }
         intent.getStringExtra("MunicipalityName")?.let {
             municipalityName = it
@@ -159,7 +159,6 @@ class HomeActivity : AppCompatActivity() {
 //        materialToolbar = findViewById(R.id.app_bar_layout_test)
 //        setSupportActionBar(materialToolbar)
 //        drawerLayout = findViewById(R.id.drawerLayout)
-        navigationView = findViewById(R.id.nav_view)
 //
 //        materialToolbar.setNavigationOnClickListener {​​​​​
 //            drawerLayout.openDrawer(Gravity.LEFT)
@@ -172,45 +171,82 @@ class HomeActivity : AppCompatActivity() {
 //
 
 
-        navigationView.setNavigationItemSelectedListener {
-            // Handle menu item selected
-            when(it.itemId){
+        val farahUser = homeViewModel.farahUser()
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        var navView: NavigationView = findViewById(R.id.nav_view_test)
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.appointments -> {
+                    if (farahUser) {
+                        viewPager.visibility = GONE
+                        val farahFragment = findViewById<FrameLayout>(R.id.farah_recycler_view)
+                        val farahAppointmentFragment = HomeCareAppointmentFragment()
+                        tabLayout.visibility = GONE
+                        farahFragment.visibility = VISIBLE
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.farah_recycler_view, farahAppointmentFragment)
+                            .commitNow()
+                    } else {
+                        mainFab.visibility = GONE
+                        val adapter =
+                            ViewPagerAppointmentsAdapter(supportFragmentManager, lifecycle)
+                        viewPager.adapter = adapter
+                        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                            when (position) {
+                                0 -> {
+                                    tab.text = "HomeCare Appointments"
+                                }
+                                1 -> {
+                                    tab.text = "PCR Appointments"
+                                }
+                            }
+                        }.attach()
+                    }
+
+                }
                 R.id.logout -> {
                     homeViewModel.logout()
-                    drawerLayout.closeDrawers()
-                    val intent = Intent(Intent.ACTION_MAIN)
-                    intent.addCategory(Intent.CATEGORY_HOME)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.change_language -> {
-
+                    //TODO: Change Language
                 }
-                R.id.appointments -> {
-
+                R.id.forms -> {
+                    if (farahUser) {
+                        viewPager.visibility = GONE
+                        val farahFragment = findViewById<FrameLayout>(R.id.farah_recycler_view)
+                        tabLayout.visibility = GONE
+                        farahFragment.visibility = VISIBLE
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.farah_recycler_view, HomeCareFormsFragment())
+                            .commitNow()
+                    } else {
+                        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+                        viewPager.adapter = adapter
+                        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                            when (position) {
+                                0 -> {
+                                    tab.text = "Home Care"
+                                    tab.icon = resources.getDrawable(R.drawable.ic_home_care, theme)
+                                }
+                                1 -> {
+                                    tab.text = "PCR"
+                                    tab.icon =
+                                        resources.getDrawable(R.drawable.ic_corona_virus_rv, theme)
+                                }
+                            }
+                        }.attach()
+                    }
                 }
             }
             true
         }
 
 
-//        materialToolbar.setOnMenuItemClickListener {​​​​​ menuItem ->
-//            when (menuItem.itemId) {​​​​​
-//                R.id.favorite -> {​​​​​
-//                    // Handle favorite icon press
-//                    true
-//                }​​​​​
-//                R.id.search -> {​​​​​
-//                    // Handle search icon press
-//                    true
-//                }​​​​​
-//                R.id.more -> {​​​​​
-//                    // Handle more item (inside overflow menu) press
-//                    true
-//                }​​​​​
-//                else -> false
-//            }​​​​​
-//        }​​​​​
     }
 
     private fun onAddButtonClicked() {
@@ -267,9 +303,6 @@ class HomeActivity : AppCompatActivity() {
 //    }
 
 }
-
-
-
 
 
 //    private fun setDrawerInfo(userType: String, municipalityName: String){
