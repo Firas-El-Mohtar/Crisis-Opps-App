@@ -14,7 +14,6 @@ import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 class PcrFormsFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
-
     private lateinit var pcrFormsAdapter: PcrFormAdapter
     private lateinit var recyclerView: RecyclerView
 
@@ -40,9 +39,9 @@ class PcrFormsFragment : Fragment() {
         super.onStart()
         pcrFormsAdapter.startListening()
     }
-
     override fun onStop() {
         super.onStop()
         pcrFormsAdapter.stopListening()
     }
+
 }

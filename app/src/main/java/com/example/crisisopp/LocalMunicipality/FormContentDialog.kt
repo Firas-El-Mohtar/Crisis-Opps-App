@@ -36,9 +36,10 @@ class FormContentDialog: DialogFragment() {
     private lateinit var form: HomeCareForm
     private lateinit var doctorsPrescription: ImageView
     private lateinit var storageLocation: String
-
+    private lateinit var tMunicipalityName: TextView
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +53,7 @@ class FormContentDialog: DialogFragment() {
         tFormTitle = view.findViewById(R.id.form_title)
         tFullName = view.findViewById(R.id.full_name_tv)
         tMothersName = view.findViewById(R.id.mothers_name_tv)
+        tMunicipalityName = view.findViewById(R.id.municipality_name)
         tBirthDate = view.findViewById(R.id.birth_date_tv)
         tBloodType = view.findViewById(R.id.blood_type_tv)
         tPlaceOfResidence = view.findViewById(R.id.place_of_residency_tv)
@@ -64,6 +66,7 @@ class FormContentDialog: DialogFragment() {
         declineButton = view.findViewById(R.id.decline_button)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar_home_care)
         doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
+
 
 
         tFormTitle.text= form.fullName + " Home Care Form"
@@ -92,6 +95,7 @@ class FormContentDialog: DialogFragment() {
             progressBar.visibility = VISIBLE
             homeViewModel.approveForm()
             progressBar.visibility = GONE
+
         }
         declineButton.setOnClickListener {
             progressBar.visibility = VISIBLE

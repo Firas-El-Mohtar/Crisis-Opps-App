@@ -24,6 +24,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.util.*
 
@@ -33,10 +34,13 @@ class HomeCareFormDialog : DialogFragment() {
     private var btnAttach: Button? = null
 
     private var documentReference: String? = null
+
     // view for image view
     private var imageView: ImageView? = null
+
     // Uri indicates, where the image will be picked from
     private var filePath: Uri? = null
+
     // instance for firebase storage and StorageReference
 //    var storage: FirebaseStorage? = null
 //    var storageReference: StorageReference? = null
@@ -58,13 +62,14 @@ class HomeCareFormDialog : DialogFragment() {
 
 
     private val homeViewModel: HomeViewModel by activityViewModels()
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_create_form, container, false)
+        val view = inflater.inflate(R.layout.fragment_create_form, container, false)
 
         //initialize views
         imageView = view.findViewById(R.id.imageView)
@@ -86,27 +91,28 @@ class HomeCareFormDialog : DialogFragment() {
 //        storage = FirebaseStorage.getInstance()
 //        storageReference = storage!!.reference
         // on pressing btnSelect SelectImage() is called
-        btnAttach!!.setOnClickListener{
+        btnAttach!!.setOnClickListener {
             ImagePicker.with(this).start()
         }
         // on pressing btnSubmit uploadimage() is called another functions may be added later
-        btnSubmit!!.setOnClickListener{
+        btnSubmit!!.setOnClickListener {
             uploadImage()
             val currentUserId = homeViewModel.getUserId()
 
             val formId = (0..1000).random().toString()
-            val currentUserToken = homeViewModel.getUserToken()
+            val currentUserToken = homeViewModel.getFormSenderToken(currentUserId)!!
             //constructor to build a Form object to then pass to firebase for saving
-            var form = HomeCareForm(formID = formId,
-                fullName =  etFullName.editText?.text.toString(),
-                mothersName =  etMothersName.editText?.text.toString(),
-                birthDate =  etBirthDate.editText?.text.toString(),
-                bloodType =  etBloodType.editText?.text.toString(),
-                placeOfResidence =  etPlaceOfResidence.editText?.text.toString(),
-                dateOfPrescription =  etDateOfPrescription.editText?.text.toString(),
-                recordNumber =  Integer.parseInt(etRecordNumber.editText?.text.toString()),
-                lastPcrDate =  etLastPcrDate.editText?.text.toString(),
-                phoneNumber =  etPhoneNumber.editText?.text.toString(),
+            var form = HomeCareForm(
+                formID = formId,
+                fullName = etFullName.editText?.text.toString(),
+                mothersName = etMothersName.editText?.text.toString(),
+                birthDate = etBirthDate.editText?.text.toString(),
+                bloodType = etBloodType.editText?.text.toString(),
+                placeOfResidence = etPlaceOfResidence.editText?.text.toString(),
+                dateOfPrescription = etDateOfPrescription.editText?.text.toString(),
+                recordNumber = Integer.parseInt(etRecordNumber.editText?.text.toString()),
+                lastPcrDate = etLastPcrDate.editText?.text.toString(),
+                phoneNumber = etPhoneNumber.editText?.text.toString(),
                 doctorsName = etDoctorName.editText?.text.toString(),
                 documentReference = imageId,
                 originatorToken = currentUserToken,
@@ -114,8 +120,9 @@ class HomeCareFormDialog : DialogFragment() {
                 farahApproval = 0,
                 mainApproval = 0,
                 ainWzeinApproval = 0,
-                municipalityName = homeViewModel.getMunicipalityName() ,
-                formType = "Homecare")
+                municipalityName = homeViewModel.getMunicipalityName(),
+                formType = "Homecare"
+            )
 
             homeViewModel.uploadHomeCareForm(form)
             homeViewModel.onFormUploadSendNotification(currentUserToken)
@@ -123,6 +130,7 @@ class HomeCareFormDialog : DialogFragment() {
         return view
     }
     // UploadImage method
+
     private fun uploadImage() {
         if (filePath != null) {
             // Code for showing progressDialog while uploading
@@ -133,7 +141,8 @@ class HomeCareFormDialog : DialogFragment() {
                 imageId = it
                 val ref = homeViewModel.uploadImageToStorage(it)
                 ref?.putFile(filePath!!)
-                    ?.addOnSuccessListener { // Image uploaded successfully
+                    ?.addOnSuccessListener {// Image uploaded successfully
+
                         // Dismiss dialog
                         progressDialog.dismiss()
                         Toast.makeText(activity, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
@@ -158,7 +167,6 @@ class HomeCareFormDialog : DialogFragment() {
 
             // adding listeners on upload
             // or failure of image
-
         }
     }
 
@@ -183,7 +191,7 @@ class HomeCareFormDialog : DialogFragment() {
             val file: File = ImagePicker.getFile(data)!!
 
             //You can also get File Path from intent
-            val filePath:String = ImagePicker.getFilePath(data)!!
+            val filePath: String = ImagePicker.getFilePath(data)!!
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {

@@ -1,26 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.view.HomeActivity"
-    tools:openDrawer="start"
-    android:backgroundTint="#003434"
-    >
-    <include
-        layout="@layout/main_home_activity"
+    android:fitsSystemWindows="true">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#364f6b"
+                app:navigationIcon="@drawable/burger_icon">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#364f6b" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="?actionBarSize" />
+
+        <FrameLayout
+            android:id="@+id/farah_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?actionBarSize">
+
+            <TextView
+                android:id="@+id/text_view_home_care"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="88dp"
+                android:layout_marginBottom="186dp"
+                android:background="#212121"
+                android:padding="8dp"
+                android:text="Home Care"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_home_care"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="176dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:elevation="16dp"
+                android:focusable="true"
+                android:visibility="gone"
+                app:backgroundTint="#ffffff"
+                app:pressedTranslationZ="12dp"
+                app:srcCompat="@drawable/floating_action_button_add" />
+
+            <TextView
+                android:id="@+id/text_view_pcr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="88dp"
+                android:layout_marginBottom="116dp"
+                android:background="#212121"
+                android:padding="8dp"
+                android:text="PCR"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_pcr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="106dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:elevation="16dp"
+                android:focusable="true"
+                android:visibility="gone"
+                app:backgroundTint="#ffffff"
+                app:pressedTranslationZ="12dp"
+                app:srcCompat="@drawable/floating_action_button_add" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/main_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="32dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:elevation="16dp"
+                android:focusable="true"
+                android:visibility="visible"
+                app:backgroundTint="#ffffff"
+                app:pressedTranslationZ="12dp"
+                app:srcCompat="@drawable/floating_action_button_add" />
+
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navView"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_navigation_drawer"
         app:menu="@menu/navigation_drawer" />
-
 </androidx.drawerlayout.widget.DrawerLayout>
+

@@ -16,34 +16,38 @@
             android:id="@+id/app_bar_layout_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             >
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:navigationIcon="@drawable/burger_icon"
-                android:background= "#364f6b">
-
+                android:background= "#364f6b"
+                app:title="Crisis Ops"
+                app:layout_scrollFlags="enterAlways|snap|scroll">
+            </androidx.appcompat.widget.Toolbar>
             <com.google.android.material.tabs.TabLayout
+                app:tabMode="fixed"
+                app:tabGravity="fill"
                 android:background="#364f6b"
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize" />
-            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_marginTop="?actionBarSize"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
         <FrameLayout
             android:id="@+id/farah_recycler_view"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         <RelativeLayout
             android:layout_marginTop="?actionBarSize"
             android:id="@+id/relativeLayout"
@@ -128,7 +132,9 @@
                 app:backgroundTint="#ffffff"
                 app:pressedTranslationZ="12dp"
                 app:srcCompat="@drawable/floating_action_button_add"
-                android:tint="#fc5185"/>
+                android:tint="#fc5185"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+                />
 
 
         </RelativeLayout>
@@ -139,7 +145,7 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/nav_view_test"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

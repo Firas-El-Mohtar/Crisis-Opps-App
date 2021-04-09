@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <group
         android:id="@+id/group1"
         android:checkableBehavior="single">
+        <item
+            android:id="@+id/forms"
+            android:icon="@drawable/ic_forms"
+            android:title="Forms" />
         <item
             android:id="@+id/appointments"
             android:icon="@drawable/date_of_prescription_icon"
@@ -18,6 +23,5 @@
             android:title="Logout" />
     </group>
 
-
-
 </menu>
+

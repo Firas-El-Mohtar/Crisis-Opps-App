@@ -3,14 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecyclerView.HomeCareFormsFragment"
-    >
-
+    tools:context=".RecyclerView.HomeCareFormsFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_test_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/home_care_recycler_items" />
-
 
 </FrameLayout>

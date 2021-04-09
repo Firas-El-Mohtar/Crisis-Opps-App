@@ -41,6 +41,7 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
 
     suspend fun login(email: String, password: String): LoggedInUser {
         // handle login
+        
         return dataSource.login(email, password)
     }
 
@@ -64,9 +65,9 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
         this.token = token
     }
 
-    suspend fun updateUserInfo(userId: String, userType: String) {
+    suspend fun updateUserInfo(userId: String, userType: String, municipalityName: String) {
 
-        val user = User(token, userId, userType)
+        val user = User(token, userId, userType, municipalityName)
         dataSource.updateUserInfo(user!!)
         setLoggedInUser(user)
     }

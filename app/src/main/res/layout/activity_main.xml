@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginRight="48dp"/>
+                android:layout_marginRight="48dp" />
 
             <EditText
                 android:id="@+id/password"
@@ -95,18 +95,6 @@
                 android:layout_height="52dp"
                 android:layout_marginLeft="48dp"
                 android:layout_marginRight="48dp"/>
-
-            <CheckBox
-                android:id="@+id/rememberMeCheckBox"
-                android:buttonTint="@color/blue_ish_grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="18dp"
-                android:fontFamily="@font/segoe_ui_bold"
-                android:text="Remember Me!"
-                android:textColor="@color/blue_ish_grey"
-                android:textSize="18dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,7 +135,7 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
             <ProgressBar
-                android:id="@+id/progres_bar"
+                android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -165,3 +153,4 @@
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
+

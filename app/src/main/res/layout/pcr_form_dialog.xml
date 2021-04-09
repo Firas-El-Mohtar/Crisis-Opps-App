@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_margin="12dp"
         android:id="@+id/form_title_pcr"
-        android:text="PCR Form"
-        android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_margin="12dp"
+        android:text="PCR Form"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/full_name_tv_pcr"
@@ -81,7 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv_pcr" />
 
-
     <TextView
         android:id="@+id/record_number_tv_pcr"
         android:layout_width="wrap_content"
@@ -93,7 +92,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phone_number_tv_pcr" />
 
-
+    [7:32 PM] FIRAS M. EL MOHTAR
 
     <TextView
         android:id="@+id/date_of_infection_pcr"
@@ -123,29 +122,39 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="25dp"
         app:layout_constraintTop_toBottomOf="@id/name_of_source_pcr" />
 
     <Button
         android:id="@+id/approve_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="15dp"
-        android:text="approve"/>
+        android:text="approve"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
 
     <Button
         android:id="@+id/decline_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="15dp"
-        android:text="decline"/>
+        android:text="decline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
 
+    <TextView
+        android:id="@+id/tv_textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/approve_button_pcr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

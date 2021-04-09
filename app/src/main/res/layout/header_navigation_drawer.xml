@@ -11,8 +11,7 @@
     <ImageView
         android:id="@+id/drawerLogo"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_photo_black_48dp">
 
     </ImageView>

@@ -14,7 +14,6 @@ import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 class HomeCareFormsFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
-
     private lateinit var homeCareFormsAdapter: HomeCareFormsAdapter
     private lateinit var recyclerView: RecyclerView
 
@@ -46,3 +45,4 @@ class HomeCareFormsFragment : Fragment() {
         homeCareFormsAdapter.stopListening()
     }
 }
+

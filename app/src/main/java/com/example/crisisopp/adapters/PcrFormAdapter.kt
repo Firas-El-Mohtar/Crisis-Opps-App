@@ -30,8 +30,10 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
         val personName: TextView = itemView.findViewById(R.id.full_name_pcr_tv)
         val placeOfResidency: TextView = itemView.findViewById(R.id.place_of_residency_pcr)
         val phoneNumber: TextView = itemView.findViewById(R.id.phone_number_pcr)
-        val nameOfSource: TextView = itemView.findViewById(R.id.name_of_source_pcr)
-        val bloodType: TextView = itemView.findViewById(R.id.blood_type_pcr)
+        val dateOfinfection: TextView = itemView.findViewById(R.id.presumed_date_pcr)
+        val approvedState: TextView = itemView.findViewById(R.id.approved_state_pcr)
+        val requestedState: TextView = itemView.findViewById(R.id.requested_state_pcr)
+        val rejectedState: TextView = itemView.findViewById(R.id.rejected_state_pcr)
 
 
         init {
@@ -44,8 +46,21 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapte
                 personName.text = form.fullName
                 placeOfResidency.text = form.placeOfResidence
                 phoneNumber.text = form.phoneNumber
-                nameOfSource.text =  form.nameOfSource
-                bloodType.text = form.bloodType
+                dateOfinfection.text =  form.dateOfInfection
+                if(it.ainWzeinApproval == 0){
+                    requestedState.visibility = View.VISIBLE
+                    rejectedState.visibility = View.GONE
+                    approvedState.visibility = View.GONE
+                }else if(it.ainWzeinApproval == -1) {
+                    rejectedState.visibility = View.VISIBLE
+                    approvedState.visibility = View.GONE
+                    requestedState.visibility = View.GONE
+                }else if(it.ainWzeinApproval == 1){
+                    approvedState.visibility = View.VISIBLE
+                    rejectedState.visibility = View.GONE
+                    requestedState.visibility = View.GONE
+                }
+
             }
 
         }
