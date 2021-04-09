@@ -2,19 +2,12 @@ package com.example.crisisopp.LocalMunicipality
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
-import com.example.crisisopp.LocalMunicipality.FirestoreLocalMunicipalityAdapter
-import com.example.crisisopp.RecyclerView.RecyclerViewFragment
-import com.example.crisisopp.home.models.Form
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.toObject
 
 class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter<LocalMunicipalityAdapter.ViewHolder>(query) {
 
@@ -30,7 +23,7 @@ class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter
 
         fun bind(snapshot: DocumentSnapshot) {
 
-            val form = snapshot.toObject<Form>()
+//            val form = snapshot.toObject<ParentForm>()
 //
 //            nameHolder.text = "Name: " + form?.fullName
 //            phoneNumberHolder.text = form?.phoneNumber
@@ -49,7 +42,7 @@ class LocalMunicipalityAdapter(query: Query) : FirestoreLocalMunicipalityAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_items, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.homecare_recycler_items, parent, false)
         return ViewHolder(view)
     }
 

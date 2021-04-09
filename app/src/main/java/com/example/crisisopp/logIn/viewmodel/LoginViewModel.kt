@@ -27,14 +27,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             try {
                 val result = loginRepository.login(email, password)
                 municipalityName = email.municipalityName
-
                 userType = email.emailDomain
                 userToken = loginRepository.fetchToken()
-                loginRepository.updateUserInfo(result.userId, email.emailDomain)
+                loginRepository.updateUserInfo(result.userId, email.emailDomain, email.municipalityName)
                 Log.d(TAG, email.emailDomain)
                 loginRepository.user?.let {
                     _loginResult.postValue(LoginResult(it))
                 } ?: _loginResult.postValue(LoginResult(error = Exception("Something went wrong")))
+
 
             } catch (e: Exception) {
                 userType = null

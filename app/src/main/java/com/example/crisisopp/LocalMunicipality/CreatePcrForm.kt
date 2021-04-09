@@ -56,10 +56,9 @@ class CreatePcrForm : DialogFragment() {
 
             val currentUserId = homeViewModel.getUserId()
 
-            val formId = (0..1000).random().toString()
-            val currentUserToken = homeViewModel.getUserToken()
+            val currentUserToken = homeViewModel.getUserId()
             var pcrForm = PcrForm(
-                formId,
+                formID = homeViewModel.formId(),
                 fullName = etFullName.editText?.text.toString(),
                 mothersName = etMothersName.editText?.text.toString(),
                 birthDate = etBirthDate.editText?.text.toString(),

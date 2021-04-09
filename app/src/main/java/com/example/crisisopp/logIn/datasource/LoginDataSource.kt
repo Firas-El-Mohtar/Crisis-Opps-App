@@ -75,8 +75,3 @@ class LoginDataSource {
         }
     }
 }
-
-//
-//    fun changeUserType(string: String){
-//        usersCollectionRef.
-//    }
