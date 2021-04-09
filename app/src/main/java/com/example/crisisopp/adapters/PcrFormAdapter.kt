@@ -12,15 +12,21 @@ import com.example.testingthings.history.FirestoreAdapter
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 
+<<<<<<< HEAD:app/src/main/java/com/example/crisisopp/adapters/PcrFormsAdapter.kt
 
 class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
     FirestoreAdapter<PcrFormAdapter.PcrFormViewHolder>(homeViewModel.pcrQuerySelector()!!) {
+=======
+class PcrFormAdapter(private val homeViewModel: HomeViewModel) : FirestoreAdapter<PcrFormAdapter.PcrFormViewHolder>(homeViewModel.pcrQuerySelector()!!) {
+
+>>>>>>> main:app/src/main/java/com/example/crisisopp/adapters/PcrFormAdapter.kt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PcrFormViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.pcr_recycler_view_items, parent, false)
         return PcrFormViewHolder(itemView)
     }
+
 
     override fun onBindViewHolder(holder: PcrFormViewHolder, position: Int) {
         return holder.bind(getSnapshot(position))
@@ -35,6 +41,10 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
         val approvedState: TextView = itemView.findViewById(R.id.approved_state_pcr)
         val requestedState: TextView = itemView.findViewById(R.id.requested_state_pcr)
         val rejectedState: TextView = itemView.findViewById(R.id.rejected_state_pcr)
+<<<<<<< HEAD:app/src/main/java/com/example/crisisopp/adapters/PcrFormsAdapter.kt
+=======
+
+>>>>>>> main:app/src/main/java/com/example/crisisopp/adapters/PcrFormAdapter.kt
 
         init {
 
@@ -47,6 +57,7 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
                 personName.text = form.fullName
                 placeOfResidency.text = form.placeOfResidence
                 phoneNumber.text = form.phoneNumber
+<<<<<<< HEAD:app/src/main/java/com/example/crisisopp/adapters/PcrFormsAdapter.kt
                 dateOfinfection.text = form.dateOfInfection
                 if (it.ainWzeinApproval == 0) {
                     requestedState.visibility = View.VISIBLE
@@ -57,11 +68,29 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
                     approvedState.visibility = View.GONE
                     requestedState.visibility = View.GONE
                 } else if (it.ainWzeinApproval == 1) {
+=======
+                dateOfinfection.text =  form.dateOfInfection
+                if(it.ainWzeinApproval == 0){
+                    requestedState.visibility = View.VISIBLE
+                    rejectedState.visibility = View.GONE
+                    approvedState.visibility = View.GONE
+                }else if(it.ainWzeinApproval == -1) {
+                    rejectedState.visibility = View.VISIBLE
+                    approvedState.visibility = View.GONE
+                    requestedState.visibility = View.GONE
+                }else if(it.ainWzeinApproval == 1){
+>>>>>>> main:app/src/main/java/com/example/crisisopp/adapters/PcrFormAdapter.kt
                     approvedState.visibility = View.VISIBLE
                     rejectedState.visibility = View.GONE
                     requestedState.visibility = View.GONE
                 }
+<<<<<<< HEAD:app/src/main/java/com/example/crisisopp/adapters/PcrFormsAdapter.kt
             }
+=======
+
+            }
+
+>>>>>>> main:app/src/main/java/com/example/crisisopp/adapters/PcrFormAdapter.kt
         }
 
         override fun onClick(v: View?) {

@@ -6,7 +6,6 @@ import com.example.crisisopp.home.models.*
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
 
-
 class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, val municipalityName: String) {
 
 
@@ -67,6 +66,8 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     fun uploadImageToStorage(uuid: String): StorageReference?{
         return homeDataSource.uploadImageToStorage(uuid)
     }
+    fun logOut(){
+        homeDataSource.logOut()
+    }
 
 }
-

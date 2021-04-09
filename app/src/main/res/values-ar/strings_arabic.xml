@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">ادارة الازمات</string>
     <string name="notificationTitle">تمت الموافقة على طلبك</string>
-    <string name="notificationDesciption"> اضغط لرؤية تاريخ الموعد </string>
+    <string name="notificationDesciption">اضغط لرؤية تاريخ الموعد </string>
 
 
     //onborading

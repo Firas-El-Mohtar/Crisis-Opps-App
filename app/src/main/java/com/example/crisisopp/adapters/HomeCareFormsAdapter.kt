@@ -1,5 +1,6 @@
 package com.example.crisisopp.adapters
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -35,6 +36,7 @@ class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) :
         val approvedState: TextView = itemView.findViewById(R.id.approved_state)
         val requestedState: TextView = itemView.findViewById(R.id.requested_state)
         val rejectedState: TextView = itemView.findViewById(R.id.rejected_state)
+
         init {
             itemView.setOnClickListener(this)
         }

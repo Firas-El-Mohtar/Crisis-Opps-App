@@ -1,5 +1,7 @@
 package com.example.crisisopp.home.models
 
+import java.io.Serializable
+
 data class PcrForm (
     var fullName: String = "",
     var mothersName: String = "",
@@ -13,6 +15,17 @@ data class PcrForm (
     var originatorId: String = "",
     var ainWzeinApproval: Int = 0,
     var additionalNotes: String = "",
-    override var formType: String = "PCR",
+    var municipalityName: String = "",
+    override var formType: String = "",
     override var formID: String = ""
-) :IForm
+) :IForm, Serializable
+{
+    companion object{
+        const val FIELD_FORM_NAME = "fullName"
+        const val FIELD_FORM_PHONE_NUMBER= "phoneNumber"
+        const val FIELD_FORM_PLACE_OF_RESEDENCY = "placeOfResidence"
+        const val FIELD_FORM_NAME_OF_SOURCE = "nameOfSource"
+        const val FIELD_FORM_BLOOD_TYPE = "bloodType"
+    }
+}
+

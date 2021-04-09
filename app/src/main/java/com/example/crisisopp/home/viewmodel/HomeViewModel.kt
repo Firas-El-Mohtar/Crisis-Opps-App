@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.IForm
+import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.models.*
 import com.example.crisisopp.home.repository.HomeRepository
 import com.example.crisisopp.logIn.models.User
@@ -37,9 +40,6 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     private lateinit var parentForm: IForm
     private lateinit var parentAppointment: IAppointment
 
-    fun setDrawerInfo(userType: String, municipalityName: String){
-
-    }
 
     //User Functions
 
@@ -62,11 +62,11 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     //Universal form/appointment functions
 
     fun setSelectedForm(form: IForm){
-         this.parentForm = form
+        this.parentForm = form
         _selectedForm.value = 1
     }
     fun getHomeCareForm(): HomeCareForm? {
-      return parentForm as? HomeCareForm
+        return parentForm as? HomeCareForm
     }
     fun getPcrForm(): PcrForm? {
         return parentForm as? PcrForm
@@ -134,7 +134,7 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     fun setSelectedPcrForm(form: IForm){
         this.parentForm = form
         _selectedPcrForm.value = 1
-        }
+    }
 
 
     //Notification Functions
@@ -168,7 +168,7 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
 
     fun getUserParams(userId: String): String? {
         viewModelScope.launch {
-             token = homeRepository.getUserParams(userId)
+            token = homeRepository.getUserParams(userId)
         }
         return token
     }

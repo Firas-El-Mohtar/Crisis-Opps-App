@@ -32,13 +32,17 @@ class PcrAppointmentFragment: Fragment() {
             }
             return view
         }
+
     }
     override fun onStart() {
         super.onStart()
         pcrAppointmentAdapter.startListening()
     }
+
     override fun onStop() {
         super.onStop()
         pcrAppointmentAdapter.stopListening()
     }
+
 }
+

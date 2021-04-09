@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#003434"
     tools:context=".RecyclerView.PcrFormsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/pcr_recycler_view_items" />
-
 
 </FrameLayout>
 

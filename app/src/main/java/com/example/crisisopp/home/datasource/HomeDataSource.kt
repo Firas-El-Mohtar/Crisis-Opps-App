@@ -6,14 +6,14 @@ import android.util.Log
 import com.example.crisisopp.FarahFoundation.TAG
 import android.view.View
 import android.widget.Toast
-import com.example.crisisopp.home.models.Form
-import com.example.crisisopp.home.models.PcrForm
+import com.example.crisisopp.home.models.*
 
 import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.notifications.NotificationData
 import com.example.crisisopp.notifications.PushNotification
 import com.example.crisisopp.notifications.RetrofitInstance
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
@@ -29,10 +29,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+
 class HomeDataSource {
 
     val db = Firebase.firestore
-    val currentUser = Firebase.auth.currentUser
+    var currentUser = Firebase.auth.currentUser
 
     val hashMap: HashMap<String, String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
     val appointmentHashMap: HashMap<String, String> =
@@ -52,7 +53,7 @@ class HomeDataSource {
                     val mainApproval = hashMapOf("mainApproval" to value)
                     document?.reference?.set(mainApproval, SetOptions.merge())
                 }
-                "ainWzeinApproval" -> {
+                "ainwzein" -> {
                     val aynWZaynApproval = hashMapOf("ainWzeinApproval" to value)
                     document?.reference?.set(aynWZaynApproval, SetOptions.merge())
                 }
@@ -271,13 +272,17 @@ class HomeDataSource {
             b = query.isEmpty
             doc = query.documents.first()
         }
-            return if (b!!) {
-                null
-            } else {
-                doc
-            }
+        return if (b!!) {
+            null
+        } else {
+            doc
         }
+    }
 
+    fun logOut(){
+        currentUser = null
+    }
 }
+
 
 

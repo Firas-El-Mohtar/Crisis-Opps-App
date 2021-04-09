@@ -1,21 +1,27 @@
 package com.example.crisisopp.LocalMunicipality
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
 import com.example.crisisopp.R
 import com.example.crisisopp.glide.GlideApp
 import com.example.crisisopp.home.models.HomeCareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
+import com.google.firebase.storage.FirebaseStorage
 
-class FormContentDialog: DialogFragment() {
+class FormContentDialog: DialogFragment(){
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var tFormTitle: TextView
     private lateinit var tFullName: TextView
@@ -28,11 +34,13 @@ class FormContentDialog: DialogFragment() {
     private lateinit var tRecordNumber: TextView
     private lateinit var tLastPcrDate: TextView
     private lateinit var tDoctorName: TextView
-    private lateinit var tMunicipalityName: TextView
     private lateinit var form: HomeCareForm
+    private lateinit var doctorsPrescription: ImageView
+    private lateinit var storageLocation: String
+    private lateinit var tMunicipalityName: TextView
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
-    private lateinit var doctorsPrescription: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,6 +65,8 @@ class FormContentDialog: DialogFragment() {
         tDoctorName = view.findViewById(R.id.doctor_name_tv)
         approveButton = view.findViewById(R.id.approve_button)
         declineButton = view.findViewById(R.id.decline_button)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar_home_care)
+        doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
 
 
 
@@ -83,13 +93,15 @@ class FormContentDialog: DialogFragment() {
         }
 
         approveButton.setOnClickListener {
+            progressBar.visibility = VISIBLE
             homeViewModel.approveForm()
-            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
+            progressBar.visibility = GONE
+
         }
         declineButton.setOnClickListener {
+            progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
-            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, false)
-
+            progressBar.visibility = GONE
         }
         return view
     }
@@ -97,7 +109,7 @@ class FormContentDialog: DialogFragment() {
         super.onStart()
         dialog?.let {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
-            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.WRAP_CONTENT
             it.window?.setLayout(width, height)
         }
     }

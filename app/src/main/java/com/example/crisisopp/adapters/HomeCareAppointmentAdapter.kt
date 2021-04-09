@@ -16,25 +16,31 @@ import com.google.firebase.firestore.ktx.toObject
 class HomeCareAppointmentAdapter(private val homeViewModel: HomeViewModel) :
     FirestoreAdapter<HomeCareAppointmentAdapter.HomeCareAppointmentViewHolder>(homeViewModel.homecareAppointmentQuerySelector()!!) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareAppointmentViewHolder {
+
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.home_care_appointments_item, parent, false)
         return HomeCareAppointmentViewHolder(itemView)
     }
+
     override fun onBindViewHolder(holder: HomeCareAppointmentViewHolder, position: Int) {
         return holder.bind(getSnapshot(position))
     }
+
     inner class HomeCareAppointmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val date_tv = itemView.findViewById<TextView>(R.id.date_placeholder)
         val time_tv = itemView.findViewById<TextView>(R.id.time_placeholder)
         val location_tv = itemView.findViewById<TextView>(R.id.location_placeholder)
+
         fun bind(snapshot: DocumentSnapshot) {
             snapshot.toObject<HomecareAppointment>()?.let {
                 date_tv.text = it.date
                 time_tv.text = it.time
                 location_tv.text = it.time
             }
+
         }
     }
+
 
 }
 
