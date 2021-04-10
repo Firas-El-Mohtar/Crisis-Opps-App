@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".RecyclerView.HomeCareFormsFragment">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_home_care_appointments"
+        android:id="@+id/recycler_view_test_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/home_care_appointments_item" />
+        tools:listitem="@layout/homecare_recycler_items" />
 
 </FrameLayout>

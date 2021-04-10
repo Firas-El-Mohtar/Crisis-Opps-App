@@ -35,10 +35,12 @@ class PcrFormsFragment : Fragment() {
         }
 
     }
+
     override fun onStart() {
         super.onStart()
         pcrFormsAdapter.startListening()
     }
+
     override fun onStop() {
         super.onStop()
         pcrFormsAdapter.stopListening()

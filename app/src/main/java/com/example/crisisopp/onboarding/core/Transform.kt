@@ -2,7 +2,7 @@ import android.view.View
 import android.widget.ImageView
 import com.example.crisisopp.R
 
-fun setParallaxTransformation(page: View, position: Float){
+fun setParallaxTransformation(page: View, position: Float) {
     page.apply {
         val parallaxView = this.findViewById<ImageView>(R.id.img)
         when {

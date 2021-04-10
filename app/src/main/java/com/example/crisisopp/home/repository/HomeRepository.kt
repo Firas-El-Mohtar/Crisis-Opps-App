@@ -17,8 +17,8 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
         return homeDataSource.getUserToken(userId)
     }
     //Form Functions
-    fun uploadHomeCareForm(homeCareForm: HomeCareForm){
-        homeDataSource.saveForm(homeCareForm)
+    fun uploadHomeCareForm(homecareForm: HomecareForm){
+        homeDataSource.saveForm(homecareForm)
     }
     fun uploadPcrForm(pcrForm: PcrForm){
         homeDataSource.savePcrForm(pcrForm)
@@ -34,8 +34,8 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
             homeDataSource.autoSendNotification(userType, it, b)
         }
     }
-    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference {
-        return homeDataSource.getStorageReference(homeCareForm)
+    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getStorageReference(homecareForm)
     }
     fun querySelector(): Query?{
         return homeDataSource.querySelector(userType, municipalityName)
@@ -66,8 +66,4 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     fun uploadImageToStorage(uuid: String): StorageReference?{
         return homeDataSource.uploadImageToStorage(uuid)
     }
-    fun logOut(){
-        homeDataSource.logOut()
-    }
-
 }

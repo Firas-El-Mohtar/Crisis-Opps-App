@@ -19,12 +19,6 @@ class LoginDataSource {
 
     private val usersCollectionRef = Firebase.firestore
 
-
-    /**
-     * Returns the absolute value of the given number.
-     * @param number The number to return the absolute value for.
-     * @return The absolute value.
-     */
     suspend fun login(email: String, password: String): LoggedInUser {
         try {
             val result = auth.signInWithEmailAndPassword(email, password).await()

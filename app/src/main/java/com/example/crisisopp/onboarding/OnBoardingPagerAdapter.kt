@@ -9,9 +9,8 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
 
-class OnBoardingPagerAdapter(private val onBoardingPageList:Array<OnBoardingPage> = OnBoardingPage.values())
-    : RecyclerView.Adapter<PagerViewHolder>() {
-
+class OnBoardingPagerAdapter(private val onBoardingPageList: Array<OnBoardingPage> = OnBoardingPage.values()) :
+    RecyclerView.Adapter<PagerViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): PagerViewHolder {
@@ -29,10 +28,13 @@ class OnBoardingPagerAdapter(private val onBoardingPageList:Array<OnBoardingPage
 
 class PagerViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     fun bind(onBoardingPage: OnBoardingPage) {
-       val res = root.context.resources
-        root.findViewById<TextView>(R.id.titleTv)?.text = res.getString(onBoardingPage.titleResource)
-        root.findViewById<TextView>(R.id.subTitleTv)?.text = res.getString(onBoardingPage.subTitleResource)
-        root.findViewById<TextView>(R.id.descTV)?.text = res.getString(onBoardingPage.descriptionResource)
+        val res = root.context.resources
+        root.findViewById<TextView>(R.id.titleTv)?.text =
+            res.getString(onBoardingPage.titleResource)
+        root.findViewById<TextView>(R.id.subTitleTv)?.text =
+            res.getString(onBoardingPage.subTitleResource)
+        root.findViewById<TextView>(R.id.descTV)?.text =
+            res.getString(onBoardingPage.descriptionResource)
         root.findViewById<ImageView>(R.id.img).setImageResource(onBoardingPage.logoResource)
     }
 

@@ -1,11 +1,7 @@
 package com.example.crisisopp.home.datasource
 
-
-
+import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.crisisopp.FarahFoundation.TAG
-import android.view.View
-import android.widget.Toast
 import com.example.crisisopp.home.models.*
 
 import com.example.crisisopp.logIn.models.User
@@ -13,10 +9,8 @@ import com.example.crisisopp.notifications.NotificationData
 import com.example.crisisopp.notifications.PushNotification
 import com.example.crisisopp.notifications.RetrofitInstance
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -28,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-
 
 class HomeDataSource {
 
@@ -67,8 +60,8 @@ class HomeDataSource {
         return currentUser.uid
     }
 
-    fun saveForm(homeCareForm: HomeCareForm) {
-        db.collection("forms").add(homeCareForm)
+    fun saveForm(homecareForm: HomecareForm) {
+        db.collection("forms").add(homecareForm)
     }
 
     fun savePcrForm(pcrForm: PcrForm) {
@@ -114,7 +107,6 @@ class HomeDataSource {
         }
     }
 
-
     suspend fun getUserToken(userId: String): String? {
         var user = getUserInfo(userId)
         return user?.token
@@ -159,12 +151,12 @@ class HomeDataSource {
             }
         }
     }
-    fun uploadImageToStorage(uuid: String): StorageReference?{
+
+    fun uploadImageToStorage(uuid: String): StorageReference? {
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage!!.reference
         return storageReference?.child("images/" + uuid)
     }
-
 
     fun sendNotificationRetrofit(notification: PushNotification) =
         CoroutineScope(Dispatchers.IO).launch {
@@ -231,13 +223,14 @@ class HomeDataSource {
         return query
 
     }
-    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference {
-        return FirebaseStorage.getInstance().getReferenceFromUrl(getImageReference(homeCareForm))
-    }
-    fun getImageReference(homeCareForm: HomeCareForm): String{
-        return "gs://crisis-opps-app.appspot.com/images/${homeCareForm.documentReference}"
+
+    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
+        return FirebaseStorage.getInstance().getReferenceFromUrl(getImageReference(homecareForm))
     }
 
+    fun getImageReference(homecareForm: HomecareForm): String {
+        return "gs://crisis-opps-app.appspot.com/images/${homecareForm.firstDocumentReference}"
+    }
 
     fun pcrAppointmentQuerySelector(userType: String, municipalityName: String): Query? {
         var query: Query? = null
@@ -262,8 +255,11 @@ class HomeDataSource {
             return it.toObject<IAppointment>()
         } ?: return null
     }
-    suspend fun getAppointmentDocument(appointId: String, appointmentType: String): DocumentSnapshot? {
-//        var query: QuerySnapshot? = null
+
+    suspend fun getAppointmentDocument(
+        appointId: String,
+        appointmentType: String
+    ): DocumentSnapshot? {
         var b: Boolean? = null
         var doc: DocumentSnapshot? = null
         hashMap.get(appointmentType)?.let {
@@ -277,10 +273,6 @@ class HomeDataSource {
         } else {
             doc
         }
-    }
-
-    fun logOut(){
-        currentUser = null
     }
 }
 

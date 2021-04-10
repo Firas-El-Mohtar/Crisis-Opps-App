@@ -22,7 +22,8 @@ import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import java.util.*
 
-class PcrFormDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener,
+    TimePickerDialog.OnTimeSetListener {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var formTitle: TextView
@@ -88,7 +89,7 @@ class PcrFormDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener, Ti
             bloodType.text = "Blood Type: " + it.bloodType
             placeOfResidence.text = "Place Of Residence: " + it.placeOfResidence
             dateOfInfection.text = "Date Of Infection: " + it.dateOfInfection
-            recordNumber.text = "Record Number: "+ it.recordNumber
+            recordNumber.text = "Record Number: " + it.recordNumber
             recordNumber.text = "Record Number: " + it.recordNumber
             additionalNotes.text = "Additional Notes: " + it.additionalNotes
             phoneNumber.text = "Phone Number: " + it.phoneNumber
@@ -106,7 +107,7 @@ class PcrFormDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener, Ti
         return view
     }
 
-    private fun getDateTimeCalendar(){
+    private fun getDateTimeCalendar() {
         val cal: Calendar = Calendar.getInstance()
         day = cal.get(Calendar.DAY_OF_MONTH)
         month = cal.get(Calendar.MONTH)
@@ -115,6 +116,7 @@ class PcrFormDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener, Ti
         minute = cal.get(Calendar.MINUTE)
 
     }
+
     override fun onStart() {
         super.onStart()
         dialog?.let {

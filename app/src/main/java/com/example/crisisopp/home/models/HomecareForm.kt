@@ -4,7 +4,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 import java.io.Serializable
 
 @IgnoreExtraProperties
-data class HomeCareForm (
+data class HomecareForm (
     var fullName: String = "",
     var mothersName: String = "",
     var birthDate: String = "",
@@ -15,7 +15,8 @@ data class HomeCareForm (
     var lastPcrDate: String? = "",
     var phoneNumber: String = "",
     var doctorsName: String = "",
-    var documentReference: String? = "",
+    var firstDocumentReference: String? = "",
+    var secondDocumentReference: String? = "",
     var originatorId: String = "",
     var ainWzeinApproval: Int = 0,
     var farahApproval: Int = 0,

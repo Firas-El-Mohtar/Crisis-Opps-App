@@ -32,7 +32,7 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="17dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="25dp"
             android:fontFamily="@font/segoe_ui_bold"

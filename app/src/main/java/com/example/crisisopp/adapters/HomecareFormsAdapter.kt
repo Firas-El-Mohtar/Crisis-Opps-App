@@ -1,27 +1,25 @@
 package com.example.crisisopp.adapters
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
-import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.testingthings.history.FirestoreAdapter
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 
 
-class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) :
-    FirestoreAdapter<HomeCareFormsAdapter.HomeCareFormViewHolder>(homeViewModel.homecareQuerySelector()!!) {
+class HomecareFormsAdapter(private val homeViewModel: HomeViewModel) :
+    FirestoreAdapter<HomecareFormsAdapter.HomeCareFormViewHolder>(homeViewModel.homecareQuerySelector()!!) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareFormViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_care_recycler_items, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.homecare_recycler_items, parent, false)
         return HomeCareFormViewHolder(itemView)
     }
     override fun onBindViewHolder(holder: HomeCareFormViewHolder, position: Int) {
@@ -41,7 +39,7 @@ class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) :
             itemView.setOnClickListener(this)
         }
         fun bind(snapshot: DocumentSnapshot) {
-            val form = snapshot.toObject<HomeCareForm>()
+            val form = snapshot.toObject<HomecareForm>()
             personName.text = form?.fullName
             phoneNumber.text = form?.phoneNumber
             placeOfResidency.text = form?.placeOfResidence
@@ -61,7 +59,7 @@ class HomeCareFormsAdapter(private val homeViewModel: HomeViewModel) :
             }
         }
         override fun onClick(v: View?) {
-            getSnapshot(adapterPosition).toObject<HomeCareForm>()?.let {
+            getSnapshot(adapterPosition).toObject<HomecareForm>()?.let {
                 homeViewModel.setSelectedHomeCareForm(it)
             }
         }

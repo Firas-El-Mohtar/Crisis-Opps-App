@@ -2,32 +2,44 @@ package com.example.crisisopp.onboarding.customview
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.crisisopp.R
 import com.example.crisisopp.logIn.view.LoginActivity
+import com.example.crisisopp.logIn.viewmodel.LoginViewModel
+import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.example.crisisopp.onboarding.entity.OnBoardingPage
 import com.example.crisisopp.onboarding.entity.OnBoardingPagerAdapter
 import com.example.crisisopp.onboarding.prefsmanager.OnBoardingPrefManager
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import setParallaxTransformation
 
 class OnBoardingView @JvmOverloads
-constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
+constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) :
     FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
-
     private val numberOfPages by lazy { OnBoardingPage.values().size }
+    private lateinit var prefs: SharedPreferences
     private val prefManager: OnBoardingPrefManager
     lateinit var slider: ViewPager2
     lateinit var nextBtn: MaterialButton
     lateinit var skipBtn: MaterialButton
     lateinit var startBtn: MaterialButton
     lateinit var onboardingRoot: MotionLayout
+
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.onboarding_view, this, true)
         slider = view.findViewById(R.id.slider)
@@ -39,7 +51,6 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         addingButtonsClickListeners()
         prefManager = OnBoardingPrefManager(view.context)
     }
-
 
 
     private fun setUpSlider(view: View) {
@@ -60,7 +71,11 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private fun addSlideChangeListener() {
 
         slider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 if (numberOfPages > 1) {
                     val newProgress = (position + positionOffset) / (numberOfPages - 1)
@@ -91,8 +106,11 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         slider?.setCurrentItem(nextSlidePos, true)
     }
 
-    private fun navigateToMainActivity(){
-        val intent = Intent(context , LoginActivity::class.java)
+    private fun navigateToMainActivity() {
+
+        var auth = Firebase.auth
+        auth.signOut()
+        val intent = Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
     }
 }

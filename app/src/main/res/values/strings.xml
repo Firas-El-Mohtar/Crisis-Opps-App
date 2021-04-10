@@ -16,6 +16,7 @@
     <string name="Open">Open</string>
     <string name="Close">Close</string>
 
+    //Onboarding Strings
     <string name="onboarding_slide1_title">PCR Requests</string>
     <string name="onboarding_slide1_subtitle">Request a PCR test at Ain W Zein</string>
     <string name="onboarding_slide1_desc">Get a scheduled date within 2 days. </string>
@@ -38,4 +39,13 @@
     <string name="invalid_password">Invalid password</string>
     <string name="home_screen_title">Home</string>
     <string name="home_screen_text">Can\'t walk? then fly!</string>
+
+    //Appbar Names
+    <string name="homecare_appointments_appbar_string">Homecare Appointments</string>
+    <string name="pcr_appointments_appbar_string">PCR Appointments</string>
+
+
+    //Universal Strings
+    <string name="homecare">Home Care</string>
+    <string name="pcr">PCR</string>
 </resources>

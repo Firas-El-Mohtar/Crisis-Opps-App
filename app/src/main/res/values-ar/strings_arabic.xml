@@ -31,4 +31,12 @@
     <string name="home_screen_title">Home</string>
     <string name="home_screen_text">Can\'t walk? then fly!</string>
     <string name="previous">previous</string>
+
+    //Appbar Names
+    <string name="homecare_appointments_appbar_string">Homecare Appointments</string>
+    <string name="pcr_appointments_appbar_string">PCR Appointments</string>
+
+    //universal Strings
+    <string name="homecare">Home Care</string>
+    <string name="pcr">PCR</string>
 </resources>

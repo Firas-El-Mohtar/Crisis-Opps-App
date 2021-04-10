@@ -21,6 +21,5 @@ class AppGlide: AppGlideModule(){
             StorageReference::class.java, InputStream::class.java,
             FirebaseImageLoader.Factory()
         )
-
     }
 }

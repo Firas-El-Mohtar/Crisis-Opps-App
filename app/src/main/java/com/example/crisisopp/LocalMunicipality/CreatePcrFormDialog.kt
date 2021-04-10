@@ -14,7 +14,7 @@ import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.google.android.material.textfield.TextInputLayout
 
-class CreatePcrForm : DialogFragment() {
+class CreatePcrFormDialog : DialogFragment() {
 
     private lateinit var btnSubmit: Button
     private lateinit var etFullName: TextInputLayout

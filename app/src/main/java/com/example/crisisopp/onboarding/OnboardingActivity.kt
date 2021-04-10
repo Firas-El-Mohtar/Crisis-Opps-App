@@ -16,7 +16,7 @@ class OnboardingActivity : AppCompatActivity() {
         val prefManager = OnBoardingPrefManager(this)
 
 
-        if(!prefManager.isFirstTimeLaunch){
+        if (!prefManager.isFirstTimeLaunch) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

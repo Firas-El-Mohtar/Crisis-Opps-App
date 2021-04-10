@@ -1,4 +1,5 @@
 package com.example.crisisopp.onboarding.entity
+
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.crisisopp.R
@@ -10,8 +11,23 @@ enum class OnBoardingPage(
     @DrawableRes val logoResource: Int
 ) {
 
-    ONE(R.string.onboarding_slide1_title, R.string.onboarding_slide1_subtitle,R.string.onboarding_slide1_desc, R.drawable.ic_coughing),
-    TWO(R.string.onboarding_slide2_title, R.string.onboarding_slide2_subtitle,R.string.onboarding_slide2_desc, R.drawable.ic_diabetes),
-    THREE(R.string.onboarding_slide3_title, R.string.onboarding_slide3_subtitle,R.string.onboarding_slide3_desc, R.drawable.ic_connections)
+    ONE(
+        R.string.onboarding_slide1_title,
+        R.string.onboarding_slide1_subtitle,
+        R.string.onboarding_slide1_desc,
+        R.drawable.ic_coughing
+    ),
+    TWO(
+        R.string.onboarding_slide2_title,
+        R.string.onboarding_slide2_subtitle,
+        R.string.onboarding_slide2_desc,
+        R.drawable.ic_diabetes
+    ),
+    THREE(
+        R.string.onboarding_slide3_title,
+        R.string.onboarding_slide3_subtitle,
+        R.string.onboarding_slide3_desc,
+        R.drawable.ic_connections
+    )
 
 }

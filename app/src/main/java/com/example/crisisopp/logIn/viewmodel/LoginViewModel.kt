@@ -47,24 +47,8 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             }
         }
     }
-    suspend fun returnLoggedInUserToken(): String{
-        return loginRepository.fetchToken()
-    }
 
     suspend fun returnUserInfoFromFirebase(userId: String): User?{
         return loginRepository.returnUserInfoFromFirestore(userId)
     }
-
-//    fun updateUiWithUser(activity: LoginActivity) {
-//        loginRepository.
-//        val intent = Intent(activity, LocalMunicipalityMainActivity::class.java)
-//        intent.putExtra("usertype", userType)
-//        startActivity(intent)
-//    }
-
-//    fun updateLiveData(string: String){
-//        userType.value(string)
-//    }
-
-
 }

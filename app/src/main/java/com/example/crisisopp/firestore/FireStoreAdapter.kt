@@ -23,7 +23,6 @@ abstract class FirestoreAdapter<VH : RecyclerView.ViewHolder>(private var query:
         if (documentSnapshots == null) {
             return
         }
-//        setQuery(query)
         // Dispatch the event
         Log.d(TAG, "onEvent:numChanges:" + documentSnapshots.documentChanges.size)
         for (change in documentSnapshots.documentChanges) {

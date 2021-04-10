@@ -13,12 +13,12 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 
 
-class HomeCareAppointmentAdapter(private val homeViewModel: HomeViewModel) :
-    FirestoreAdapter<HomeCareAppointmentAdapter.HomeCareAppointmentViewHolder>(homeViewModel.homecareAppointmentQuerySelector()!!) {
+class HomecareAppointmentsAdapter(private val homeViewModel: HomeViewModel) :
+    FirestoreAdapter<HomecareAppointmentsAdapter.HomeCareAppointmentViewHolder>(homeViewModel.homecareAppointmentQuerySelector()!!) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCareAppointmentViewHolder {
 
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_care_appointments_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.homecare_appointments_item, parent, false)
         return HomeCareAppointmentViewHolder(itemView)
     }
 
@@ -37,10 +37,7 @@ class HomeCareAppointmentAdapter(private val homeViewModel: HomeViewModel) :
                 time_tv.text = it.time
                 location_tv.text = it.time
             }
-
         }
     }
-
-
 }
 

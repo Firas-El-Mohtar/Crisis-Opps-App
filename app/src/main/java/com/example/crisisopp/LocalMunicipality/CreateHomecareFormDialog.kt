@@ -16,20 +16,15 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
-import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.util.*
 
 
-class HomeCareFormDialog : DialogFragment() {
+class CreateHomecareFormDialog : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
 
@@ -69,7 +64,7 @@ class HomeCareFormDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_create_form, container, false)
+        val view = inflater.inflate(R.layout.fragment_create_homecare_form, container, false)
 
         //initialize views
         imageView = view.findViewById(R.id.imageView)
@@ -102,7 +97,7 @@ class HomeCareFormDialog : DialogFragment() {
             val formId = (0..1000).random().toString()
             val currentUserToken = homeViewModel.getFormSenderToken(currentUserId)!!
             //constructor to build a Form object to then pass to firebase for saving
-            var form = HomeCareForm(
+            var form = HomecareForm(
                 formID = formId,
                 fullName = etFullName.editText?.text.toString(),
                 mothersName = etMothersName.editText?.text.toString(),
@@ -114,7 +109,8 @@ class HomeCareFormDialog : DialogFragment() {
                 lastPcrDate = etLastPcrDate.editText?.text.toString(),
                 phoneNumber = etPhoneNumber.editText?.text.toString(),
                 doctorsName = etDoctorName.editText?.text.toString(),
-                documentReference = imageId,
+                firstDocumentReference = imageId,
+                secondDocumentReference = "",
                 originatorToken = currentUserToken,
                 originatorId = currentUserId,
                 farahApproval = 0,

@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.crisisopp.adapters.HomeCareFormsAdapter
+import com.example.crisisopp.adapters.HomecareFormsAdapter
 import com.example.crisisopp.R
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 class HomeCareFormsFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private lateinit var homeCareFormsAdapter: HomeCareFormsAdapter
+    private lateinit var homecareFormsAdapter: HomecareFormsAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -22,27 +22,28 @@ class HomeCareFormsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home_care_forms, container, false)
-        homeCareFormsAdapter = HomeCareFormsAdapter(homeViewModel)
+        val view = inflater.inflate(R.layout.fragment_homecare_forms, container, false)
+        homecareFormsAdapter = HomecareFormsAdapter(homeViewModel)
         recyclerView = view.findViewById(R.id.recycler_view_test_1)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = homeCareFormsAdapter.apply {
+            adapter = homecareFormsAdapter.apply {
                 notifyDataSetChanged()
             }
             return view
         }
 
     }
+
     override fun onStart() {
         super.onStart()
-        homeCareFormsAdapter.startListening()
+        homecareFormsAdapter.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        homeCareFormsAdapter.stopListening()
+        homecareFormsAdapter.stopListening()
     }
 }
 

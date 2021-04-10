@@ -9,16 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
-import com.example.crisisopp.adapters.HomeCareAppointmentAdapter
+import com.example.crisisopp.adapters.HomecareAppointmentsAdapter
 
 
-import com.example.crisisopp.adapters.PcrAppointmentAdapter
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
 
-class HomeCareAppointmentFragment: Fragment() {
+class HomeCareAppointmentFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private lateinit var homeCareAppointmentAdapter: HomeCareAppointmentAdapter
+    private lateinit var homecareAppointmentsAdapter: HomecareAppointmentsAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -26,27 +25,28 @@ class HomeCareAppointmentFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home_care_appointment, container, false)
-        homeCareAppointmentAdapter = HomeCareAppointmentAdapter(homeViewModel)
+        val view = inflater.inflate(R.layout.fragment_homecare_appointment, container, false)
+        homecareAppointmentsAdapter = HomecareAppointmentsAdapter(homeViewModel)
         recyclerView = view.findViewById(R.id.recycler_view_home_care_appointments)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            adapter = homeCareAppointmentAdapter.apply {
+            adapter = homecareAppointmentsAdapter.apply {
                 notifyDataSetChanged()
             }
             return view
         }
 
     }
+
     override fun onStart() {
         super.onStart()
-        homeCareAppointmentAdapter.startListening()
+        homecareAppointmentsAdapter.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-        homeCareAppointmentAdapter.stopListening()
+        homecareAppointmentsAdapter.stopListening()
     }
 
 }

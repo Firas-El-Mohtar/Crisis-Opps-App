@@ -12,7 +12,7 @@ import com.example.crisisopp.R
 import com.example.crisisopp.adapters.PcrAppointmentAdapter
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 
-class PcrAppointmentFragment: Fragment() {
+class PcrAppointmentFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var pcrAppointmentAdapter: PcrAppointmentAdapter
     private lateinit var recyclerView: RecyclerView
@@ -34,6 +34,7 @@ class PcrAppointmentFragment: Fragment() {
         }
 
     }
+
     override fun onStart() {
         super.onStart()
         pcrAppointmentAdapter.startListening()

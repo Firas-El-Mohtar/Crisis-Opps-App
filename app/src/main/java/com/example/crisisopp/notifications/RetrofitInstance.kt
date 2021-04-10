@@ -1,6 +1,5 @@
 package com.example.crisisopp.notifications
 
-
 import com.example.crisisopp.constants.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.crisisopp.home.models.HomeCareForm
+import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.models.IForm
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.models.*
@@ -17,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
+class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     //todo var query (computed var)
     var auth = Firebase.auth
     var query: Query? = null
@@ -36,60 +36,69 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     val selectedPcrForm: LiveData<Int>
         get() = _selectedPcrForm
 
-
     private lateinit var parentForm: IForm
     private lateinit var parentAppointment: IAppointment
 
-
     //User Functions
 
-    fun getUserId(): String{
+    fun getUserId(): String {
         return homeRepository.getUserId()
     }
-    fun getMunicipalityName(): String{
+
+    fun getMunicipalityName(): String {
         return homeRepository.municipalityName
     }
-    fun canCreateForm(): Boolean{
+
+    fun canCreateForm(): Boolean {
         return homeRepository.userType == "local"
     }
-    fun farahUser():Boolean{
+
+    fun isFarahUser(): Boolean {
         return homeRepository.userType == "farah"
     }
-    fun canApproveForm() : Boolean{
+
+    fun canApproveForm(): Boolean {
         return homeRepository.userType == "ainwzein"
     }
 
     //Universal form/appointment functions
 
-    fun setSelectedForm(form: IForm){
+    fun setSelectedForm(form: IForm) {
         this.parentForm = form
         _selectedForm.value = 1
     }
-    fun getHomeCareForm(): HomeCareForm? {
-        return parentForm as? HomeCareForm
+
+    fun getHomeCareForm(): HomecareForm? {
+        return parentForm as? HomecareForm
     }
+
     fun getPcrForm(): PcrForm? {
         return parentForm as? PcrForm
     }
-    fun formId(): String{
+
+    fun formId(): String {
         return (0..1000).random().toString()
     }
-    fun deleteAppointment(appointment: IAppointment){
+
+    fun deleteAppointment(appointment: IAppointment) {
         viewModelScope.launch {
             homeRepository.deleteAppointment(appointment)
         }
     }
+
     fun approveForm() {
         viewModelScope.launch {
             homeRepository.updateFormApproval(parentForm, true)
         }
     }
-    fun declineForm(){
+
+    fun declineForm() {
         viewModelScope.launch {
             homeRepository.updateFormApproval(parentForm, false)
         }
     }
-    fun getFormSenderToken(userId: String): String?{
+
+    fun getFormSenderToken(userId: String): String? {
         //pass the userId from the FormContentDialog that contains the query with the userId from firebase
         viewModelScope.launch {
             token = homeRepository.getFormSenderToken(userId)
@@ -99,72 +108,76 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
 
     //Homecare Forms/Appointments
 
-    fun uploadHomeCareForm(homeCareForm : HomeCareForm){
-        homeRepository.uploadHomeCareForm(homeCareForm)
+    fun uploadHomeCareForm(homecareForm: HomecareForm) {
+        homeRepository.uploadHomeCareForm(homecareForm)
     }
-    fun uploadHomecareAppointment(appointment: HomecareAppointment){
+
+    fun uploadHomecareAppointment(appointment: HomecareAppointment) {
         homeRepository.uploadHomecareAppointment(appointment)
     }
-    fun homecareQuerySelector(): Query?{
+
+    fun homecareQuerySelector(): Query? {
         query = homeRepository.querySelector()
         return query
     }
-    fun setSelectedHomeCareForm(form: IForm){
+
+    fun setSelectedHomeCareForm(form: IForm) {
         this.parentForm = form
         _selectedHomeCareForm.value = 1
     }
-    fun getStorageReference(homeCareForm: HomeCareForm): StorageReference {
-        return homeRepository.getStorageReference(homeCareForm)
+
+    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getStorageReference(homecareForm)
     }
-
-
-
 
     //Pcr Forms/Appointments
 
-    fun uploadPcrForm(pcrForm: PcrForm){
+    fun uploadPcrForm(pcrForm: PcrForm) {
         homeRepository.uploadPcrForm(pcrForm)
     }
-    fun uploadPcrAppointment(appointment: PcrAppointment){
+
+    fun uploadPcrAppointment(appointment: PcrAppointment) {
         homeRepository.uploadPcrAppointment(appointment)
     }
-    fun pcrQuerySelector(): Query?{
+
+    fun pcrQuerySelector(): Query? {
         return homeRepository.pcrQuerySelector()
     }
-    fun setSelectedPcrForm(form: IForm){
+
+    fun setSelectedPcrForm(form: IForm) {
         this.parentForm = form
         _selectedPcrForm.value = 1
     }
 
-
     //Notification Functions
 
-    fun onFormUploadSendNotification(token: String){
+    fun onFormUploadSendNotification(token: String) {
         homeRepository.onFormUploadSendNotification(token)
     }
-    fun autoSendNotification(userId: String, b: Boolean){
+
+    fun autoSendNotification(userId: String, b: Boolean) {
         viewModelScope.launch {
             homeRepository.autoSendNotification(userId, b)
         }
         //The notificationTitle and notificationContent will come from an edit text in a dialogue fragment
     }
 
-    fun setSelectedAppointmentType(appointment: IAppointment){
+    fun setSelectedAppointmentType(appointment: IAppointment) {
         this.parentAppointment = appointment
         _selectedAppointment.value = 1
     }
 
-    fun pcrAppointmentQuerySelector(): Query?{
+    fun pcrAppointmentQuerySelector(): Query? {
         return homeRepository.pcrAppointmentQuerySelector()
     }
-    fun homecareAppointmentQuerySelector(): Query?{
+
+    fun homecareAppointmentQuerySelector(): Query? {
         return homeRepository.homecareAppointmentQuerySelector()
     }
 
-    fun uploadImageToStorage(uuid: String): StorageReference?{
+    fun uploadImageToStorage(uuid: String): StorageReference? {
         return homeRepository.uploadImageToStorage(uuid)
     }
-
 
     fun getUserParams(userId: String): String? {
         viewModelScope.launch {
@@ -172,13 +185,15 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         }
         return token
     }
-    fun logout(){
+
+    fun logout() {
         auth.signOut()
     }
 
     fun getHomecareAppointment(): HomecareAppointment? {
         return parentAppointment as? HomecareAppointment
     }
+
     fun getPcrAppointment(): PcrAppointment? {
         return parentAppointment as? PcrAppointment
     }
