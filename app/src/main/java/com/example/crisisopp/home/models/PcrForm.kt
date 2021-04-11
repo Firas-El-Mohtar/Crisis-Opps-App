@@ -9,7 +9,7 @@ data class PcrForm (
     var bloodType: String = "",
     var placeOfResidence: String = "",
     var dateOfInfection: String? = "",
-    var recordNumber: Int = 0,
+    var recordNumber: String = "",
     var phoneNumber: String = "",
     var nameOfSource: String = "",
     var originatorId: String = "",

@@ -14,6 +14,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -272,6 +273,15 @@ class HomeDataSource {
             null
         } else {
             doc
+        }
+    }
+
+    suspend fun fetchCurrentUserToken(): String {
+        try {
+            val instanceIdResult = FirebaseInstanceId.getInstance().instanceId.await()
+            return instanceIdResult.token
+        } catch (e: java.lang.Exception) {
+            throw e
         }
     }
 }

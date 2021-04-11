@@ -1,10 +1,7 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.dialogs
 
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -99,10 +96,12 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
 
         approveButton.setOnClickListener() {
             homeViewModel.approveForm()
+            homeViewModel.autoSendNotification(form.originatorId, true)
 
         }
         declineButton.setOnClickListener {
             homeViewModel.declineForm()
+            homeViewModel.autoSendNotification(form.originatorId, false)
         }
         return view
     }

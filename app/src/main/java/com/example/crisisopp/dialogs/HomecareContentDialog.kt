@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -92,12 +92,13 @@ class HomecareContentDialog : DialogFragment() {
         approveButton.setOnClickListener {
             progressBar.visibility = VISIBLE
             homeViewModel.approveForm()
+            homeViewModel.autoSendNotification(form.originatorId, true)
             progressBar.visibility = GONE
-
         }
         declineButton.setOnClickListener {
             progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
+            homeViewModel.autoSendNotification(form.originatorId, false)
             progressBar.visibility = GONE
         }
         return view

@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="Theme.CrisisOpp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="windowActionBar">false</item>
         <item name="colorPrimary">#fc5185</item>
         <item name="colorPrimaryVariant">@color/teal_200</item>
         <item name="colorOnPrimary">@color/colorWhite</item>

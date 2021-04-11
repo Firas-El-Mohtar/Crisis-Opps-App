@@ -17,10 +17,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.crisisopp.LocalMunicipality.CreatePcrFormDialog
-import com.example.crisisopp.LocalMunicipality.HomecareContentDialog
-import com.example.crisisopp.LocalMunicipality.CreateHomecareFormDialog
-import com.example.crisisopp.LocalMunicipality.PcrFormContentDialog
+import com.example.crisisopp.dialogs.CreatePcrFormDialog
+import com.example.crisisopp.dialogs.HomecareContentDialog
+import com.example.crisisopp.dialogs.CreateHomecareFormDialog
+import com.example.crisisopp.dialogs.PcrFormContentDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.HomeCareAppointmentFragment
 import com.example.crisisopp.RecyclerView.HomeCareFormsFragment
@@ -102,6 +102,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_layout_test)
 
+
         val auth = Firebase.auth
         val userEmail = auth.currentUser.email
         userType = userEmail.emailDomain
@@ -114,7 +115,11 @@ class HomeActivity : AppCompatActivity() {
         val farahUser = homeViewModel.isFarahUser()
         val toolbar = findViewById<Toolbar>(R.id.toolbar_home)
         drawerLayout = findViewById(R.id.drawer_layout)
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
+
+        toolbar.setTitle(municipalityName[0].toUpperCase()+municipalityName.substring(1))
+        toolbar.setSubtitle("$municipalityName@$userType.com")
+
         toolbar.setNavigationOnClickListener {
             // Handle navigation icon press
 

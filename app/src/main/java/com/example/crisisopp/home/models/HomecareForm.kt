@@ -11,7 +11,7 @@ data class HomecareForm (
     var bloodType: String = "",
     var placeOfResidence: String = "",
     var dateOfPrescription: String? = "",
-    var recordNumber: Int = 0,
+    var recordNumber: String? = "",
     var lastPcrDate: String? = "",
     var phoneNumber: String = "",
     var doctorsName: String = "",
@@ -21,7 +21,6 @@ data class HomecareForm (
     var ainWzeinApproval: Int = 0,
     var farahApproval: Int = 0,
     var mainApproval: Int = 0,
-    var originatorToken: String = "",
     var municipalityName: String = "",
     override var formType: String = "",
     override var formID: String = ""

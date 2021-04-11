@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.dialogs
 
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
@@ -20,6 +20,11 @@ import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
@@ -66,6 +71,8 @@ class CreateHomecareFormDialog : DialogFragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_homecare_form, container, false)
 
+        //
+        var auth = Firebase.auth
         //initialize views
         imageView = view.findViewById(R.id.imageView)
         btnAttach = view.findViewById(R.id.attach_image)
@@ -92,10 +99,9 @@ class CreateHomecareFormDialog : DialogFragment() {
         // on pressing btnSubmit uploadimage() is called another functions may be added later
         btnSubmit!!.setOnClickListener {
             uploadImage()
-            val currentUserId = homeViewModel.getUserId()
-
+            val currentUserId = auth.currentUser.uid
             val formId = (0..1000).random().toString()
-            val currentUserToken = homeViewModel.getFormSenderToken(currentUserId)!!
+            val currentUserToken = homeViewModel.getUserParams(currentUserId)
             //constructor to build a Form object to then pass to firebase for saving
             var form = HomecareForm(
                 formID = formId,
@@ -105,13 +111,12 @@ class CreateHomecareFormDialog : DialogFragment() {
                 bloodType = etBloodType.editText?.text.toString(),
                 placeOfResidence = etPlaceOfResidence.editText?.text.toString(),
                 dateOfPrescription = etDateOfPrescription.editText?.text.toString(),
-                recordNumber = Integer.parseInt(etRecordNumber.editText?.text.toString()),
+                recordNumber = etRecordNumber.editText?.text.toString(),
                 lastPcrDate = etLastPcrDate.editText?.text.toString(),
                 phoneNumber = etPhoneNumber.editText?.text.toString(),
                 doctorsName = etDoctorName.editText?.text.toString(),
                 firstDocumentReference = imageId,
                 secondDocumentReference = "",
-                originatorToken = currentUserToken,
                 originatorId = currentUserId,
                 farahApproval = 0,
                 mainApproval = 0,
@@ -121,7 +126,9 @@ class CreateHomecareFormDialog : DialogFragment() {
             )
 
             homeViewModel.uploadHomeCareForm(form)
-            homeViewModel.onFormUploadSendNotification(currentUserToken)
+            GlobalScope.launch {
+                homeViewModel.onFormUploadSendNotification(currentUserToken.await()!!)
+            }
         }
         return view
     }
