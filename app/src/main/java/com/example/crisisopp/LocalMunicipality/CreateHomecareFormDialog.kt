@@ -31,7 +31,8 @@ class CreateHomecareFormDialog : DialogFragment() {
     private var documentReference: String? = null
 
     // view for image view
-    private var imageView: ImageView? = null
+    private var firstImageView: ImageView? = null
+    private var secondImageView: ImageView? = null
 
     // Uri indicates, where the image will be picked from
     private var filePath: Uri? = null
@@ -41,7 +42,9 @@ class CreateHomecareFormDialog : DialogFragment() {
 //    var storageReference: StorageReference? = null
 //    var db = Firebase.firestore
 
-    var imageId: String? = null
+    var firstImageID: String? = null
+
+    var secondImageID: String? = null
 
     //Edit Text References
     private lateinit var etFullName: TextInputLayout
@@ -54,7 +57,7 @@ class CreateHomecareFormDialog : DialogFragment() {
     private lateinit var etRecordNumber: TextInputLayout
     private lateinit var etLastPcrDate: TextInputLayout
     private lateinit var etDoctorName: TextInputLayout
-
+    private var counter = 1
 
     private val homeViewModel: HomeViewModel by activityViewModels()
 
@@ -67,7 +70,8 @@ class CreateHomecareFormDialog : DialogFragment() {
         val view = inflater.inflate(R.layout.fragment_create_homecare_form, container, false)
 
         //initialize views
-        imageView = view.findViewById(R.id.imageView)
+        firstImageView = view.findViewById(R.id.imageView)
+        secondImageView = view.findViewById(R.id.imageView_2)
         btnAttach = view.findViewById(R.id.attach_image)
         btnSubmit = view.findViewById(R.id.submit)
         //Edit Text References (initializing)
@@ -88,6 +92,16 @@ class CreateHomecareFormDialog : DialogFragment() {
         // on pressing btnSelect SelectImage() is called
         btnAttach!!.setOnClickListener {
             ImagePicker.with(this).start()
+            when(counter){
+                1 ->{
+                    firstImageID = UUID.randomUUID().toString()
+                    counter++
+                }
+                2 ->{
+                    secondImageID = UUID.randomUUID().toString()
+                    counter--
+                }
+            }
         }
         // on pressing btnSubmit uploadimage() is called another functions may be added later
         btnSubmit!!.setOnClickListener {
@@ -109,15 +123,16 @@ class CreateHomecareFormDialog : DialogFragment() {
                 lastPcrDate = etLastPcrDate.editText?.text.toString(),
                 phoneNumber = etPhoneNumber.editText?.text.toString(),
                 doctorsName = etDoctorName.editText?.text.toString(),
-                firstDocumentReference = imageId,
-                secondDocumentReference = "",
                 originatorToken = currentUserToken,
                 originatorId = currentUserId,
+                firstDocumentReference = firstImageID,
+                secondDocumentReference = secondImageID,
                 farahApproval = 0,
                 mainApproval = 0,
                 ainWzeinApproval = 0,
                 municipalityName = homeViewModel.getMunicipalityName(),
-                formType = "Homecare"
+                formType = "Homecare",
+
             )
 
             homeViewModel.uploadHomeCareForm(form)
@@ -133,8 +148,7 @@ class CreateHomecareFormDialog : DialogFragment() {
             val progressDialog = ProgressDialog(this.context)
             progressDialog.setTitle("Uploading...")
             progressDialog.show()
-            UUID.randomUUID().toString()?.let {
-                imageId = it
+            firstImageID?.let {
                 val ref = homeViewModel.uploadImageToStorage(it)
                 ref?.putFile(filePath!!)
                     ?.addOnSuccessListener {// Image uploaded successfully
@@ -156,6 +170,31 @@ class CreateHomecareFormDialog : DialogFragment() {
                         progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                     }
             }
+            secondImageID?.let {
+                val ref = homeViewModel.uploadImageToStorage(it)
+                ref?.putFile(filePath!!)
+                    ?.addOnSuccessListener {// Image uploaded successfully
+
+                        // Dismiss dialog
+                        progressDialog.dismiss()
+                        Toast.makeText(activity, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                        dialog?.dismiss()
+                    }
+                    ?.addOnFailureListener { e -> // Error, Image not uploaded
+                        progressDialog.dismiss()
+                        Toast.makeText(activity, "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                        dialog?.dismiss()
+                    }
+                    ?.addOnProgressListener { taskSnapshot ->
+                        // Progress Listener for loading
+                        // percentage on the dialog box
+                        val progress: Double = (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount)
+                        progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                    }
+            }
+
+
+            }
             //instead of the imageid var, the UUID line was passed in the following block
 
 
@@ -163,7 +202,6 @@ class CreateHomecareFormDialog : DialogFragment() {
 
             // adding listeners on upload
             // or failure of image
-        }
     }
 
 
@@ -178,17 +216,28 @@ class CreateHomecareFormDialog : DialogFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && counter == 1) {
             //Image Uri will not be null for RESULT_OK
             filePath = data?.data
-            imageView?.setImageURI(filePath)
-            imageView?.visibility = View.VISIBLE
+            firstImageView?.setImageURI(filePath)
+            firstImageView?.visibility = View.VISIBLE
             //You can get File object from intent
             val file: File = ImagePicker.getFile(data)!!
 
             //You can also get File Path from intent
             val filePath: String = ImagePicker.getFilePath(data)!!
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+        }else if (resultCode == RESULT_OK && counter == 2){
+            filePath = data?.data
+            secondImageView?.setImageURI(filePath)
+            secondImageView?.visibility = View.VISIBLE
+            //You can get File object from intent
+            val file: File = ImagePicker.getFile(data)!!
+
+            //You can also get File Path from intent
+            val filePath: String = ImagePicker.getFilePath(data)!!
+
+        }
+        else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()

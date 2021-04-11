@@ -32,6 +32,7 @@ class HomecareContentDialog : DialogFragment() {
     private lateinit var tDoctorName: TextView
     private lateinit var form: HomecareForm
     private lateinit var doctorsPrescription: ImageView
+    private lateinit var haweyyeScan: ImageView
     private lateinit var storageLocation: String
     private lateinit var tMunicipalityName: TextView
     private lateinit var approveButton: Button
@@ -63,6 +64,7 @@ class HomecareContentDialog : DialogFragment() {
         declineButton = view.findViewById(R.id.decline_button)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar_home_care)
         doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
+        haweyyeScan = view.findViewById(R.id.hawiyye_scan_iv)
 
 
 
@@ -79,8 +81,10 @@ class HomecareContentDialog : DialogFragment() {
         tDoctorName.text = "Doctors Name: " + form.doctorsName
         form.firstDocumentReference?.let {
             doctorsPrescription = view.findViewById(R.id.doctors_prescription_iv)
-            GlideApp.with(this).load(homeViewModel.getStorageReference(form))
+            GlideApp.with(this).load(homeViewModel.getFirstStorageReference(form))
                 .into(doctorsPrescription)
+            GlideApp.with(this).load(homeViewModel.getSecondStorageReference(form))
+                .into(haweyyeScan)
         }
 
 

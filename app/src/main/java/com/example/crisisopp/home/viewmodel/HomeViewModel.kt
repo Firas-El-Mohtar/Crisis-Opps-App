@@ -126,8 +126,11 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         _selectedHomeCareForm.value = 1
     }
 
-    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeRepository.getStorageReference(homecareForm)
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getSecondStorageReference(homecareForm)
     }
 
     //Pcr Forms/Appointments

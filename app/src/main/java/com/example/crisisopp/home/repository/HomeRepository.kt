@@ -34,8 +34,11 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
             homeDataSource.autoSendNotification(userType, it, b)
         }
     }
-    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeDataSource.getStorageReference(homecareForm)
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getSecondStorageReference(homecareForm)
     }
     fun querySelector(): Query?{
         return homeDataSource.querySelector(userType, municipalityName)
