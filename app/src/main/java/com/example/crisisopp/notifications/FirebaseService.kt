@@ -44,17 +44,19 @@ class FirebaseService : FirebaseMessagingService() {
 
         var doc: DocumentSnapshot? = null
         val usersCollectionRef = Firebase.firestore
-        GlobalScope.launch {
-            val query =
-                usersCollectionRef.collection("users")
-                    .whereEqualTo("userId", auth.currentUser.uid).get().await()
+        auth.currentUser?.uid?.let {
+            GlobalScope.launch {
+                val query =
+                    usersCollectionRef.collection("users")
+                        .whereEqualTo("userId", it).get().await()
 
-            doc = query.documents.first()
+                doc = query.documents.first()
 
-            var token = newToken
-            val tokenHashMap = hashMapOf("token" to token)
-            doc?.reference?.set(tokenHashMap, SetOptions.merge())
-        }
+                var token = newToken
+                val tokenHashMap = hashMapOf("token" to token)
+                doc?.reference?.set(tokenHashMap, SetOptions.merge())
+            }
+        }?: return
     }
 
     override fun onMessageReceived(message: RemoteMessage) {

@@ -111,10 +111,12 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
                 val datePickerDialog =
                     DatePickerDialog(requireContext(), this, year, month, day)
                 datePickerDialog.show()
+                homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
             } else {
 
                 progressBar.visibility = VISIBLE
                 homeViewModel.approveForm()
+                homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
             }
             progressBar.visibility = GONE
         }
@@ -122,6 +124,7 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
 
             progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
+            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, false)
             progressBar.visibility = GONE
         }
         return view
