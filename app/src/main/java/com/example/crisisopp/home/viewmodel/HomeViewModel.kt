@@ -210,12 +210,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         return homeRepository.userType == "ainwzein"
     }
 
-    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeRepository.getFirstStorageReference(homecareForm)
-    }
-    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeRepository.getSecondStorageReference(homecareForm)
-    }
 
 
 }
