@@ -14,6 +14,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -68,6 +69,19 @@ class HomeDataSource {
         db.collection("pcrforms").add(pcrForm)
     }
 
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return FirebaseStorage.getInstance().getReferenceFromUrl(getFirstImageReference(homecareForm))
+    }
+    fun getFirstImageReference(homecareForm: HomecareForm): String {
+        return "gs://crisis-opps-app.appspot.com/images/${homecareForm.firstDocumentReference}"
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return FirebaseStorage.getInstance().getReferenceFromUrl(getSecondImageReference(homecareForm))
+    }
+    fun getSecondImageReference(homecareForm: HomecareForm): String {
+        return "gs://crisis-opps-app.appspot.com/images/${homecareForm.secondDocumentReference}"
+    }
+
     fun querySelector(usertype: String, municipalityName: String): Query? {
         var query: Query? = null
         when (usertype.toLowerCase()) {
@@ -92,6 +106,8 @@ class HomeDataSource {
                 db.collection("pcrforms").whereEqualTo("municipalityName", municipalityName)
                     .orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
             "ainwzein" -> query =
+                db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+            "main" -> query =
                 db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
 
         }
@@ -129,7 +145,7 @@ class HomeDataSource {
         }
     }
 
-    fun autoSendNotification(userType: String, token: String, b: Boolean) {
+    fun autoSendNotification(token: String, b: Boolean) {
 
         when (b) {
             false -> {
@@ -281,6 +297,23 @@ class HomeDataSource {
             doc
         }
     }
+
+    suspend fun fetchCurrentUserToken(): String {
+        try {
+            val instanceIdResult = FirebaseInstanceId.getInstance().instanceId.await()
+            return instanceIdResult.token
+        } catch (e: java.lang.Exception) {
+            throw e
+        }
+    }
+
+    //todo new query to filter by type
+    // add date of creation to forms objects
+    // sort queries based on date
+    // new state for forms: Passed/Done
+    // content dialogs fix
+    // login buttons learn more + need help
+
 }
 
 

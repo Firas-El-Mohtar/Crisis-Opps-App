@@ -1,4 +1,4 @@
-package com.example.crisisopp.LocalMunicipality
+package com.example.crisisopp.dialogs
 
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +13,10 @@ import com.example.crisisopp.R
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CreatePcrFormDialog : DialogFragment() {
 
@@ -38,6 +42,8 @@ class CreatePcrFormDialog : DialogFragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_pcr_form, container, false)
 
+        var auth = Firebase.auth
+
         btnSubmit = view.findViewById(R.id.submit)
         //Edit Text References (initializing)
         etFullName = view.findViewById(R.id.full_name)
@@ -56,7 +62,7 @@ class CreatePcrFormDialog : DialogFragment() {
 
             val currentUserId = homeViewModel.getUserId()
 
-            val currentUserToken = homeViewModel.getUserId()
+            val currentUserToken = homeViewModel.getUserParams(currentUserId)
             var pcrForm = PcrForm(
                 municipalityName = homeViewModel.getMunicipalityName(),
                 formID = homeViewModel.formId(),
@@ -76,7 +82,9 @@ class CreatePcrFormDialog : DialogFragment() {
             )
 
             homeViewModel.uploadPcrForm(pcrForm)
-            homeViewModel.onFormUploadSendNotification(currentUserToken)
+            GlobalScope.launch {
+                homeViewModel.onFormUploadSendNotification(currentUserToken.await()!!)
+            }
             dialog?.dismiss()
 
         }

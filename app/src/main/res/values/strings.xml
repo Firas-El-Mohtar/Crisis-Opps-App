@@ -48,4 +48,6 @@
     //Universal Strings
     <string name="homecare">Home Care</string>
     <string name="pcr">PCR</string>
+
+    //Toolbar strings
 </resources>

@@ -15,6 +15,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
@@ -157,9 +159,12 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun onFormUploadSendNotification(token: String) {
         homeRepository.onFormUploadSendNotification(token)
     }
+    suspend fun fetchCurrentUserToken(): String{
+           return homeRepository.fetchCurrentUserToken()
+    }
 
     fun autoSendNotification(userId: String, b: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.async {
             homeRepository.autoSendNotification(userId, b)
         }
         //The notificationTitle and notificationContent will come from an edit text in a dialogue fragment
@@ -182,11 +187,11 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         return homeRepository.uploadImageToStorage(uuid)
     }
 
-    fun getUserParams(userId: String): String? {
-        viewModelScope.launch {
-            token = homeRepository.getUserParams(userId)
+    fun getUserParams(userId: String): Deferred<String?> {
+        var tokenn: Deferred<String?> = viewModelScope.async {
+            homeRepository.getUserParams(userId)
         }
-        return token
+        return tokenn
     }
 
     fun logout() {
@@ -200,4 +205,17 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun getPcrAppointment(): PcrAppointment? {
         return parentAppointment as? PcrAppointment
     }
+
+    fun isAynWZein(): Boolean {
+        return homeRepository.userType == "ainwzein"
+    }
+
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getSecondStorageReference(homecareForm)
+    }
+
+
 }

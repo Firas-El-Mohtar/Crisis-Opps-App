@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +38,9 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
         signInButton.setOnClickListener {
+            progressBar?.visibility = View.VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
+            progressBar?.visibility = View.GONE
         }
         if (auth.currentUser != null) {
             updateUiWithUser()
