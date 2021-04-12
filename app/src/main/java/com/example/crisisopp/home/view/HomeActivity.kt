@@ -63,8 +63,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var materialToolbar: CollapsingToolbarLayout
     private lateinit var toolbar: Toolbar
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
     private lateinit var drawerLogo: ImageView
     private lateinit var tvDrawerUsername: TextView
     private lateinit var tvDrawerEmail: TextView
@@ -114,100 +112,12 @@ class HomeActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
         val farahUser = homeViewModel.isFarahUser()
         val toolbar = findViewById<Toolbar>(R.id.toolbar_home)
-        drawerLayout = findViewById(R.id.drawer_layout)
 //        setSupportActionBar(toolbar)
 
         toolbar.setTitle(municipalityName[0].toUpperCase()+municipalityName.substring(1))
         toolbar.setSubtitle("$municipalityName@$userType.com")
 
-        toolbar.setNavigationOnClickListener {
-            // Handle navigation icon press
-
-            drawerLayout.openDrawer(Gravity.LEFT)
-
-            drawerLogo = findViewById(R.id.drawerLogo)
-            tvDrawerUsername = findViewById(R.id.tvDrawerUsername)
-            tvDrawerEmail = findViewById(R.id.tvDrawerEmail)
-
-            setDrawerInfo(userType, municipalityName)
-
-        }
-
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close)
 //        drawerLayout.addDrawerListener(toolbar)
-        toggle.syncState()
-        var navView: NavigationView = findViewById(R.id.nav_view_test)
-        navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.appointments -> {
-                    if (farahUser) {
-                        viewPager.visibility = GONE
-                        val farahFragment = findViewById<FrameLayout>(R.id.farah_recycler_view)
-                        val farahAppointmentFragment = HomeCareAppointmentFragment()
-                        tabLayout.visibility = GONE
-                        farahFragment.visibility = VISIBLE
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.farah_recycler_view, farahAppointmentFragment)
-                            .commitNow()
-                        drawerLayout.closeDrawers()
-                    } else {
-                        mainFab.visibility = GONE
-                        val adapter =
-                            ViewPagerAppointmentsAdapter(supportFragmentManager, lifecycle)
-                        viewPager.adapter = adapter
-                        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                            when (position) {
-                                0 -> {
-                                    tab.text = resources.getString(R.string.homecare_appointments_appbar_string)
-                                }
-                                1 -> {
-                                    tab.text = resources.getString(R.string.pcr_appointments_appbar_string)
-                                }
-                            }
-                        }.attach()
-                        drawerLayout.closeDrawers()
-                    }
-                }
-                R.id.logout -> {
-                    homeViewModel.logout()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                }
-                R.id.change_language -> {
-                    //TODO: Change Language
-                }
-                R.id.forms -> {
-                    if (farahUser) {
-                        viewPager.visibility = GONE
-                        val farahFragment = findViewById<FrameLayout>(R.id.farah_recycler_view)
-                        tabLayout.visibility = GONE
-                        farahFragment.visibility = VISIBLE
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.farah_recycler_view, HomeCareFormsFragment())
-                            .commitNow()
-                    } else {
-                        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
-                        viewPager.adapter = adapter
-                        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                            when (position) {
-                                0 -> {
-                                    tab.text = resources.getString(R.string.homecare)
-                                    tab.icon = resources.getDrawable(R.drawable.ic_home_care, theme)
-                                }
-                                1 -> {
-                                    tab.text = resources.getString(R.string.pcr)
-                                    tab.icon =
-                                        resources.getDrawable(R.drawable.ic_corona_virus_rv, theme)
-                                }
-                            }
-                        }.attach()
-                        drawerLayout.closeDrawers()
-                    }
-                }
-            }
-            true
-        }
 
         intent.getStringExtra("UserType")?.let {
             userType = it
@@ -243,7 +153,8 @@ class HomeActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.farah_recycler_view, HomeCareFormsFragment())
                 .commitNow()
-        } else {
+        }
+        else {
             val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
             viewPager.adapter = adapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->

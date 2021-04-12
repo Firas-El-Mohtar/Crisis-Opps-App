@@ -206,6 +206,9 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun isAynWZein(): Boolean {
         return homeRepository.userType == "ainwzein"
     }
+    fun isMain(): Boolean{
+        return homeRepository.userType == "main"
+    }
 
     fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
         return homeRepository.getFirstStorageReference(homecareForm)
