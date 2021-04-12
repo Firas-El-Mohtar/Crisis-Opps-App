@@ -72,7 +72,7 @@ class CreatePcrFormDialog : DialogFragment() {
                 bloodType = etBloodType.editText?.text.toString(),
                 placeOfResidence = etPlaceOfResidence.editText?.text.toString(),
                 dateOfInfection = etDateOfInfection.editText?.text.toString(),
-                recordNumber = etRecordNumber.editText?.text.toString(),
+                recordNumber = Integer.parseInt(etRecordNumber.editText?.text.toString()),
                 nameOfSource = etNameOfSource.editText?.text.toString(),
                 phoneNumber = etPhoneNumber.editText?.text.toString(),
                 originatorId = currentUserId,

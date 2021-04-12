@@ -38,9 +38,8 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
 
     suspend fun autoSendNotification(userId: String, b: Boolean) {
-        getFormSenderToken(userId)?.let {
-            homeDataSource.autoSendNotification(userType, it, b)
-        }
+            homeDataSource.autoSendNotification(getFormSenderToken(userId)!!, b)
+
     }
 
     fun getStorageReference(homecareForm: HomecareForm): StorageReference {
@@ -87,5 +86,11 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
 
     suspend fun fetchCurrentUserToken(): String {
         return homeDataSource.fetchCurrentUserToken()
+    }
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getSecondStorageReference(homecareForm)
     }
 }

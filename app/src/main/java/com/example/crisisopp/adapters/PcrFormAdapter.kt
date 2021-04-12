@@ -46,7 +46,7 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
                 val form = it
                 personName.text = form.fullName
                 placeOfResidency.text = form.placeOfResidence
-                phoneNumber.text = form.phoneNumber
+                phoneNumber.text = form.phoneNumber.toString()
                 dateOfinfection.text = form.dateOfInfection
                 if (it.ainWzeinApproval == 0) {
                     requestedState.visibility = View.VISIBLE

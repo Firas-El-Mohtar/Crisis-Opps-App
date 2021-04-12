@@ -25,7 +25,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     var query: Query? = null
     var user: User? = null
     var token: String? = null
-    private lateinit var xxx: String
     private val _selectedForm = MutableLiveData<Int>()
     private val _selectedAppointment = MutableLiveData<Int>()
     private val _selectedPcrForm = MutableLiveData<Int>()
@@ -162,7 +161,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     }
 
     fun autoSendNotification(userId: String, b: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.async {
             homeRepository.autoSendNotification(userId, b)
         }
         //The notificationTitle and notificationContent will come from an edit text in a dialogue fragment
@@ -203,4 +202,17 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun getPcrAppointment(): PcrAppointment? {
         return parentAppointment as? PcrAppointment
     }
+
+    fun isAynWZein(): Boolean {
+        return homeRepository.userType == "ainwzein"
+    }
+
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeRepository.getSecondStorageReference(homecareForm)
+    }
+
+
 }

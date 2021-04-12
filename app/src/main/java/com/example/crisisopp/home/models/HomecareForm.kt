@@ -11,7 +11,7 @@ data class HomecareForm (
     var bloodType: String = "",
     var placeOfResidence: String = "",
     var dateOfPrescription: String? = "",
-    var recordNumber: String? = "",
+    var recordNumber: Int = 0,
     var lastPcrDate: String? = "",
     var phoneNumber: String = "",
     var doctorsName: String = "",
@@ -23,7 +23,10 @@ data class HomecareForm (
     var mainApproval: Int = 0,
     var municipalityName: String = "",
     override var formType: String = "",
-    override var formID: String = ""
+    override var formID: String = "",
+    override var appointmentDate: String = "",
+    override var appointmentTime: String = "",
+    override var appointmentLocation: String = ""
 ): IForm, Serializable
 {
     companion object{
@@ -32,6 +35,5 @@ data class HomecareForm (
         const val FIELD_AIN_WZEIN_APPROVAL = "ainWZeinApproval"
         const val FIELD_MAIN_APPROVAL = "mainApproval"
         const val FIELD_FARAH_APPROVAL = "farahApproval"
-
     }
 }

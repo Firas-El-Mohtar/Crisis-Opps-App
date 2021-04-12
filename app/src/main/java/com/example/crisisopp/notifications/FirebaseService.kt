@@ -17,8 +17,18 @@ import androidx.core.content.edit
 import com.example.crisisopp.R
 import com.example.crisisopp.home.view.HomeActivity
 import com.example.crisisopp.logIn.models.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
 
 private const val CHANNEL_ID = "my_channel"
@@ -29,6 +39,21 @@ class FirebaseService : FirebaseMessagingService() {
         super.onNewToken(newToken)
         getSharedPreferences("shredPref", MODE_PRIVATE).edit().apply {
             putString("token", newToken)?.apply()
+        }
+        var auth = Firebase.auth
+
+        var doc: DocumentSnapshot? = null
+        val usersCollectionRef = Firebase.firestore
+        GlobalScope.launch {
+            val query =
+                usersCollectionRef.collection("users")
+                    .whereEqualTo("userId", auth.currentUser.uid).get().await()
+
+            doc = query.documents.first()
+
+            var token = newToken
+            val tokenHashMap = hashMapOf("token" to token)
+            doc?.reference?.set(tokenHashMap, SetOptions.merge())
         }
     }
 

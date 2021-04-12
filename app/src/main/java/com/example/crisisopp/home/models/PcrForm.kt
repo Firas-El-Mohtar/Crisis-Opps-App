@@ -9,7 +9,7 @@ data class PcrForm (
     var bloodType: String = "",
     var placeOfResidence: String = "",
     var dateOfInfection: String? = "",
-    var recordNumber: String = "",
+    var recordNumber: Int = 0,
     var phoneNumber: String = "",
     var nameOfSource: String = "",
     var originatorId: String = "",
@@ -17,7 +17,10 @@ data class PcrForm (
     var additionalNotes: String = "",
     var municipalityName: String = "",
     override var formType: String = "",
-    override var formID: String = ""
+    override var formID: String = "",
+    override var appointmentDate: String = "",
+    override var appointmentTime: String = "",
+    override var appointmentLocation: String = ""
 ) :IForm, Serializable
 {
     companion object{
@@ -28,4 +31,6 @@ data class PcrForm (
         const val FIELD_FORM_BLOOD_TYPE = "bloodType"
     }
 }
+
+
 
