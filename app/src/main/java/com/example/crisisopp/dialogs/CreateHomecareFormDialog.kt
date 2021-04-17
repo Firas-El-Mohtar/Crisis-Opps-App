@@ -113,6 +113,7 @@ class CreateHomecareFormDialog : DialogFragment() {
             val currentUserId = homeViewModel.getUserId()
             val formId = (0..1000).random().toString()
             val currentUserToken = homeViewModel.getUserParams(currentUserId)
+            val currentDate = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
             //constructor to build a Form object to then pass to firebase for saving
             var form = HomecareForm(
                 formID = formId,
@@ -134,6 +135,7 @@ class CreateHomecareFormDialog : DialogFragment() {
                 ainWzeinApproval = 0,
                 municipalityName = homeViewModel.getMunicipalityName(),
                 formType = "Homecare",
+                dateOfUpload = currentDate
             )
             homeViewModel.uploadHomeCareForm(form)
             GlobalScope.launch {

@@ -59,12 +59,12 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
 
     //Appointment Functions
-    fun uploadPcrAppointment(appointment: PcrAppointment) {
-        homeDataSource.uploadPcrAppointment(appointment)
+    suspend fun uploadPcrAppointment(formId: String, appointment: String) {
+        homeDataSource.uploadPcrAppointment(formId, appointment)
     }
 
-    fun uploadHomecareAppointment(appointment: HomecareAppointment) {
-        homeDataSource.uploadHomecareAppointment(appointment)
+    suspend fun uploadHomecareAppointment(formId: String, appointment: String) {
+        homeDataSource.uploadHomecareAppointment(formId, appointment)
     }
 
     fun pcrAppointmentQuerySelector(): Query? {
@@ -74,6 +74,7 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     fun homecareAppointmentQuerySelector(): Query? {
         return homeDataSource.homecareAppointmentQuerySelector(userType, municipalityName)
     }
+
 
     suspend fun deleteAppointment(appointment: IAppointment) {
         homeDataSource.deleteAppointment(appointment)
@@ -92,5 +93,10 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
     fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
         return homeDataSource.getSecondStorageReference(homecareForm)
+    }
+
+    //filters
+    fun homecareQueryWithFilter(filter: String): Query?{
+        return homeDataSource.querySelectorWithFilter(userType, municipalityName, filter)
     }
 }

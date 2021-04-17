@@ -12,6 +12,7 @@
         android:layout_margin="12dp"
         android:text="PCR Form"
         android:textSize="24sp"
+        android:fontFamily="@font/segoe_ui_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +22,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/fullname_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Full Name: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/form_title_pcr" />
@@ -32,7 +35,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/mother_name_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Mother's Name: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/full_name_tv_pcr" />
@@ -43,7 +48,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/birthdate_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Date of Birth: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mothers_name_tv_pcr" />
@@ -54,7 +61,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/bloodtype_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Blood Type: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/birth_date_tv_pcr" />
@@ -65,7 +74,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/place_of_residence_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Place of Residence: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/blood_type_tv_pcr" />
@@ -76,7 +87,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/phone_number_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Phone Number: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv_pcr" />
@@ -87,12 +100,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/record_number_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Record Number: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phone_number_tv_pcr" />
-
-    [7:32 PM] FIRAS M. EL MOHTAR
 
     <TextView
         android:id="@+id/date_of_infection_pcr"
@@ -100,7 +113,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/date_of_prescription_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Date of Infection: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/record_number_tv_pcr" />
@@ -111,7 +126,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/name_of_source_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Name of Source: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_of_infection_pcr" />
@@ -122,39 +139,166 @@
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="25dp"
-        android:text="TextView"
+        android:drawableLeft="@drawable/additional_notes_icon"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Additional Notes: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_of_source_pcr" />
+
+    <TextView
+        android:id="@+id/appointment_date_pcr"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additional_notes_pcr" />
 
     <Button
         android:id="@+id/approve_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="approve"
+        android:text="Approve"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
+        app:layout_constraintTop_toBottomOf="@id/appointment_date_pcr" />
 
     <Button
         android:id="@+id/decline_button_pcr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="decline"
+        android:text="Decline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additional_notes_pcr" />
+        app:layout_constraintTop_toBottomOf="@id/appointment_date_pcr" />
+
 
     <TextView
-        android:id="@+id/tv_textTime"
+        android:id="@+id/full_name_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/full_name_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/form_title_pcr" />
+
+    <TextView
+        android:id="@+id/mothers_name__pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/mothers_name_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/full_name_tv_pcr" />
+
+    <TextView
+        android:id="@+id/birth_date_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/birth_date_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv_pcr" />
+
+    <TextView
+        android:id="@+id/blood_type_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/blood_type_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/birth_date_tv_pcr" />
+
+    <TextView
+        android:id="@+id/place_of_residency_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/place_of_residency_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/blood_type_tv_pcr" />
+
+    <TextView
+        android:id="@+id/phone_number_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/phone_number_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv_pcr" />
+
+    <TextView
+        android:id="@+id/record_number_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/record_number_tv_pcr"
+        app:layout_constraintTop_toBottomOf="@id/phone_number_tv_pcr" />
+
+    <TextView
+        android:id="@+id/date_of_infection_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/date_of_infection_pcr"
+        app:layout_constraintTop_toBottomOf="@id/record_number_tv_pcr" />
+
+    <TextView
+        android:id="@+id/name_of_source_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/name_of_source_pcr"
+        app:layout_constraintTop_toBottomOf="@id/date_of_infection_pcr" />
+
+    <TextView
+        android:id="@+id/additional_notes_pcr_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_ui_regular"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/additional_notes_pcr"
+        app:layout_constraintTop_toBottomOf="@id/name_of_source_pcr" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_pcr_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/approve_button_pcr" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

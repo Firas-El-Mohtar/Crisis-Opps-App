@@ -3,6 +3,8 @@ package com.example.crisisopp.home.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -17,13 +19,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.crisisopp.dialogs.CreatePcrFormDialog
-import com.example.crisisopp.dialogs.HomecareContentDialog
-import com.example.crisisopp.dialogs.CreateHomecareFormDialog
-import com.example.crisisopp.dialogs.PcrFormContentDialog
 import com.example.crisisopp.R
 import com.example.crisisopp.RecyclerView.HomeCareAppointmentFragment
 import com.example.crisisopp.RecyclerView.HomeCareFormsFragment
+import com.example.crisisopp.dialogs.*
 import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.home.viewmodel.HomeViewModel
@@ -40,6 +39,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.Locale.filter
 
 
 class HomeActivity : AppCompatActivity() {
@@ -112,8 +112,7 @@ class HomeActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
         val farahUser = homeViewModel.isFarahUser()
         val toolbar = findViewById<Toolbar>(R.id.toolbar_home)
-//        setSupportActionBar(toolbar)
-
+        setSupportActionBar(toolbar)
         toolbar.setTitle(municipalityName[0].toUpperCase()+municipalityName.substring(1))
         toolbar.setSubtitle("$municipalityName@$userType.com")
 
@@ -243,5 +242,25 @@ class HomeActivity : AppCompatActivity() {
             "farah" -> drawerLogo.setImageResource(R.drawable.farah_foundation_logo)
 
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.appbar_menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val itemView = item.itemId
+        when(itemView){
+            R.id.filter -> {
+                val dialog = FilterDialog()
+                dialog.show(supportFragmentManager, "Filter Dialog")
+
+            }
+            R.id.logout -> {
+                homeViewModel.logout()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/filter_icon"
+        app:showAsAction="always"
+        android:title="Filter"
+        />
+    <item
+        android:id="@+id/change_language"
+        android:icon="@drawable/ic_translate"
+        android:title="Change Language"
+        />
+    <item
+        android:id="@+id/logout"
+        android:checked="true"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+</menu>

@@ -2,6 +2,7 @@ package com.example.crisisopp.home.datasource
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.crisisopp.adapters.HomecareFormsAdapter
 import com.example.crisisopp.home.models.*
 
 import com.example.crisisopp.logIn.models.User
@@ -32,6 +33,8 @@ class HomeDataSource {
     val hashMap: HashMap<String, String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
     val appointmentHashMap: HashMap<String, String> =
         hashMapOf("Pcr" to "pcrappointments", "Homecare" to "homecareappointments")
+    val appointmentHashMap2: HashMap<String, String> =
+        hashMapOf()
 
     suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean) {
         hashMap.get(form.formType)?.let {
@@ -70,14 +73,19 @@ class HomeDataSource {
     }
 
     fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
-        return FirebaseStorage.getInstance().getReferenceFromUrl(getFirstImageReference(homecareForm))
+        return FirebaseStorage.getInstance()
+            .getReferenceFromUrl(getFirstImageReference(homecareForm))
     }
+
     fun getFirstImageReference(homecareForm: HomecareForm): String {
         return "gs://crisis-opps-app.appspot.com/images/${homecareForm.firstDocumentReference}"
     }
+
     fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
-        return FirebaseStorage.getInstance().getReferenceFromUrl(getSecondImageReference(homecareForm))
+        return FirebaseStorage.getInstance()
+            .getReferenceFromUrl(getSecondImageReference(homecareForm))
     }
+
     fun getSecondImageReference(homecareForm: HomecareForm): String {
         return "gs://crisis-opps-app.appspot.com/images/${homecareForm.secondDocumentReference}"
     }
@@ -87,10 +95,10 @@ class HomeDataSource {
         when (usertype.toLowerCase()) {
             "local" -> query =
                 db.collection("forms").whereEqualTo("municipalityName", municipalityName)
-                    .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    .orderBy("dateOfUpload", Query.Direction.DESCENDING).limit(50)
             "farah" -> query = db.collection("forms").whereEqualTo("mainApproval", 1)
                 .whereEqualTo("ainWzeinApproval", 1)
-                .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                .orderBy("dateOfUpload", Query.Direction.DESCENDING).limit(50)
             else -> query =
                 db.collection("forms").orderBy("farahApproval", Query.Direction.DESCENDING)
                     .limit(50)
@@ -104,11 +112,11 @@ class HomeDataSource {
         when (usertype.toLowerCase()) {
             "local" -> query =
                 db.collection("pcrforms").whereEqualTo("municipalityName", municipalityName)
-                    .orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+                    .orderBy("dateOfUpload", Query.Direction.DESCENDING)
             "ainwzein" -> query =
-                db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+                db.collection("pcrforms").orderBy("dateOfUpload", Query.Direction.DESCENDING)
             "main" -> query =
-                db.collection("pcrforms").orderBy("ainWzeinApproval", Query.Direction.DESCENDING)
+                db.collection("pcrforms").orderBy("dateOfUpload", Query.Direction.DESCENDING)
 
         }
         return query
@@ -197,12 +205,20 @@ class HomeDataSource {
         return user?.userId
     }
 
-    fun uploadPcrAppointment(appointment: PcrAppointment) {
-        db.collection("pcrappointments").add(appointment)
+    suspend fun uploadPcrAppointment(formId: String, appointment: String) {
+        val querySnapshot =
+            db.collection("pcrforms").whereEqualTo("formID", formId).get().await()
+        val document = querySnapshot.documents.firstOrNull()
+        val newAppointment = hashMapOf("appointment" to appointment)
+        document?.reference?.set(newAppointment, SetOptions.merge())
     }
 
-    fun uploadHomecareAppointment(appointment: HomecareAppointment) {
-        db.collection("homecareappointments").add(appointment)
+    suspend fun uploadHomecareAppointment(formId: String, appointment: String) {
+        val querySnapshot =
+            db.collection("forms").whereEqualTo("formID", formId).get().await()
+        val document = querySnapshot.documents.firstOrNull()
+        val newAppointment = hashMapOf("appointment" to appointment)
+        document?.reference?.set(newAppointment, SetOptions.merge())
     }
 
     suspend fun deleteAppointment(appointment: IAppointment) {
@@ -300,11 +316,90 @@ class HomeDataSource {
         }
     }
 
+    fun querySelectorWithFilter(
+        userType: String,
+        municipalityName: String,
+        filter: String
+    ): Query? {
+        var query: Query? = null
+        when (userType.toLowerCase()) {
+            "local" -> {
+                when (filter) {
+                    "Approved" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Requested" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", 0)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Rejected" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", -1)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                }
+            }
+            "farah" -> {
+                when (filter) {
+                    "Approved" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Requested" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", 0)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Rejected" -> {
+
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", -1)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                }
+            }
+            else -> {
+                when (filter) {
+
+                    "Approved" -> {
+
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Requested" -> {
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", 0)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                    "Rejected" -> {
+
+                        query = db.collection("forms")
+                            .whereEqualTo("municipalityName", municipalityName)
+                            .whereEqualTo("farahApproval", -1)
+                            .orderBy("farahApproval", Query.Direction.DESCENDING).limit(50)
+                    }
+                }
+            }
+        }
+        return query
+    }
+
+
     //todo new query to filter by type
     // add date of creation to forms objects    DONE
-    // sort queries based on date
+    // sort queries based on date  DONE
     // new state for forms: Passed/Done
-    // content dialogs fix
+    // content dialogs fix  DONE
     // login buttons learn more + need help
 
 }

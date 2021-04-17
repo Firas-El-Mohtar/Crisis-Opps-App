@@ -37,6 +37,7 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
     private lateinit var tMunicipalityName: TextView
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
+    private lateinit var tAppointmentDate: TextView
     private var day = 0
     private var month: Int = 0
     private var year: Int = 0
@@ -56,52 +57,56 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
 
         val view = inflater.inflate(R.layout.form_content_dialog, container, false)
         tFormTitle = view.findViewById(R.id.form_title)
-        tFullName = view.findViewById(R.id.full_name_tv)
-        tMothersName = view.findViewById(R.id.mothers_name_tv)
-        tMunicipalityName = view.findViewById(R.id.municipality_name)
-        tBirthDate = view.findViewById(R.id.birth_date_tv)
-        tBloodType = view.findViewById(R.id.blood_type_tv)
-        tPlaceOfResidence = view.findViewById(R.id.place_of_residency_tv)
-        tPhoneNumber = view.findViewById(R.id.phone_number_tv)
-        tDateOfPrescription = view.findViewById(R.id.date_of_prescription_tv)
-        tRecordNumber = view.findViewById(R.id.record_number_tv)
-        tLastPcrDate = view.findViewById(R.id.last_pcr_date_tv)
-        tDoctorName = view.findViewById(R.id.doctor_name_tv)
+        tFullName = view.findViewById(R.id.full_name_tv_hc_placeholder)
+        tMothersName = view.findViewById(R.id.mothers_name_tv_hc_placeholder)
+        tMunicipalityName = view.findViewById(R.id.municipality_name_hc_placeholder)
+        tBirthDate = view.findViewById(R.id.birth_date_tv_hc_placeholder)
+        tBloodType = view.findViewById(R.id.blood_type_tv_hc_placeholder)
+        tPlaceOfResidence = view.findViewById(R.id.place_of_residency_tv_hc_placeholder)
+        tPhoneNumber = view.findViewById(R.id.phone_number_tv_hc_placeholder)
+        tDateOfPrescription = view.findViewById(R.id.date_of_prescription_tv_hc_placeholder)
+        tRecordNumber = view.findViewById(R.id.record_number_tv_hc_placeholder)
+        tLastPcrDate = view.findViewById(R.id.last_pcr_date_tv_hc_placeholder)
+        tDoctorName = view.findViewById(R.id.doctor_name_tv_hc_placeholder)
         approveButton = view.findViewById(R.id.approve_button)
         declineButton = view.findViewById(R.id.decline_button)
+        tAppointmentDate = view.findViewById(R.id.appointment_date_homecare)
         val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar_home_care_content)
         firstImage = view.findViewById(R.id.doctors_prescription_iv)
         secondImage = view.findViewById(R.id.hawiyye_scan_iv)
 
         homeViewModel.getHomeCareForm()?.let {
-            tFormTitle.text = it.fullName + " Home Care Form"
-            tFullName.text = "Full Name: " + it.fullName
-            tMothersName.text = "Mothers Name: " + it.mothersName
-            tBirthDate.text = "Date Of Birth: " + it.birthDate
-            tBloodType.text = "Blood Type: " + it.bloodType
-            tPlaceOfResidence.text = "Place Of Resendence: " + it.placeOfResidence
-            tPhoneNumber.text = "Phone Number: " + it.phoneNumber
-            tDateOfPrescription.text = "Date Of Prescription: " + it.dateOfPrescription
-            tRecordNumber.text = "Record Number: " + it.recordNumber.toString()
-            tLastPcrDate.text = "Last PCR Date: " + it.lastPcrDate
-            tDoctorName.text = "Doctors Name: " + it.doctorsName
+            tFormTitle.text = "Homecare Form"
+            tFullName.text = it.fullName
+            tMothersName.text = it.mothersName
+            tBirthDate.text = it.birthDate
+            tBloodType.text = it.bloodType
+            tPlaceOfResidence.text = it.placeOfResidence
+            tPhoneNumber.text = it.phoneNumber
+            tDateOfPrescription.text = it.dateOfPrescription
+            tRecordNumber.text = it.recordNumber.toString()
+            tLastPcrDate.text = it.lastPcrDate
+            tDoctorName.text = it.doctorsName
+            if(it.appointment != ""){
+                tAppointmentDate.text = "Appointment: " + it.appointment
+            }else tAppointmentDate.visibility = GONE
+
             progressBar.visibility = VISIBLE
             GlideApp.with(this).load(homeViewModel.getFirstStorageReference(it))
                 .into(firstImage)
             GlideApp.with(this).load(homeViewModel.getSecondStorageReference(it))
                 .into(secondImage)
             progressBar.visibility = GONE
+
         }
 
 
         if (!homeViewModel.canCreateForm()) {
-
             approveButton.visibility = VISIBLE
             declineButton.visibility = VISIBLE
         }
         approveButton.setOnClickListener {
-
-            if (homeViewModel.isFarahUser() || homeViewModel.isAynWZein()) {
+            if (homeViewModel.isFarahUser()) {
                 progressBar.visibility = VISIBLE
                 homeViewModel.approveForm()
                 val calendar: Calendar = Calendar.getInstance()
@@ -156,9 +161,13 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         myHour = hourOfDay
-        myMinute = minute
-        tLastPcrDate.text =
-            "Year: " + myYear + "\\" + "Month: " + myMonth + "\\" + "Day: " + myDay + "\\" + "Hour: " + myHour + "\\" + "Minute: " + myMinute
+        var appointment: String? = null
+        if (minute < 10){
+            appointment = "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
+        } else appointment = "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute.toString()
+
+        tAppointmentDate.text = "Appointment: " + appointment
+        homeViewModel.uploadHomecareAppointment(homeViewModel.getHomeCareForm()?.formID!!, appointment)
     }
 }
 

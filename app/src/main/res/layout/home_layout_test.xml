@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <androidx.appcompat.widget.Toolbar
+            app:menu="@menu/appbar_menu"
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#364f6b"
             app:layout_scrollFlags="enterAlways|snap|scroll"
             app:title="Crisis Ops"/>
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"

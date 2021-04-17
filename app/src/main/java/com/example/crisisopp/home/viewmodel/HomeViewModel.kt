@@ -25,10 +25,12 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     var query: Query? = null
     var user: User? = null
     var token: String? = null
+    private lateinit var filter: String
     private val _selectedForm = MutableLiveData<Int>()
     private val _selectedAppointment = MutableLiveData<Int>()
     private val _selectedPcrForm = MutableLiveData<Int>()
     private val _selectedHomeCareForm = MutableLiveData<Int>()
+    private val _selectedFilter = MutableLiveData<Int>()
     val selectedHomeCareForm: LiveData<Int>
         get() = _selectedHomeCareForm
     val selectedForm: LiveData<Int>
@@ -37,6 +39,10 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         get() = _selectedAppointment
     val selectedPcrForm: LiveData<Int>
         get() = _selectedPcrForm
+    val selectedFilter: LiveData<Int>
+        get() = _selectedFilter
+
+
 
     private lateinit var parentForm: IForm
     private lateinit var parentAppointment: IAppointment
@@ -114,8 +120,10 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         homeRepository.uploadHomeCareForm(homecareForm)
     }
 
-    fun uploadHomecareAppointment(appointment: HomecareAppointment) {
-        homeRepository.uploadHomecareAppointment(appointment)
+    fun uploadHomecareAppointment(formId: String, appointment: String) {
+        viewModelScope.launch {
+            homeRepository.uploadHomecareAppointment(formId, appointment)
+        }
     }
 
     fun homecareQuerySelector(): Query? {
@@ -138,8 +146,10 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         homeRepository.uploadPcrForm(pcrForm)
     }
 
-    fun uploadPcrAppointment(appointment: PcrAppointment) {
-        homeRepository.uploadPcrAppointment(appointment)
+    fun uploadPcrAppointment(formId: String, appointment: String) {
+        viewModelScope.launch {
+            homeRepository.uploadPcrAppointment(formId, appointment)
+        }
     }
 
     fun pcrQuerySelector(): Query? {
@@ -215,6 +225,20 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     }
     fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
         return homeRepository.getSecondStorageReference(homecareForm)
+    }
+
+    fun setSelectedFilter(filter: String) {
+        this.filter = filter
+        when(filter){
+            "Approved" ->  _selectedFilter.value = 1
+            "Rejected" ->  _selectedFilter.value = 2
+            "Requested" ->  _selectedFilter.value = 3
+            "Done" ->  _selectedFilter.value = 4
+        }
+    }
+
+    fun homecareQueryWithFilter(): Query?{
+        return homeRepository.homecareQueryWithFilter(filter)
     }
 
 

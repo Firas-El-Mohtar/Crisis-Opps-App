@@ -22,11 +22,10 @@ data class HomecareForm (
     var farahApproval: Int = 0,
     var mainApproval: Int = 0,
     var municipalityName: String = "",
+    override var dateOfUpload: Int = 1,
     override var formType: String = "",
     override var formID: String = "",
-    override var appointmentDate: String = "",
-    override var appointmentTime: String = "",
-    override var appointmentLocation: String = ""
+    override var appointment: String = ""
 ): IForm, Serializable
 {
     companion object{

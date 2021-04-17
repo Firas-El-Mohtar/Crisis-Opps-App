@@ -16,11 +16,10 @@ data class PcrForm (
     var ainWzeinApproval: Int = 0,
     var additionalNotes: String = "",
     var municipalityName: String = "",
+    override var dateOfUpload: Int = 1,
     override var formType: String = "",
     override var formID: String = "",
-    override var appointmentDate: String = "",
-    override var appointmentTime: String = "",
-    override var appointmentLocation: String = ""
+    override var appointment: String = ""
 ) :IForm, Serializable
 {
     companion object{

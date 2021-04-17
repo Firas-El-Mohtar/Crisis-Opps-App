@@ -17,6 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class CreatePcrFormDialog : DialogFragment() {
 
@@ -61,7 +62,7 @@ class CreatePcrFormDialog : DialogFragment() {
         btnSubmit!!.setOnClickListener {
 
             val currentUserId = homeViewModel.getUserId()
-
+            val currentDate = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
             val currentUserToken = homeViewModel.getUserParams(currentUserId)
             var pcrForm = PcrForm(
                 municipalityName = homeViewModel.getMunicipalityName(),
@@ -78,7 +79,8 @@ class CreatePcrFormDialog : DialogFragment() {
                 originatorId = currentUserId,
                 ainWzeinApproval = 0,
                 additionalNotes = etAdditionalNotes.editText?.text.toString(),
-                formType = "PCR"
+                formType = "PCR",
+                dateOfUpload = currentDate
             )
 
             homeViewModel.uploadPcrForm(pcrForm)

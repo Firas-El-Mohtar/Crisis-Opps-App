@@ -8,195 +8,345 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:layout_margin="12dp"
-        android:id="@+id/form_title"
-        android:text="Home Care Form"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/full_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_title"
-        android:drawableLeft="@drawable/fullname_icon"/>
+        <TextView
+            android:id="@+id/form_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Home Care Form"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/mothers_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/full_name_tv"
-        android:drawableLeft="@drawable/mother_name_icon"/>
+        <TextView
+            android:id="@+id/full_name_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/full_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/form_title" />
 
-    <TextView
-        android:id="@+id/municipality_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mothers_name_tv"
-        android:drawableLeft="@drawable/place_of_residence_icon"/>
+        <TextView
+            android:id="@+id/mothers_name_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/mothers_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
 
-    <TextView
-        android:id="@+id/birth_date_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/municipality_name"
-        android:drawableLeft="@drawable/birthdate_icon"/>
+        <TextView
+            android:id="@+id/municipality_name_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/municipality_name"
+            app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
 
-    <TextView
-        android:id="@+id/blood_type_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birth_date_tv"
-        android:drawableLeft="@drawable/bloodtype_icon"/>
+        <TextView
+            android:id="@+id/birth_date_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/birth_date_tv"
+            app:layout_constraintTop_toBottomOf="@id/municipality_name" />
 
-    <TextView
-        android:id="@+id/place_of_residency_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blood_type_tv"
-        android:drawableLeft="@drawable/place_of_residence_icon"/>
+        <TextView
+            android:id="@+id/blood_type_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/blood_type_tv"
+            app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
 
-    <TextView
-        android:id="@+id/phone_number_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv"
-        android:drawableLeft="@drawable/phone_number_icon"/>
+        <TextView
+            android:id="@+id/place_of_residency_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/place_of_residency_tv"
+            app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
 
-    <TextView
-        android:id="@+id/date_of_prescription_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_tv"
-        android:drawableLeft="@drawable/date_of_prescription_icon"/>
+        <TextView
+            android:id="@+id/phone_number_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/phone_number_tv"
+            app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
 
-    <TextView
-        android:id="@+id/record_number_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv"
-        android:drawableLeft="@drawable/record_number_icon"/>
+        <TextView
+            android:id="@+id/date_of_prescription_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/date_of_prescription_tv"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
 
-    <TextView
-        android:id="@+id/last_pcr_date_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/record_number_tv"
-        />
+        <TextView
+            android:id="@+id/record_number_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/record_number_tv"
+            app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
 
-    <TextView
-        android:id="@+id/doctor_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
+        <TextView
+            android:id="@+id/last_pcr_date_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/last_pcr_date_tv"
+            app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
 
-    <ImageView
-        android:id="@+id/hawiyye_scan_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv"
-        tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/doctor_name_tv_hc_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_regular"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/doctor_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
 
-    <ImageView
-        android:id="@+id/doctors_prescription_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hawiyye_scan_iv"
-        tools:srcCompat="@tools:sample/avatars" />
-    <Button
-        android:id="@+id/approve_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Approve"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        android:layout_margin="35dp"
-        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
-    <Button
-        android:layout_margin="35dp"
-        android:id="@+id/decline_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Decline"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv"/>
+        <TextView
+            android:id="@+id/full_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/fullname_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Full Name: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/form_title" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar_home_care_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/mothers_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/mother_name_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Mother's Name: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
+
+        <TextView
+            android:id="@+id/municipality_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/place_of_residence_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Municipality Name: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
+
+        <TextView
+            android:id="@+id/birth_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/birthdate_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Date of Birth: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/municipality_name" />
+
+        <TextView
+            android:id="@+id/blood_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/bloodtype_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Blood Type: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
+
+        <TextView
+            android:id="@+id/place_of_residency_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/place_of_residence_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Place of Residence: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
+
+        <TextView
+            android:id="@+id/phone_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/phone_number_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Phone Number: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
+
+        <TextView
+            android:id="@+id/date_of_prescription_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/date_of_prescription_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Date of Prescription: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
+
+        <TextView
+            android:id="@+id/record_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/record_number_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Record Number: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
+
+        <TextView
+            android:id="@+id/last_pcr_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/covid_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Last PCR Date: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
+
+        <TextView
+            android:id="@+id/doctor_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/doctor_name_icon"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Doctor's Name: "
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
+
+        <TextView
+            android:id="@+id/appointment_date_homecare"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text=""
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv" />
+
+        <ImageView
+            android:id="@+id/hawiyye_scan_iv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appointment_date_homecare"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="501dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/doctors_prescription_iv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hawiyye_scan_iv"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/approve_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="35dp"
+            android:text="Approve"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv" />
+
+        <Button
+            android:id="@+id/decline_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="35dp"
+            android:text="Decline"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_home_care_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
