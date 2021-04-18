@@ -35,6 +35,7 @@ private const val CHANNEL_ID = "my_channel"
 
 class FirebaseService : FirebaseMessagingService() {
 
+    //replaces the old token with the newly obtained token in the firestore database
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
         getSharedPreferences("shredPref", MODE_PRIVATE).edit().apply {

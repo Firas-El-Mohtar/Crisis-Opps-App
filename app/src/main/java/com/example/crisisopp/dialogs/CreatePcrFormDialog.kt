@@ -19,6 +19,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
+/**
+ * This dialog is presented to the user upon clicking the add pcr form floating action button in HomeActivity
+ */
+
 class CreatePcrFormDialog : DialogFragment() {
 
     private lateinit var btnSubmit: Button

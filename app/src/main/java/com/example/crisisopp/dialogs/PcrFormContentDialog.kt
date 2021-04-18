@@ -16,6 +16,10 @@ import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import java.util.*
 
+/**
+ * This dialog is presented to the user upon clicking a pcr form item in the recycler view entailed in HomeActivity
+ */
+
 class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 

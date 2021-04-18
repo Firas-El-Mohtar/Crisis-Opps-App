@@ -33,8 +33,6 @@ class HomeDataSource {
     val hashMap: HashMap<String, String> = hashMapOf("PCR" to "pcrforms", "Homecare" to "forms")
     val appointmentHashMap: HashMap<String, String> =
         hashMapOf("Pcr" to "pcrappointments", "Homecare" to "homecareappointments")
-    val appointmentHashMap2: HashMap<String, String> =
-        hashMapOf()
 
     suspend fun updateFormApproval(userType: String, form: IForm, isApproved: Boolean) {
         hashMap.get(form.formType)?.let {
@@ -221,15 +219,7 @@ class HomeDataSource {
         document?.reference?.set(newAppointment, SetOptions.merge())
     }
 
-    suspend fun deleteAppointment(appointment: IAppointment) {
-        appointmentHashMap.get(appointment.appointmentType)?.let {
-            val querySnapshot =
-                db.collection(it).whereEqualTo("appointmentId", appointment.appointmentId).get()
-                    .await()
-            val document = querySnapshot.documents.firstOrNull()
-            document?.reference?.delete()
-        }
-    }
+
 
     fun homecareAppointmentQuerySelector(userType: String, municipalityName: String): Query? {
         var query: Query? = null
@@ -280,12 +270,6 @@ class HomeDataSource {
             }
         }
         return query
-    }
-
-    suspend fun getAppointmentInfo(appointmentId: String, appointmentType: String): IAppointment? {
-        getAppointmentDocument(appointmentId, appointmentType)?.let {
-            return it.toObject<IAppointment>()
-        } ?: return null
     }
 
     suspend fun getAppointmentDocument(

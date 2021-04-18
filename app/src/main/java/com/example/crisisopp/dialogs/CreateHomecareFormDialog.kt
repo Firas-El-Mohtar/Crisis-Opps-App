@@ -31,6 +31,10 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
+/**
+ *This dialog is presented to the user upon clicking the add homecare form floating action button in HomeActivity
+ */
+
 class CreateHomecareFormDialog : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null

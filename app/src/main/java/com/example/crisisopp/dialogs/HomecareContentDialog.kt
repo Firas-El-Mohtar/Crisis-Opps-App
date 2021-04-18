@@ -17,6 +17,9 @@ import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import java.util.*
 
+/**
+ * This dialog is presented to the user upon clicking a homecare form item in the recycler view entailed in HomeActivity
+ */
 
 class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {

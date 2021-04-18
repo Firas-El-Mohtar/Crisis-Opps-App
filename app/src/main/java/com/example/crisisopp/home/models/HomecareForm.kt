@@ -3,6 +3,10 @@ package com.example.crisisopp.home.models
 import com.google.firebase.firestore.IgnoreExtraProperties
 import java.io.Serializable
 
+/**
+ * HomecareForm Class
+ * Child of IForm parent class
+ */
 @IgnoreExtraProperties
 data class HomecareForm (
     var fullName: String = "",

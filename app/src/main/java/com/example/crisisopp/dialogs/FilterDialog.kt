@@ -12,6 +12,10 @@ import com.example.crisisopp.home.view.HomeActivity
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
 
+/**
+ * This dialog is presented to the user upon clicking the filter button in the appbar
+ */
+
 class FilterDialog : DialogFragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
 

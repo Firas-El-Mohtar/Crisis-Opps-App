@@ -8,7 +8,11 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
 
-class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, val municipalityName: String) {
+class HomeRepository(
+    val homeDataSource: HomeDataSource,
+    val userType: String,
+    val municipalityName: String
+) {
 
 
     //User Functions
@@ -38,7 +42,7 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     }
 
     suspend fun autoSendNotification(userId: String, b: Boolean) {
-            homeDataSource.autoSendNotification(getFormSenderToken(userId)!!, b)
+        homeDataSource.autoSendNotification(getFormSenderToken(userId)!!, b)
 
     }
 
@@ -75,11 +79,6 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
         return homeDataSource.homecareAppointmentQuerySelector(userType, municipalityName)
     }
 
-
-    suspend fun deleteAppointment(appointment: IAppointment) {
-        homeDataSource.deleteAppointment(appointment)
-    }
-
     //Image handling
     fun uploadImageToStorage(uuid: String): StorageReference? {
         return homeDataSource.uploadImageToStorage(uuid)
@@ -88,15 +87,17 @@ class HomeRepository(val homeDataSource: HomeDataSource, val userType: String, v
     suspend fun fetchCurrentUserToken(): String {
         return homeDataSource.fetchCurrentUserToken()
     }
+
     fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
         return homeDataSource.getFirstStorageReference(homecareForm)
     }
+
     fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
         return homeDataSource.getSecondStorageReference(homecareForm)
     }
 
     //filters
-    fun homecareQueryWithFilter(filter: String): Query?{
+    fun homecareQueryWithFilter(filter: String): Query? {
         return homeDataSource.querySelectorWithFilter(userType, municipalityName, filter)
     }
 }

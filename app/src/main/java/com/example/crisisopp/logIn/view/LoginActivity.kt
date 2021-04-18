@@ -19,6 +19,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+/**
+ * Login Activity
+ *
+ * This activity will not be displayed if the user has previously logged in before
+ *
+ */
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> { LoginViewModelFactory(prefs) }
@@ -42,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
             progressBar?.visibility = View.GONE
         }
+        // checking if the user has an active session
+        //skips login if true
         if (auth.currentUser != null) {
             updateUiWithUser()
         } else {
@@ -52,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    // Function to move to the home activity
     private fun updateUiWithUser() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("UserType", viewModel.userType)
