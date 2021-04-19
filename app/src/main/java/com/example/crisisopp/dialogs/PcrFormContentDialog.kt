@@ -160,7 +160,10 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
 
         myHour = hourOfDay
         myMinute = minute
-        val appointment = "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + myMinute
+        var appointment : String?
+        appointment = if (minute <= 9){
+            "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
+        } else "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute
         tAppointmentDate.text = "Appointment: " + appointment
         //"Year: " + myYear + "\\" + "Month: " + myMonth + "\\" + "Day: " + myDay + "\\" + "Hour: " + myHour + "\\" + "Minute: " + myMinute
         homeViewModel.uploadPcrAppointment(homeViewModel.getPcrForm()?.formID!!, appointment)

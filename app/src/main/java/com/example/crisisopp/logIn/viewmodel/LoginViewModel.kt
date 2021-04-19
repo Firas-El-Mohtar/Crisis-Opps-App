@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel(){
+class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     val TAG = "321"
     var userType: String? = null
     var userToken: String? = null
@@ -22,14 +22,24 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun loginWithCoroutines(email: String, password: String){
+    /**
+     * Logs the user into the app and determines usertype and token
+     * @param email Account Email from EditText
+     * @param password Account Password from EditText
+     */
+
+    fun loginWithCoroutines(email: String, password: String) {
         viewModelScope.launch {
             try {
                 val result = loginRepository.login(email, password)
                 municipalityName = email.municipalityName
                 userType = email.emailDomain
                 userToken = loginRepository.fetchToken()
-                loginRepository.updateUserInfo(result.userId, email.emailDomain, email.municipalityName)
+                loginRepository.updateUserInfo(
+                    result.userId,
+                    email.emailDomain,
+                    email.municipalityName
+                )
                 Log.d(TAG, email.emailDomain)
                 loginRepository.user?.let {
                     _loginResult.postValue(LoginResult(it))
@@ -40,15 +50,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                 userType = null
                 println(e)
                 when (e) {
-                    is FirebaseAuthInvalidCredentialsException -> {}//display our own message
-                    is FirebaseAuthInvalidUserException -> {}
-                    else -> {}
+                    is FirebaseAuthInvalidCredentialsException -> {
+                    }//display our own message
+                    is FirebaseAuthInvalidUserException -> {
+                    }
+                    else -> {
+                    }
                 }
             }
         }
-    }
-
-    suspend fun returnUserInfoFromFirebase(userId: String): User?{
-        return loginRepository.returnUserInfoFromFirestore(userId)
     }
 }

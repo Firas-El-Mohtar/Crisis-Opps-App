@@ -27,11 +27,7 @@ class LoginDataSource {
             throw e
         }
     }
-
-    fun logout() {
-        auth.signOut()
-    }
-
+    
     suspend fun fetchToken(): String {
         try {
             val instanceIdResult = FirebaseInstanceId.getInstance().instanceId.await()

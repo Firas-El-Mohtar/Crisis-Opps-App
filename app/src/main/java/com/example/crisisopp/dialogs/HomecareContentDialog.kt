@@ -16,6 +16,7 @@ import com.example.crisisopp.glide.GlideApp
 import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import java.util.*
+import kotlin.math.min
 
 /**
  * This dialog is presented to the user upon clicking a homecare form item in the recycler view entailed in HomeActivity
@@ -50,7 +51,7 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
     private var myMonth: Int = 0
     private var myYear: Int = 0
     private var myHour: Int = 0
-    private var myMinute: Int = 0
+    private var myMinute: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,9 +91,8 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
             tRecordNumber.text = it.recordNumber.toString()
             tLastPcrDate.text = it.lastPcrDate
             tDoctorName.text = it.doctorsName
-            if(it.appointment != ""){
-                tAppointmentDate.text = "Appointment: " + it.appointment
-            }else tAppointmentDate.visibility = GONE
+            tAppointmentDate.text = "Appointment: " + it.appointment
+
 
             progressBar.visibility = VISIBLE
             GlideApp.with(this).load(homeViewModel.getFirstStorageReference(it))
@@ -158,6 +158,9 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
+        if (minute <= 9) {
+            myMinute = ":0" + minute
+        }
         val timePickerDialog = TimePickerDialog(requireContext(), this, hour, minute, true)
         timePickerDialog.show()
     }
@@ -165,9 +168,9 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         myHour = hourOfDay
         var appointment: String? = null
-        if (minute < 10){
-            appointment = "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
-        } else appointment = "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute.toString()
+        appointment = if (minute <= 9){
+            "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
+        } else "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute
 
         tAppointmentDate.text = "Appointment: " + appointment
         homeViewModel.uploadHomecareAppointment(homeViewModel.getHomeCareForm()?.formID!!, appointment)

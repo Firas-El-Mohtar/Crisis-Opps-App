@@ -110,8 +110,6 @@ class HomeActivity : AppCompatActivity() {
         toolbar.setTitle(municipalityName[0].toUpperCase()+municipalityName.substring(1))
         toolbar.setSubtitle("$municipalityName@$userType.com")
 
-//        drawerLayout.addDrawerListener(toolbar)
-
         intent.getStringExtra("UserType")?.let {
             userType = it
         }
@@ -226,17 +224,7 @@ class HomeActivity : AppCompatActivity() {
             pcrText.visibility = GONE
         }
     }
-    private fun setDrawerInfo(userType: String, municipalityName: String){
-        tvDrawerEmail.setText("$municipalityName@$userType.com")
-        tvDrawerUsername.setText(municipalityName[0].toUpperCase()+municipalityName.substring(1))
-        when(userType){
-            "ainwzein" -> drawerLogo.setImageResource(R.drawable.ainwzein_logo)
-            "local" -> drawerLogo.setImageResource(R.drawable.local_logo)
-            "main" -> drawerLogo.setImageResource(R.drawable.main_logo)
-            "farah" -> drawerLogo.setImageResource(R.drawable.farah_foundation_logo)
 
-        }
-    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.appbar_menu, menu)
         return true
@@ -244,11 +232,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val itemView = item.itemId
         when(itemView){
-            R.id.filter -> {
-                val dialog = FilterDialog()
-                dialog.show(supportFragmentManager, "Filter Dialog")
-
-            }
             R.id.logout -> {
                 homeViewModel.logout()
                 val intent = Intent(this, LoginActivity::class.java)

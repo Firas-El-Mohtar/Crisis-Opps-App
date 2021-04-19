@@ -15,12 +15,13 @@ import javax.sql.DataSource
 class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPreferences) {
     val TAG = "LOGIN"
     private var token: String?
-             get() {
-                return sharedPref?.getString("token", null)
-            }
-            set(value) {
-                sharedPref?.edit()?.putString("token", value)?.apply()
-            }
+        get() {
+            return sharedPref?.getString("token", null)
+        }
+        set(value) {
+            sharedPref?.edit()?.putString("token", value)?.apply()
+        }
+
     // in-memory cache of the loggedInUser object
     var user: User? = null
         private set
@@ -34,14 +35,9 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
         user = null
     }
 
-    fun logout() {
-        user = null
-        dataSource.logout()
-    }
-
     suspend fun login(email: String, password: String): LoggedInUser {
         // handle login
-        
+
         return dataSource.login(email, password)
     }
 
@@ -51,10 +47,13 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
         // @see https://developer.android.com/training/articles/keystore
     }
 
+    /**
+     * Fetches the user token from shared preferences if token is found there, if not, fetches the token from firebase
+     */
     suspend fun fetchToken(): String {
         token?.let {
             return it
-        } ?: run{
+        } ?: run {
             var instanceIdToken = dataSource.fetchToken()
             setInstanceIdToken(instanceIdToken)
             return instanceIdToken
@@ -66,13 +65,8 @@ class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPre
     }
 
     suspend fun updateUserInfo(userId: String, userType: String, municipalityName: String) {
-
         val user = User(token, userId, userType, municipalityName)
         dataSource.updateUserInfo(user!!)
         setLoggedInUser(user)
-    }
-
-    suspend fun returnUserInfoFromFirestore(userId: String): User?{
-        return dataSource.getUserInfo(userId)
     }
 }
