@@ -39,6 +39,7 @@ class CreateHomecareFormDialog : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
     private var documentReference: String? = null
+
     // view for image view
     private var firstImageView: ImageView? = null
     private var secondImageView: ImageView? = null
