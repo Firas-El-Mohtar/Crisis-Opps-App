@@ -13,10 +13,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
 import com.example.crisisopp.glide.GlideApp
-import com.example.crisisopp.home.models.HomecareForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import java.util.*
-import kotlin.math.min
 
 /**
  * This dialog is presented to the user upon clicking a homecare form item in the recycler view entailed in HomeActivity
@@ -60,7 +58,7 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
     ): View? {
 
         val view = inflater.inflate(R.layout.form_content_dialog, container, false)
-        tFormTitle = view.findViewById(R.id.form_title)
+        tFormTitle = view.findViewById(R.id.form_title_pcr)
         tFullName = view.findViewById(R.id.full_name_tv_hc_placeholder)
         tMothersName = view.findViewById(R.id.mothers_name_tv_hc_placeholder)
         tMunicipalityName = view.findViewById(R.id.municipality_name_hc_placeholder)
@@ -80,9 +78,9 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
         secondImage = view.findViewById(R.id.hawiyye_scan_iv)
 
         homeViewModel.getHomeCareForm()?.let {
-            tFormTitle.text = "Homecare Form"
             tFullName.text = it.fullName
             tMothersName.text = it.mothersName
+            tMunicipalityName.text = it.municipalityName
             tBirthDate.text = it.birthDate
             tBloodType.text = it.bloodType
             tPlaceOfResidence.text = it.placeOfResidence
@@ -94,7 +92,7 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
             tMunicipalityName.text = it.municipalityName
             if(it.appointment != "") {
                 tAppointmentDate.text = it.appointment
-            }else tAppointmentDate.text = "Date not yet set!"
+            }
 
             progressBar.visibility = VISIBLE
             GlideApp.with(this).load(homeViewModel.getFirstStorageReference(it))

@@ -1,6 +1,7 @@
 package com.example.crisisopp.home.view
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,9 +9,6 @@ import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,13 +16,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.crisisopp.R
-import com.example.crisisopp.recyclerview.HomeCareFormsFragment
 import com.example.crisisopp.dialogs.*
 import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.example.crisisopp.logIn.view.LoginActivity
+import com.example.crisisopp.recyclerview.HomeCareFormsFragment
 import com.example.crisisopp.viewpager.ViewPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,6 +32,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -107,7 +106,7 @@ class HomeActivity : AppCompatActivity() {
         val farahUser = homeViewModel.isFarahUser()
         val toolbar = findViewById<Toolbar>(R.id.toolbar_home)
         setSupportActionBar(toolbar)
-        toolbar.setTitle(municipalityName[0].toUpperCase()+municipalityName.substring(1))
+        toolbar.setTitle(municipalityName[0].toUpperCase() + municipalityName.substring(1))
         toolbar.setSubtitle("$municipalityName@$userType.com")
 
         intent.getStringExtra("UserType")?.let {

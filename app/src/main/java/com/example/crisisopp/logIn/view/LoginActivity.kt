@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.opengl.Visibility
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.example.crisisopp.R
 import com.example.crisisopp.home.view.HomeActivity
@@ -18,6 +19,8 @@ import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.*
+
 
 /**
  * Login Activity
@@ -40,10 +43,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_activity)
         auth = Firebase.auth
         prefs = getPreferences(Context.MODE_PRIVATE)
+        progressBar = findViewById(R.id.progress_bar_login)
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
         progressBar = findViewById(R.id.progress_bar_login)
+        var currentLanguage = Locale.getDefault().getDisplayLanguage();
+
+
+        password.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
         signInButton.setOnClickListener {
             progressBar?.visibility = View.VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())

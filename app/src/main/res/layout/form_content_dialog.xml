@@ -10,24 +10,24 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/form_title"
+            android:id="@+id/form_title_pcr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Home Care Form"
+            android:text="@string/homecareFormTitle"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/form_title2"
+            android:id="@+id/form_title2_pcr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Appointment"
+            android:text="@string/appointment"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -36,6 +36,7 @@
             android:id="@+id/full_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -46,6 +47,7 @@
             android:id="@+id/mothers_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -56,6 +58,7 @@
             android:id="@+id/municipality_name_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -66,6 +69,7 @@
             android:id="@+id/birth_date_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -76,6 +80,7 @@
             android:id="@+id/blood_type_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -86,6 +91,7 @@
             android:id="@+id/place_of_residency_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -96,6 +102,7 @@
             android:id="@+id/phone_number_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -106,6 +113,7 @@
             android:id="@+id/date_of_prescription_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -116,6 +124,7 @@
             android:id="@+id/record_number_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -126,6 +135,7 @@
             android:id="@+id/last_pcr_date_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -136,6 +146,7 @@
             android:id="@+id/doctor_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
@@ -149,19 +160,19 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Full Name: "
+            android:text="@string/fullName"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@id/form_title" />
+            app:layout_constraintTop_toBottomOf="@id/form_title_pcr" />
 
         <TextView
             android:id="@+id/mothers_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Mother's Name: "
+            android:text="@string/mothersName"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView15"
             app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
@@ -173,7 +184,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Municipality Name: "
+            android:text="@string/municipalityName"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView23"
             app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
@@ -184,7 +195,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Date of Birth: "
+            android:text="@string/dateOfBirth"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@id/municipality_name" />
@@ -196,7 +207,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Blood Type: "
+            android:text="@string/bloodType"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView25"
             app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
@@ -208,7 +219,7 @@
             android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Place of Residence: "
+            android:text="@string/placeOfResidence"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
@@ -217,10 +228,10 @@
             android:id="@+id/phone_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Phone Number: "
+            android:text="@string/phoneNumber"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView21"
             app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
@@ -232,7 +243,7 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Date of Prescription: "
+            android:text="@string/dateOfPrescription"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView19"
             app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
@@ -244,7 +255,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Record Number: "
+            android:text="@string/recordNumber"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView27"
             app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
@@ -256,7 +267,7 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Last PCR Date: "
+            android:text="@string/lastPcrDate"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView24"
             app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
@@ -268,7 +279,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="Doctor's Name: "
+            android:text="@string/doctorsName"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView26"
             app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
@@ -300,7 +311,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
-            android:text="Approve"
+            android:text="@string/approve"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv" />
@@ -310,7 +321,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="35dp"
-            android:text="Decline"
+            android:text="@string/decline"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/doctors_prescription_iv" />
@@ -327,8 +338,8 @@
 
         <ImageView
             android:id="@+id/imageView14"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/full_name_tv"
             app:layout_constraintStart_toStartOf="parent"
@@ -442,10 +453,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="52dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="TextView"
+            android:text="@string/dateNotYetSet"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView13"
-            app:layout_constraintTop_toBottomOf="@+id/form_title2" />
+            app:layout_constraintTop_toBottomOf="@+id/form_title2_pcr" />
 
         <View
             android:id="@+id/divider"

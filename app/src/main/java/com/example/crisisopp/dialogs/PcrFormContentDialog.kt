@@ -14,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
 import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.home.viewmodel.HomeViewModel
+import org.w3c.dom.Text
 import java.util.*
 
 /**
@@ -35,6 +36,7 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
     private lateinit var phoneNumber: TextView
     private lateinit var nameOfSource: TextView
     private lateinit var additionalNotes: TextView
+    private lateinit var municipalityName: TextView
     private lateinit var form: PcrForm
     private lateinit var approveButton: Button
     private lateinit var declineButton: Button
@@ -69,21 +71,22 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
         }
 
         formTitle = view.findViewById(R.id.form_title_pcr)
-        fullName = view.findViewById(R.id.full_name_pcr_placeholder)
-        mothersName = view.findViewById(R.id.mothers_name__pcr_placeholder)
-        birthDate = view.findViewById(R.id.birth_date_pcr_placeholder)
-        bloodType = view.findViewById(R.id.blood_type_pcr_placeholder)
-        placeOfResidence = view.findViewById(R.id.place_of_residency_pcr_placeholder)
-        dateOfInfection = view.findViewById(R.id.date_of_infection_pcr_placeholder)
-        recordNumber = view.findViewById(R.id.record_number_pcr_placeholder)
-        phoneNumber = view.findViewById(R.id.phone_number_pcr_placeholder)
-        nameOfSource = view.findViewById(R.id.name_of_source_pcr_placeholder)
-        additionalNotes = view.findViewById(R.id.additional_notes_pcr_placeholder)
+        fullName = view.findViewById(R.id.full_name_tv_pcr_placeholder)
+        mothersName = view.findViewById(R.id.mothers_name_tv_pcr_placeholder)
+        birthDate = view.findViewById(R.id.birth_date_tv_pcr_placeholder)
+        bloodType = view.findViewById(R.id.blood_type_tv_pcr_placeholder)
+
+        municipalityName = view.findViewById(R.id.municipality_name_pcr_placeholder)
+        placeOfResidence = view.findViewById(R.id.place_of_residency_tv_pcr_placeholder)
+        dateOfInfection = view.findViewById(R.id.date_of_infection_tv_pcr_placeholder)
+        recordNumber = view.findViewById(R.id.record_number_tv_pcr_placeholder)
+        phoneNumber = view.findViewById(R.id.phone_number_tv_pcr_placeholder)
+        nameOfSource = view.findViewById(R.id.name_of_source_tv_pcr_placeholder)
+        additionalNotes = view.findViewById(R.id.additional_notes_tv_pcr_placeholder)
         tAppointmentDate = view.findViewById(R.id.appointment_date_pcr)
         val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar_pcr_content)
         homeViewModel.getPcrForm()?.let {
             form = it
-            formTitle.text = "PCR Form"
             fullName.text = it.fullName
             mothersName.text = it.mothersName
             birthDate.text = it.birthDate
@@ -94,7 +97,10 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
             additionalNotes.text = it.additionalNotes
             phoneNumber.text = it.phoneNumber
             nameOfSource.text =it.nameOfSource
-            tAppointmentDate.text = "Appointment: " + it.appointment
+            municipalityName.text = it.municipalityName
+            if(it.appointment != "") {
+                tAppointmentDate.text = it.appointment
+            }
         }
 
         approveButton.setOnClickListener() {
@@ -109,6 +115,7 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
                     DatePickerDialog(requireContext(), this, year, month, day)
                 datePickerDialog.show()
                 homeViewModel.autoSendNotification(homeViewModel.getPcrForm()?.originatorId!!, true)
+                progressBar.visibility = GONE
             } else {
 
                 progressBar.visibility = VISIBLE
