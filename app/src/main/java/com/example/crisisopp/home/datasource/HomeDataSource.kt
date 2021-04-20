@@ -246,13 +246,6 @@ class HomeDataSource {
 
     }
 
-    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
-        return FirebaseStorage.getInstance().getReferenceFromUrl(getImageReference(homecareForm))
-    }
-
-    fun getImageReference(homecareForm: HomecareForm): String {
-        return "gs://crisis-opps-app.appspot.com/images/${homecareForm.firstDocumentReference}"
-    }
 
     fun pcrAppointmentQuerySelector(userType: String, municipalityName: String): Query? {
         var query: Query? = null
