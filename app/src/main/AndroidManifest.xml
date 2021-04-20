@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.view.HomeActivity" />
+        <activity android:name=".home.view.HomeActivity"
+            android:noHistory="true"/>
         <activity android:name=".logIn.view.LoginActivity"></activity>
 
         <service

@@ -46,8 +46,12 @@ class HomeRepository(
 
     }
 
-    fun getStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeDataSource.getStorageReference(homecareForm)
+    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getFirstStorageReference(homecareForm)
+    }
+    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
+        return homeDataSource.getSecondStorageReference(homecareForm)
+
     }
 
     fun querySelector(): Query? {
@@ -88,16 +92,4 @@ class HomeRepository(
         return homeDataSource.fetchCurrentUserToken()
     }
 
-    fun getFirstStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeDataSource.getFirstStorageReference(homecareForm)
-    }
-
-    fun getSecondStorageReference(homecareForm: HomecareForm): StorageReference {
-        return homeDataSource.getSecondStorageReference(homecareForm)
-    }
-
-    //filters
-    fun homecareQueryWithFilter(filter: String): Query? {
-        return homeDataSource.querySelectorWithFilter(userType, municipalityName, filter)
-    }
 }

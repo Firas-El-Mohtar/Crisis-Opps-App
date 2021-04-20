@@ -21,198 +21,192 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/form_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="Appointment"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <TextView
             android:id="@+id/full_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/full_name_tv"
-            app:layout_constraintTop_toBottomOf="@id/form_title" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/full_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/full_name_tv" />
 
         <TextView
             android:id="@+id/mothers_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/mothers_name_tv"
-            app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/mothers_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/mothers_name_tv" />
 
         <TextView
             android:id="@+id/municipality_name_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/municipality_name"
-            app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/municipality_name"
+            app:layout_constraintStart_toEndOf="@+id/municipality_name" />
 
         <TextView
             android:id="@+id/birth_date_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/birth_date_tv"
-            app:layout_constraintTop_toBottomOf="@id/municipality_name" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/birth_date_tv"
+            app:layout_constraintStart_toEndOf="@+id/birth_date_tv" />
 
         <TextView
             android:id="@+id/blood_type_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/blood_type_tv"
-            app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/blood_type_tv"
+            app:layout_constraintStart_toEndOf="@+id/blood_type_tv" />
 
         <TextView
             android:id="@+id/place_of_residency_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/place_of_residency_tv"
-            app:layout_constraintTop_toBottomOf="@id/blood_type_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/place_of_residency_tv"
+            app:layout_constraintStart_toEndOf="@+id/place_of_residency_tv" />
 
         <TextView
             android:id="@+id/phone_number_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/phone_number_tv"
-            app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/phone_number_tv"
+            app:layout_constraintStart_toEndOf="@+id/phone_number_tv" />
 
         <TextView
             android:id="@+id/date_of_prescription_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/date_of_prescription_tv"
-            app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/date_of_prescription_tv"
+            app:layout_constraintStart_toEndOf="@+id/date_of_prescription_tv" />
 
         <TextView
             android:id="@+id/record_number_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/record_number_tv"
-            app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/record_number_tv"
+            app:layout_constraintStart_toEndOf="@+id/record_number_tv" />
 
         <TextView
             android:id="@+id/last_pcr_date_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/last_pcr_date_tv"
-            app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/last_pcr_date_tv"
+            app:layout_constraintStart_toEndOf="@+id/last_pcr_date_tv" />
 
         <TextView
             android:id="@+id/doctor_name_tv_hc_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/segoe_ui_regular"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/doctor_name_tv"
-            app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/doctor_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/doctor_name_tv" />
 
         <TextView
             android:id="@+id/full_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/fullname_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Full Name: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView14"
             app:layout_constraintTop_toBottomOf="@id/form_title" />
 
         <TextView
             android:id="@+id/mothers_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/mother_name_icon"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Mother's Name: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView15"
             app:layout_constraintTop_toBottomOf="@id/full_name_tv" />
 
         <TextView
             android:id="@+id/municipality_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/place_of_residence_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Municipality Name: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView23"
             app:layout_constraintTop_toBottomOf="@id/mothers_name_tv" />
 
         <TextView
             android:id="@+id/birth_date_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/birthdate_icon"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Date of Birth: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@id/municipality_name" />
 
         <TextView
             android:id="@+id/blood_type_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/bloodtype_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Blood Type: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView25"
             app:layout_constraintTop_toBottomOf="@id/birth_date_tv" />
 
         <TextView
             android:id="@+id/place_of_residency_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/place_of_residence_icon"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Place of Residence: "
             android:textSize="20sp"
@@ -223,78 +217,61 @@
             android:id="@+id/phone_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/phone_number_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Phone Number: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView21"
             app:layout_constraintTop_toBottomOf="@id/place_of_residency_tv" />
 
         <TextView
             android:id="@+id/date_of_prescription_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/date_of_prescription_icon"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Date of Prescription: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView19"
             app:layout_constraintTop_toBottomOf="@id/phone_number_tv" />
 
         <TextView
             android:id="@+id/record_number_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/record_number_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Record Number: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView27"
             app:layout_constraintTop_toBottomOf="@id/date_of_prescription_tv" />
 
         <TextView
             android:id="@+id/last_pcr_date_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/covid_icon"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Last PCR Date: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView24"
             app:layout_constraintTop_toBottomOf="@id/record_number_tv" />
 
         <TextView
             android:id="@+id/doctor_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/doctor_name_icon"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Doctor's Name: "
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView26"
             app:layout_constraintTop_toBottomOf="@id/last_pcr_date_tv" />
-
-        <TextView
-            android:id="@+id/appointment_date_homecare"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/segoe_ui_bold"
-            android:text=""
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv" />
 
         <ImageView
             android:id="@+id/hawiyye_scan_iv"
@@ -302,20 +279,20 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appointment_date_homecare"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="501dp"
+            app:layout_constraintTop_toBottomOf="@+id/doctors_prescription_iv"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/doctors_prescription_iv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hawiyye_scan_iv"
+            app:layout_constraintTop_toBottomOf="@+id/appointment_date_homecare"
             tools:srcCompat="@tools:sample/avatars" />
 
         <Button
@@ -347,6 +324,148 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/full_name_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/full_name_tv"
+            app:srcCompat="@drawable/person_icon_edited_final" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mothers_name_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mothers_name_tv"
+            app:srcCompat="@drawable/mother_icon_form" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/birth_date_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/birth_date_tv"
+            app:srcCompat="@drawable/calendar" />
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/date_of_prescription_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/date_of_prescription_tv"
+            app:srcCompat="@drawable/calendar" />
+
+        <ImageView
+            android:id="@+id/imageView24"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/last_pcr_date_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/last_pcr_date_tv"
+            app:srcCompat="@drawable/calendar" />
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/place_of_residency_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/place_of_residency_tv"
+            app:srcCompat="@drawable/nice_home_icon" />
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_number_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/phone_number_tv"
+            app:srcCompat="@drawable/phone_blue" />
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/municipality_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/municipality_name"
+            app:srcCompat="@drawable/municipality_icon_colored" />
+
+        <ImageView
+            android:id="@+id/imageView25"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/blood_type_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/blood_type_tv"
+            app:srcCompat="@drawable/bloodtype_icon" />
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/doctor_name_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/doctor_name_tv"
+            app:srcCompat="@drawable/doctor_name_icon" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/record_number_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/record_number_tv"
+            app:srcCompat="@drawable/record_number_icon" />
+
+        <TextView
+            android:id="@+id/appointment_date_homecare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="52dp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView13"
+            app:layout_constraintTop_toBottomOf="@+id/form_title2" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="25dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_name_tv" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/appointment_date_homecare"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/appointment_date_homecare"
+            app:srcCompat="@drawable/time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
