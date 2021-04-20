@@ -234,6 +234,7 @@ class HomeActivity : AppCompatActivity() {
         when(itemView){
             R.id.logout -> {
                 homeViewModel.logout()
+                finish()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }

@@ -44,18 +44,69 @@ class HomecareFormsAdapter(private val homeViewModel: HomeViewModel) :
             phoneNumber.text = form?.phoneNumber
             placeOfResidency.text = form?.placeOfResidence
             lastPcDate.text = form?.lastPcrDate
-            if(form?.farahApproval == 0){
-                requestedState.visibility = VISIBLE
-                rejectedState.visibility = GONE
-                approvedState.visibility = GONE
-            }else if(form?.farahApproval == -1) {
-                rejectedState.visibility = VISIBLE
-                approvedState.visibility = GONE
-                requestedState.visibility = GONE
-            }else if(form?.farahApproval == 1){
-                approvedState.visibility = VISIBLE
-                rejectedState.visibility = GONE
-                requestedState.visibility = GONE
+            when(homeViewModel.getUserType())
+            {
+                "local" -> {
+                    if(form?.farahApproval == 0){
+                        requestedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        approvedState.visibility = GONE
+                    }else if(form?.farahApproval == -1) {
+                        rejectedState.visibility = VISIBLE
+                        approvedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }else if(form?.farahApproval == 1){
+                        approvedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }
+                }
+                "ainwzein" -> {
+                    if(form?.ainWzeinApproval == 0){
+                        requestedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        approvedState.visibility = GONE
+                    }else if(form?.ainWzeinApproval == -1) {
+                        rejectedState.visibility = VISIBLE
+                        approvedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }else if(form?.ainWzeinApproval == 1){
+                        approvedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }
+                }
+                "main" -> {
+                    if(form?.mainApproval == 0){
+                        requestedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        approvedState.visibility = GONE
+                    }else if(form?.mainApproval == -1) {
+                        rejectedState.visibility = VISIBLE
+                        approvedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }else if(form?.mainApproval == 1){
+                        approvedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }
+                }
+                "farah" ->{
+                    if(form?.farahApproval == 0){
+                        requestedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        approvedState.visibility = GONE
+                    }else if(form?.farahApproval == -1) {
+                        rejectedState.visibility = VISIBLE
+                        approvedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }else if(form?.farahApproval == 1){
+                        approvedState.visibility = VISIBLE
+                        rejectedState.visibility = GONE
+                        requestedState.visibility = GONE
+                    }
+                }
+
             }
         }
         override fun onClick(v: View?) {

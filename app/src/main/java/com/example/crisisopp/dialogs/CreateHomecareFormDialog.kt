@@ -39,22 +39,18 @@ class CreateHomecareFormDialog : DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
     private var documentReference: String? = null
-
     // view for image view
     private var firstImageView: ImageView? = null
     private var secondImageView: ImageView? = null
-
     // Uri indicates, where the image will be picked from
     private var filePathOne: Uri? = null
     private var filePathTwo: Uri? = null
-
     // instance for firebase storage and StorageReference
 //    var storage: FirebaseStorage? = null
 //    var storageReference: StorageReference? = null
 //    var db = Firebase.firestore
     var firstImageID: String? = null
     var secondImageID: String? = null
-
     //Edit Text References
     private lateinit var etFullName: TextInputLayout
     private lateinit var etMothersName: TextInputLayout
@@ -117,7 +113,6 @@ class CreateHomecareFormDialog : DialogFragment() {
             val currentUserId = homeViewModel.getUserId()
             val formId = (0..1000).random().toString()
             val currentUserToken = homeViewModel.getUserParams(currentUserId)
-            val currentDate = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
             //constructor to build a Form object to then pass to firebase for saving
             var form = HomecareForm(
                 formID = formId,
@@ -139,7 +134,6 @@ class CreateHomecareFormDialog : DialogFragment() {
                 ainWzeinApproval = 0,
                 municipalityName = homeViewModel.getMunicipalityName(),
                 formType = "Homecare",
-                dateOfUpload = currentDate
             )
             homeViewModel.uploadHomeCareForm(form)
             GlobalScope.launch {
@@ -148,7 +142,6 @@ class CreateHomecareFormDialog : DialogFragment() {
         }
         return view
     }
-
     private fun uploadImage() {
         if (filePathOne != null) {
             progressBar.visibility = VISIBLE

@@ -52,6 +52,9 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     fun getUserId(): String {
         return homeRepository.getUserId()
     }
+    fun getUserType():String{
+        return homeRepository.userType
+    }
 
     /**
      * Fetches municipality name from homeRepository

@@ -14,6 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#364f6b"
+            app:titleTextColor="@color/white"
+            app:titleMarginStart="45dp"
+            app:subtitleTextColor="@color/white"
             app:layout_scrollFlags="enterAlways|snap|scroll"
             app:title="Crisis Ops"/>
         <com.google.android.material.tabs.TabLayout

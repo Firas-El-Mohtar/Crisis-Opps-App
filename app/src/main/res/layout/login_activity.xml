@@ -63,10 +63,8 @@
             android:layout_centerVertical="true">
             <EditText
                 android:id="@+id/username"
-                android:textColorHint="@color/blue_ish_grey"
                 android:drawableEnd="@drawable/ic_account"
-                android:drawableTint="@color/blue_ish_grey"
-                android:hint="someone@gmail.com"
+                android:hint="Email"
                 android:textColor="@color/blue_ish_grey"
                 android:paddingLeft="26dp"
                 android:paddingRight="26dp"
@@ -80,7 +78,6 @@
 
             <EditText
                 android:id="@+id/password"
-                android:textColorHint="@color/blue_ish_grey"
                 android:layout_marginTop="24dp"
                 android:drawableEnd="@drawable/ic_lock"
                 android:drawableTint="@color/blue_ish_grey"

@@ -43,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
+        progressBar = findViewById(R.id.progress_bar_login)
         signInButton.setOnClickListener {
             progressBar?.visibility = View.VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())

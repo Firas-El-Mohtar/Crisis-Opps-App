@@ -91,8 +91,10 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
             tRecordNumber.text = it.recordNumber.toString()
             tLastPcrDate.text = it.lastPcrDate
             tDoctorName.text = it.doctorsName
-            tAppointmentDate.text = "Appointment: " + it.appointment
-
+            tMunicipalityName.text = it.municipalityName
+            if(it.appointment != "") {
+                tAppointmentDate.text = it.appointment
+            }else tAppointmentDate.text = "Date not yet set!"
 
             progressBar.visibility = VISIBLE
             GlideApp.with(this).load(homeViewModel.getFirstStorageReference(it))
@@ -101,6 +103,28 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
                 .into(secondImage)
             progressBar.visibility = GONE
 
+        }
+
+        if(homeViewModel.getUserType() == "main"){
+            val form = homeViewModel.getHomeCareForm()
+            if(form?.mainApproval == 1 || form?.mainApproval == -1){
+                approveButton.isEnabled = false
+                declineButton.isEnabled = false
+            }
+        }
+        if(homeViewModel.getUserType() == "ainwzein"){
+            val form = homeViewModel.getHomeCareForm()
+            if(form?.ainWzeinApproval == 1 || form?.ainWzeinApproval == -1){
+                approveButton.isEnabled = false
+                declineButton.isEnabled = false
+            }
+        }
+        if(homeViewModel.getUserType() == "farah"){
+            val form = homeViewModel.getHomeCareForm()
+            if(form?.farahApproval == 1 || form?.farahApproval == -1){
+                approveButton.isEnabled = false
+                declineButton.isEnabled = false
+            }
         }
 
 
