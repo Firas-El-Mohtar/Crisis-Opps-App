@@ -228,17 +228,17 @@ class CreateHomecareFormDialog : DialogFragment() {
             firstImageView?.setImageURI(filePathOne)
             firstImageView?.visibility = View.VISIBLE
 //You can get File object from intent
-            val file: File = ImagePicker.getFile(data)!!
-            //You can also get File Path from intent
-            val filePath: String = ImagePicker.getFilePath(data)!!
+//            val file: File = ImagePicker.getFile(data)!!
+//            //You can also get File Path from intent
+//            val filePath: String = ImagePicker.getFilePath(data)!!
         } else if (resultCode == RESULT_OK && counter == 2) {
             filePathTwo = data?.data
             secondImageView?.setImageURI(filePathTwo)
             secondImageView?.visibility = View.VISIBLE
 //You can get File object from intent
-            val file: File = ImagePicker.getFile(data)!!
-            //You can also get File Path from intent
-            val filePath: String = ImagePicker.getFilePath(data)!!
+//            val file: File = ImagePicker.getFile(data)!!
+//            //You can also get File Path from intent
+//            val filePath: String = ImagePicker.getFilePath(data)!!
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {

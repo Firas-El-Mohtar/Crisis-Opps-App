@@ -16,6 +16,7 @@ import com.example.crisisopp.R
 import com.example.crisisopp.home.view.HomeActivity
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
+import com.example.crisisopp.login.view.LearnMoreActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var prefs: SharedPreferences
     private var progressBar: ProgressBar? = null
     private var userType: String? = null
+    private lateinit var learnMore: TextView
 
     // Initialize Firebase Auth
     val TAG = "1234"
@@ -44,14 +46,19 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         prefs = getPreferences(Context.MODE_PRIVATE)
         progressBar = findViewById(R.id.progress_bar_login)
+        learnMore = findViewById(R.id.learn_more)
+        learnMore.setOnClickListener {
+            val intent = Intent(this, LearnMoreActivity::class.java)
+            startActivity(intent)
+        }
+        
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
         progressBar = findViewById(R.id.progress_bar_login)
-        var currentLanguage = Locale.getDefault().getDisplayLanguage();
-
-
         password.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+
+
         signInButton.setOnClickListener {
             progressBar?.visibility = View.VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())

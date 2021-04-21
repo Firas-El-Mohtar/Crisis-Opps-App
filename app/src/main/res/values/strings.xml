@@ -49,6 +49,14 @@
     <string name="pcrFAB">PCR</string>
     <string name="homecareFAB">Homecare</string>
 
+    //Learn More Activity
+
+    <string name="creators">Creators: </string>
+    <string name="jad_name">Jad Kaedbey: </string>
+    <string name="jad_email">jkaedbey@gmail.com</string>
+    <string name="firas_name">Firas El Mohtar: </string>
+    <string name="firas_email">mohtarfiras6711@gmail.com</string>
+
     //states
 
     <string name="approvedState">Approved</string>
@@ -116,6 +124,7 @@
     //Universal Strings
     <string name="homecare">Home Care</string>
     <string name="pcr">PCR</string>
+    <string name="title_activity_learn_more">LearnMoreActivity</string>
 
     //Toolbar strings
 </resources>

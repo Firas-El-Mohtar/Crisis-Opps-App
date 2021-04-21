@@ -51,6 +51,13 @@
     <string name="requestedState">قيد التحليل</string>
     <string name="rejectedState">مرفوض</string>
 
+
+    <string name="creators">مبرمجي هذا التطبيق: </string>
+    <string name="jad_name">جاد قائدبيه: </string>
+    <string name="jad_email">jkaedbey@gmail.com</string>
+    <string name="firas_name">فراس المهتار: </string>
+    <string name="firas_email">mohtarfiras6711@gmail.com</string>
+
     //Appbar Menu
 
     <string name="logout">تسجيل خروج</string>
