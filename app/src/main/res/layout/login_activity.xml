@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:text="Log In"
+                android:text="@string/login"
                 android:textColor="@color/black"
                 android:textSize="36dp" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoe_ui_bold"
-                android:text="We missed you! Login to get started"
+                android:text="@string/loginToGetStarted"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
         </LinearLayout>
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/blue_ish_grey"
             android:textSize="26dp"
-            android:text="LOGIN"
+            android:text="@string/login"
             android:fontFamily="@font/segoe_ui_bold"
             android:layout_marginTop="36dp"
             android:layout_marginStart="48dp"/>
@@ -64,10 +64,11 @@
             <EditText
                 android:id="@+id/username"
                 android:drawableEnd="@drawable/ic_account"
-                android:hint="Email"
+                android:hint="@string/emailHint"
                 android:textColor="@color/blue_ish_grey"
                 android:paddingLeft="26dp"
                 android:paddingRight="26dp"
+                android:gravity="center"
                 android:background="@drawable/edit_text_background"
                 android:inputType="textEmailAddress"
                 android:fontFamily="@font/segoe_ui_bold"
@@ -81,11 +82,11 @@
                 android:layout_marginTop="24dp"
                 android:drawableEnd="@drawable/ic_lock"
                 android:drawableTint="@color/blue_ish_grey"
-                android:hint="Password"
+                android:hint="@string/passwordHint"
+                android:gravity="center"
                 android:textColor="@color/blue_ish_grey"
                 android:paddingLeft="26dp"
                 android:paddingRight="26dp"
-                android:inputType="textPassword"
                 android:fontFamily="@font/segoe_ui_bold"
                 android:background="@drawable/edit_text_background"
                 android:layout_width="match_parent"
@@ -106,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue_ish_grey"
                     android:textSize="18dp"
-                    android:text="Need Help?"
+                    android:text="@string/needHelp"
                     android:fontFamily="@font/segoe_ui_bold"
                     android:layout_marginLeft="12dp"
                     android:layout_weight="1" />
@@ -115,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"
-                    android:text="Sign In"
+                    android:text="@string/sign_in"
                     android:textAllCaps="false"
                     android:textColor="@color/blue_ish_grey"
                     android:textSize="16dp"
@@ -139,13 +140,15 @@
                 android:visibility="gone"
                 />
             <TextView
+                android:id="@+id/learn_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue_ish_grey"
                 android:textSize="18dp"
-                android:text="Learn more about us!"
+                android:text="@string/learnMoreAboutUs"
                 android:fontFamily="@font/seg_ui_semibold"
-                android:layout_marginLeft="12dp" />
+                android:layout_marginLeft="12dp"
+                android:clickable="true"/>
 
             <ProgressBar
                 android:id="@+id/progress_bar_login"

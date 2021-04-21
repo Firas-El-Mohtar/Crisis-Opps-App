@@ -13,29 +13,106 @@
     //
     <string name="Open">Open</string>
     <string name="Close">Close</string>
+
+    <string name="homecareFormTitle">طلب الرعاية المنزلية</string>
+    <string name="appointment">الموعد</string>
+    <string name="pcrFormTitle">طلب فحص PCR</string>
+    <string name="fullName">الاسم الكامل: </string>
+    <string name="mothersName">اسم الأم: </string>
+    <string name="municipalityName">اسم البلدية: </string>
+    <string name="dateOfBirth">تاريخ الولادة: </string>
+    <string name="bloodType">فئة الدم: </string>
+    <string name="placeOfResidence">مكان الإقامة: </string>
+    <string name="phoneNumber">رقم الهاتف: </string>
+    <string name="dateOfPrescription">تاريخ الوصفة الطبّية:</string>
+    <string name="recordNumber">رقم السجل: </string>
+    <string name="lastPcrDate">تاريخ فحص الPCR الأخير: </string>
+    <string name="doctorsName">اسم الطبيب: </string>
+
+    <string name="approve">قبول</string>
+    <string name="decline">رفوض</string>
+
+    <string name="dateOfInfection">تاريخ الإصابة: </string>
+    <string name="nameOfSource">اسم المصدر: </string>
+    <string name="additionalNotes">ملاحظات إضافية: </string>
+
+    //recycler view
+
+    <string name="name">الاسم: </string>
+
+    //Floating action button
+
+    <string name="pcrFAB">PCR</string>
+    <string name="homecareFAB">الرعاية المنزلية</string>
+
+    //states
+
+    <string name="approvedState">موافَق عليه</string>
+    <string name="requestedState">قيد التحليل</string>
+    <string name="rejectedState">مرفوض</string>
+
+
+    <string name="creators">مبرمجي هذا التطبيق: </string>
+    <string name="jad_name">جاد قائدبيه: </string>
+    <string name="jad_email">jkaedbey@gmail.com</string>
+    <string name="firas_name">فراس المهتار: </string>
+    <string name="firas_email">mohtarfiras6711@gmail.com</string>
+
+    //Appbar Menu
+
+    <string name="logout">تسجيل خروج</string>
+    <string name="changeLanguage">تغيير اللغة</string>
+
+    //create form dialog
+
+    <string name="fullnameHint">الاسم الكامل</string>
+    <string name="mothersNameHint">اسم الأم</string>
+    <string name="municipalityNameHint">اسم البلدية</string>
+    <string name="dateOfBirthHint">تاريخ الولادة</string>
+    <string name="bloodTypeHint">فئة الدم</string>
+    <string name="placeOfResidenceHint">مكان الإقامة</string>
+    <string name="phoneNumberHint">رقم الهاتف</string>
+    <string name="dateOfPrescriptionHint">تاريخ الوصفة الطبّية</string>
+    <string name="recordNumberHint">رقم السجل</string>
+    <string name="lastPcrDateHint">تاريخ فحص الPCR الأخير</string>
+    <string name="doctorsNameHint">اسم الطبيب</string>
+
+    <string name="dateOfInfectionHint">تاريخ الإصابة</string>
+    <string name="nameOfSourceHint">اسم المصدر</string>
+    <string name="additionalNotesHint">ملاحظات إضافية</string>
+
+    <string name="submit">إرسال</string>
+    <string name="attachImage">إرفاق الصورة</string>
+
+    <string name="dateNotYetSet">لم يتم تحديد التاريخ بعد!</string>
+
+
+
     //onborading
 
-    <string name="onboarding_slide1_title">Create an account</string>
-    <string name="onboarding_slide1_subtitle">Connect with people around the world</string>
-    <string name="onboarding_slide1_desc">User will be able to give you live, chat and meet
-        with people nearby.</string>
-    <string name="onboarding_slide2_title">Login to your account</string>
-    <string name="onboarding_slide2_subtitle">Let\'s build connection with new people</string>
-    <string name="onboarding_slide2_desc">Connect helps you locate the people around you who
-        are closest from your home.</string>
-    <string name="onboarding_slide3_title">Login to your account</string>
-    <string name="onboarding_slide3_subtitle">Feel the happiness</string>
-    <string name="onboarding_slide3_desc">User will be able to give you live, chat and meet
-        with people nearby.</string>
-    <string name="next">Next</string>
-    <string name="skip">Skip</string>
-    <string name="get_started">Get started</string>
-    <string name="sign_in">Sign In</string>
+    <string name="onboarding_slide1_title">طلبات PCR</string>
+    <string name="onboarding_slide1_subtitle">اطلب اختبار PCR في مستشفى عين وزين</string>
+    <string name="onboarding_slide1_desc">احصل على موعد فوراً</string>
+    <string name="onboarding_slide2_title">طلبات الرعاية المنزلية</string>
+    <string name="onboarding_slide2_subtitle">اطلب أي نوع من الأدوية</string>
+    <string name="onboarding_slide2_desc">أدوية, آلات O2’ الأنسولين والمزيد.</string>
+    <string name="onboarding_slide3_title"></string>
+    <string name="onboarding_slide3_subtitle">واجهة لجميع احتياجات الشوف الطبية</string>
+    <string name="onboarding_slide3_desc">مكننة الاتصالات لتخفيف من نكسات Covid-19</string>
+    <string name="next">التالي</string>
+    <string name="skip">تخطى</string>
+    <string name="get_started">البدء</string>
+    <string name="sign_in">تسجيل الدخول</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="login">Login</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="emailHint">البريد الإلكتروني</string>
+    <string name="passwordHint">كلمه السر\u202B</string>
+    <string name="needHelp">تحتاج مساعدة؟</string>
+    <string name="learnMoreAboutUs">تعلم المزيد عنا!</string>
+    <string name="loginToGetStarted">قم بتسجيل الدخول لتبدأ</string>
     <string name="new_user">New User?</string>
     <string name="invalid_username">Invalid username</string>
     <string name="invalid_password">Invalid password</string>

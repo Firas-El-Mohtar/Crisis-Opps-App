@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.crisisopp">
 
@@ -6,10 +7,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <application
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="true"/>
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
@@ -19,17 +22,23 @@
         android:theme="@style/Theme.CrisisOpp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".login.view.LearnMoreActivity"
+            android:label="@string/title_activity_learn_more"
+            android:theme="@style/Theme.CrisisOpp.NoActionBar"></activity>
+        <activity
             android:name=".onboarding.view.OnboardingActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.OnBoarding">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.view.HomeActivity"
-            android:noHistory="true"/>
-        <activity android:name=".logIn.view.LoginActivity"></activity>
+        <activity
+            android:name=".home.view.HomeActivity"
+            android:noHistory="true" />
+        <activity android:name=".logIn.view.LoginActivity" />
 
         <service
             android:name=".notifications.FirebaseService"
@@ -40,4 +49,5 @@
             </intent-filter>
         </service>
     </application>
+
 </manifest>

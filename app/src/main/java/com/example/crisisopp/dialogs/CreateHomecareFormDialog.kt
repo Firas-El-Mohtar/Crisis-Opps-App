@@ -150,6 +150,7 @@ class CreateHomecareFormDialog : DialogFragment() {
                 homeViewModel.onFormUploadSendNotification(currentUserToken.await()!!)
             }
         }
+
         return view
     }
     // UploadImage method

@@ -16,10 +16,81 @@
     <string name="Open">Open</string>
     <string name="Close">Close</string>
 
+    <string name="homecareFormTitle">Home Care Form</string>
+    <string name="appointment">Appointment</string>
+    <string name="pcrFormTitle">PCR Form</string>
+    <string name="fullName">Full Name: </string>
+    <string name="mothersName">Mother\'s Name: </string>
+    <string name="municipalityName">Municipality Name: </string>
+    <string name="dateOfBirth">Date of Birth: </string>
+    <string name="bloodType">Blood Type: </string>
+    <string name="placeOfResidence">Place of Residence: </string>
+    <string name="phoneNumber">Phone Number: </string>
+    <string name="dateOfPrescription">Date of Prescription: </string>
+    <string name="recordNumber">Record Number: </string>
+    <string name="lastPcrDate">Last PCR Date: </string>
+    <string name="doctorsName">Doctor\'s Name: </string>
+
+    <string name="approve">Approve</string>
+    <string name="decline">Decline</string>
+
+    <string name="dateOfInfection">Date of Infection: </string>
+    <string name="nameOfSource">Name of Source: </string>
+    <string name="additionalNotes">Additional Notes: </string>
+
+    <string name="dateNotYetSet">Date not yet set!</string>
+
+    //recycler view
+
+    <string name="name">Name: </string>
+
+    //Floating action button
+
+    <string name="pcrFAB">PCR</string>
+    <string name="homecareFAB">Homecare</string>
+
+    //Learn More Activity
+
+    <string name="creators">Creators: </string>
+    <string name="jad_name">Jad Kaedbey: </string>
+    <string name="jad_email">jkaedbey@gmail.com</string>
+    <string name="firas_name">Firas El Mohtar: </string>
+    <string name="firas_email">mohtarfiras6711@gmail.com</string>
+
+    //states
+
+    <string name="approvedState">Approved</string>
+    <string name="requestedState">Requested</string>
+    <string name="rejectedState">Rejected</string>
+
+    //Appbar Menu
+
+    <string name="logout">Logout</string>
+    <string name="changeLanguage">Change Language</string>
+
+    //create form dialog
+
+    <string name="fullnameHint">Full Name</string>
+    <string name="mothersNameHint">Mother\'s Name</string>
+    <string name="municipalityNameHint">Municipality Name</string>
+    <string name="dateOfBirthHint">Date of Birth</string>
+    <string name="bloodTypeHint">Blood Type</string>
+    <string name="placeOfResidenceHint">Place of Residence</string>
+    <string name="phoneNumberHint">Phone Number</string>
+    <string name="dateOfPrescriptionHint">Date of Prescription</string>
+    <string name="recordNumberHint">Record Number</string>
+    <string name="lastPcrDateHint">Last PCR Date</string>
+    <string name="doctorsNameHint">Doctor\'s Name</string>
+    <string name="dateOfInfectionHint">Date of Infection</string>
+    <string name="nameOfSourceHint">Name of Source</string>
+    <string name="additionalNotesHint">Additional Notes</string>
+    <string name="submit">Submit</string>
+    <string name="attachImage">Attach Image</string>
+
     //Onboarding Strings
     <string name="onboarding_slide1_title">PCR Requests</string>
     <string name="onboarding_slide1_subtitle">Request a PCR test at Ain W Zein</string>
-    <string name="onboarding_slide1_desc">Get a scheduled date within 2 days. </string>
+    <string name="onboarding_slide1_desc">Get a scheduled date almost instantly. </string>
     <string name="onboarding_slide2_title">Homecare Requests</string>
     <string name="onboarding_slide2_subtitle">Request any type of medication</string>
     <string name="onboarding_slide2_desc">Pills, O2 machines, Insulin, and more.</string>
@@ -34,6 +105,11 @@
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="login">Login</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="needHelp">Need Help?</string>
+    <string name="learnMoreAboutUs">Learn more about us!</string>
+    <string name="loginToGetStarted">We missed you! Login to get started</string>
     <string name="new_user">New User?</string>
     <string name="invalid_username">Invalid username</string>
     <string name="invalid_password">Invalid password</string>
@@ -48,6 +124,7 @@
     //Universal Strings
     <string name="homecare">Home Care</string>
     <string name="pcr">PCR</string>
+    <string name="title_activity_learn_more">LearnMoreActivity</string>
 
     //Toolbar strings
 </resources>

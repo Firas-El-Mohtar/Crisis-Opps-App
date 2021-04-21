@@ -58,7 +58,7 @@
             android:layout_marginBottom="186dp"
             android:background="#212121"
             android:padding="8dp"
-            android:text="Home Care"
+            android:text="@string/homecareFAB"
             android:textColor="#ffffff"
             android:visibility="gone" />
 
@@ -89,7 +89,7 @@
             android:layout_marginBottom="116dp"
             android:background="#212121"
             android:padding="8dp"
-            android:text="PCR"
+            android:text="@string/pcrFAB"
             android:textColor="#ffffff"
             android:visibility="gone" />
 

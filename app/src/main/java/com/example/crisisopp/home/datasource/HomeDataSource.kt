@@ -92,7 +92,7 @@ class HomeDataSource {
         var query: Query? = null
         when (usertype.toLowerCase()) {
             "local" -> query =
-                db.collection("forms").whereEqualTo("municipalityName", municipalityName)
+                db.collection("forms").whereEqualTo("municipalityName", municipalityName.toLowerCase())
                     .orderBy("dateOfUpload", Query.Direction.DESCENDING).limit(50)
             "farah" -> query = db.collection("forms").whereEqualTo("mainApproval", 1)
                 .whereEqualTo("ainWzeinApproval", 1)
