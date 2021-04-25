@@ -139,6 +139,7 @@ class CreateHomecareFormDialog : DialogFragment() {
             GlobalScope.launch {
                 homeViewModel.onFormUploadSendNotification(currentUserToken.await()!!)
             }
+            dialog?.dismiss()
         }
 
         return view

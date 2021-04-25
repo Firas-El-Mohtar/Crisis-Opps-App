@@ -124,7 +124,7 @@
     //Universal Strings
     <string name="homecare">Home Care</string>
     <string name="pcr">PCR</string>
-    <string name="title_activity_learn_more">LearnMoreActivity</string>
+
 
     //Toolbar strings
 </resources>

@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.example.crisisopp.R
 import com.example.crisisopp.home.view.HomeActivity
@@ -62,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         signInButton.setOnClickListener {
             progressBar?.visibility = View.VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
-            progressBar?.visibility = View.GONE
         }
         // checking if the user has an active session
         //skips login if true

@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -22,9 +23,11 @@
         android:theme="@style/Theme.CrisisOpp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".login.view.LearnMoreActivity"
-            android:label="@string/title_activity_learn_more"
+            android:name=".login.view.NeedHelpActivity"
             android:theme="@style/Theme.CrisisOpp.NoActionBar"></activity>
+        <activity
+            android:name=".login.view.LearnMoreActivity"
+            android:theme="@style/Theme.CrisisOpp.NoActionBar" />
         <activity
             android:name=".onboarding.view.OnboardingActivity"
             android:noHistory="true"
