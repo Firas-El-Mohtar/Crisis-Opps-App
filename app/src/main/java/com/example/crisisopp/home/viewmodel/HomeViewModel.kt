@@ -319,4 +319,16 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
             "Done" ->  _selectedFilter.value = 4
         }
     }
+
+    /**
+     * This fucntion works similarly to onNewToken where it updates the stored user token in the firebase db if it has changed
+     * however this function gets called whenever the user enters the home activity to ensure that the notification service
+     * will always send to the most recent token. It also returns the token for storing it in sharedPreferences.
+     *
+     * @return token: String?
+     */
+
+    fun refreshToken(){
+        homeRepository.refreshToken()
+    }
 }

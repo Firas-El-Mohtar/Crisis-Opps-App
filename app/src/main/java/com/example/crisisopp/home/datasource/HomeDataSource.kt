@@ -15,11 +15,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -55,6 +57,30 @@ class HomeDataSource {
         }
     }
 
+
+    fun refreshToken(){
+        val newToken: String? = null
+        var auth = Firebase.auth
+        var doc: DocumentSnapshot?
+        var docObject: User?
+        val usersCollectionRef = Firebase.firestore
+        auth.currentUser?.uid?.let {
+            GlobalScope.launch {
+                val query =
+                    usersCollectionRef.collection("users")
+                        .whereEqualTo("userId", it).get().await()
+
+                doc = query.documents.first()
+                docObject = doc?.toObject<User>()
+
+                var token = fetchCurrentUserToken()
+                if (docObject?.token != token) {
+                    val tokenHashMap = hashMapOf("token" to token)
+                    doc?.reference?.set(tokenHashMap, SetOptions.merge())
+                }
+            }
+        }
+    }
 
     fun getCurrentUserId(): String {
         return currentUser.uid

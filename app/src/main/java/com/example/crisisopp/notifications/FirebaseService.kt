@@ -37,7 +37,7 @@ class FirebaseService : FirebaseMessagingService() {
         }
         var auth = Firebase.auth
 
-        var doc: DocumentSnapshot? = null
+        var doc: DocumentSnapshot?
         val usersCollectionRef = Firebase.firestore
         auth.currentUser?.uid?.let {
             GlobalScope.launch {
@@ -71,7 +71,7 @@ class FirebaseService : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
-            .setSmallIcon(R.drawable.approved_icon)
+            .setSmallIcon(R.drawable.notification_icon)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
@@ -85,6 +85,7 @@ class FirebaseService : FirebaseMessagingService() {
         val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
             description = "My channel description"
             enableLights(true)
+            
             lightColor = Color.GREEN
         }
         notificationManager.createNotificationChannel(channel)

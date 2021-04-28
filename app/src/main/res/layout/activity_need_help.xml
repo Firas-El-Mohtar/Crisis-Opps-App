@@ -6,6 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".login.view.NeedHelpActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout_need_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_need_help"
+            app:navigationIcon="@drawable/ic_back_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#364f6b"
+            app:layout_scrollFlags="enterAlways|snap|scroll"
+            app:menu="@menu/appbar_need_help_menu"
+            app:subtitleTextColor="@color/white"
+            app:title=""
+            app:subtitle=""
+            app:titleMarginStart="45dp"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/need_help_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/need_help_title"
+        android:textSize="25sp"
+        android:fontFamily="@font/segoe_ui_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout_need_help" />
+
+    <TextView
+        android:id="@+id/need_help_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/municipality_email_need_help"
+        android:textSize="20sp"
+        android:fontFamily="@font/segoe_ui_regular"
+        app:layout_constraintEnd_toEndOf="@+id/need_help_title_tv"
+        app:layout_constraintStart_toStartOf="@+id/need_help_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/need_help_title_tv" />
+
+    <TextView
+        android:id="@+id/need_help_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/municipality_phone_number_need_help"
+        android:textSize="20sp"
+        android:fontFamily="@font/segoe_ui_regular"
+        app:layout_constraintStart_toStartOf="@+id/need_help_email"
+        app:layout_constraintTop_toBottomOf="@+id/need_help_email" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

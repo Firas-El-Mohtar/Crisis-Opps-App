@@ -111,6 +111,7 @@
 
 
                 <TextView
+                    android:id="@+id/need_help_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"

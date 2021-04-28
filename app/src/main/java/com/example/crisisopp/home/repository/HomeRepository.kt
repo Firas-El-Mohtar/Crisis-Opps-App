@@ -24,6 +24,10 @@ class HomeRepository(
         return homeDataSource.getUserToken(userId)
     }
 
+    fun refreshToken(){
+        homeDataSource.refreshToken()
+    }
+
     //Form Functions
     fun uploadHomeCareForm(homecareForm: HomecareForm) {
         homeDataSource.saveForm(homecareForm)

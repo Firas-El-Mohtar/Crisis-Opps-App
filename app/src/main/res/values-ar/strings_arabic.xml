@@ -58,6 +58,12 @@
     <string name="firas_name">فراس المهتار: </string>
     <string name="firas_email">mohtarfiras6711@gmail.com</string>
 
+    //Need Help Text
+
+    <string name="need_help_title">تواصل مع البلدية المركزية باستخدام البيانات التالية للحصول على حساب لاستخدام هذا التطبيق:</string>
+    <string name="municipality_email_need_help">MainMunicipality@gmail.com :البريد الإلكتروني</string>
+    <string name="municipality_phone_number_need_help">رقم الهاتف: 111 111 71 </string>
+
     //Appbar Menu
 
     <string name="logout">تسجيل خروج</string>
@@ -109,7 +115,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="login">تسجيل الدخول</string>
     <string name="emailHint">البريد الإلكتروني</string>
-    <string name="passwordHint">كلمه السر\u202B</string>
+    <string name="passwordHint">كلمه السر</string>
     <string name="needHelp">تحتاج مساعدة؟</string>
     <string name="learnMoreAboutUs">تعلم المزيد عنا!</string>
     <string name="loginToGetStarted">قم بتسجيل الدخول لتبدأ</string>
