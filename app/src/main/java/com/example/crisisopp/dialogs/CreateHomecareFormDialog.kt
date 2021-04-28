@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import com.example.crisisopp.R
 import com.example.crisisopp.home.models.HomecareForm
@@ -30,17 +31,17 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
+import kotlin.concurrent.fixedRateTimer
 
 /**
  *This dialog is presented to the user upon clicking the add homecare form floating action button in HomeActivity
  */
 
-class CreateHomecareFormDialog : DialogFragment() {
+class CreateHomecareFormDialog(): DialogFragment() {
     private var btnSubmit: Button? = null
     private var btnAttach: Button? = null
 
     private var documentReference: String? = null
-
     // view for image view
     private var firstImageView: ImageView? = null
     private var secondImageView: ImageView? = null
@@ -72,7 +73,6 @@ class CreateHomecareFormDialog : DialogFragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -102,6 +102,8 @@ class CreateHomecareFormDialog : DialogFragment() {
 //        storageReference = storage!!.reference
         // on pressing btnSelect SelectImage() is called
         btnAttach!!.setOnClickListener {
+//            val photoPickerDialog = PhotoPickerDialog()
+//            fragmentManager?.let { it1 -> photoPickerDialog.show(it1, "Fragment") }
             ImagePicker.with(this).start()
             when(counter){
                 1 ->{

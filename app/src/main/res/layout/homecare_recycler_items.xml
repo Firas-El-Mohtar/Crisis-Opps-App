@@ -107,7 +107,7 @@
             android:padding="5dp"
             android:paddingStart="10dp"
             android:paddingEnd="15dp"
-            android:text="@string/rejectedState"
+            android:text="@string/requestedState"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:visibility="gone"

@@ -1,7 +1,6 @@
 package com.example.crisisopp.home.view
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -100,7 +99,7 @@ class HomeActivity : AppCompatActivity() {
         municipalityName = userEmail.municipalityName
         userId = auth.currentUser.uid
 
-
+        homeViewModel.setContext(context = this)
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
         val farahUser = homeViewModel.isFarahUser()

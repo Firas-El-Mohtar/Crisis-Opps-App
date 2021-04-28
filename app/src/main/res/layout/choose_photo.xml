@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/choose_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/segoe_ui_bold"
+        android:text="Choose"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/camera_image_view"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toStartOf="@+id/gallery_image_view"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_text_view"
+        app:srcCompat="@drawable/camera_icon" />
+
+    <ImageView
+        android:id="@+id/gallery_image_view"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/camera_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/choose_text_view"
+        app:srcCompat="@drawable/gallery_icon" />
+
+    <TextView
+        android:id="@+id/camera_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="Camera"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/camera_image_view"
+        app:layout_constraintStart_toStartOf="@+id/camera_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/camera_image_view" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="Gallery"
+        android:textSize="17sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/camera_text_view"
+        app:layout_constraintEnd_toEndOf="@+id/gallery_image_view"
+        app:layout_constraintStart_toStartOf="@+id/gallery_image_view" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+</androidx.constraintlayout.widget.ConstraintLayout>

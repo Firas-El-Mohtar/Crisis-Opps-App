@@ -1,16 +1,9 @@
 package com.example.crisisopp.logIn.repository
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.crisisopp.logIn.datasource.LoginDataSource
 import com.example.crisisopp.logIn.models.LoggedInUser
 import com.example.crisisopp.logIn.models.User
-import com.example.crisisopp.notifications.FirebaseService
-import com.google.firebase.iid.FirebaseInstanceId
-import kotlinx.coroutines.tasks.await
-import java.lang.Exception
-import javax.sql.DataSource
 
 class LoginRepository(val dataSource: LoginDataSource, var sharedPref: SharedPreferences) {
     val TAG = "LOGIN"

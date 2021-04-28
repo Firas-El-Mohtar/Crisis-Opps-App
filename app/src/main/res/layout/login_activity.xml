@@ -14,6 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,7 +134,7 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
             <ProgressBar
-                android:id="@+id/progress_bar"
+                android:id="@+id/progress_bar_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -149,16 +150,6 @@
                 android:fontFamily="@font/seg_ui_semibold"
                 android:layout_marginLeft="12dp"
                 android:clickable="true"/>
-
-            <ProgressBar
-                android:id="@+id/progress_bar_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
     </RelativeLayout>
