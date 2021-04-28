@@ -7,13 +7,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.crisisopp.R
 import com.example.crisisopp.logIn.view.LoginActivity
-import com.example.crisisopp.logIn.viewmodel.LoginViewModel
-import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
 import com.example.crisisopp.onboarding.entity.OnBoardingPage
 import com.example.crisisopp.onboarding.entity.OnBoardingPagerAdapter
 import com.example.crisisopp.onboarding.prefsmanager.OnBoardingPrefManager

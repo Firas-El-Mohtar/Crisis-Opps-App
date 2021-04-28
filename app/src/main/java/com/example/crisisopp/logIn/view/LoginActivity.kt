@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +17,11 @@ import com.example.crisisopp.R
 import com.example.crisisopp.home.view.HomeActivity
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
-import com.example.crisisopp.login.view.LearnMoreActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -33,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> { LoginViewModelFactory(prefs) }
     private lateinit var auth: FirebaseAuth
     lateinit var prefs: SharedPreferences
-    private var progressBar: ProgressBar? = null
+    private lateinit var progressBar: ProgressBar
     private var userType: String? = null
     private lateinit var learnMore: TextView
 
@@ -43,23 +46,22 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
         auth = Firebase.auth
-        prefs = getPreferences(Context.MODE_PRIVATE)
         progressBar = findViewById(R.id.progress_bar_login)
+        prefs = getPreferences(Context.MODE_PRIVATE)
         learnMore = findViewById(R.id.learn_more)
         learnMore.setOnClickListener {
             val intent = Intent(this, LearnMoreActivity::class.java)
             startActivity(intent)
         }
-        
+
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
-        progressBar = findViewById(R.id.progress_bar_login)
         password.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
 
 
         signInButton.setOnClickListener {
-            progressBar?.visibility = View.VISIBLE
+            progressBar.visibility = VISIBLE
             viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
         }
         // checking if the user has an active session
@@ -72,7 +74,6 @@ class LoginActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK)
         finish()
     }
-
 
     // Function to move to the home activity
     private fun updateUiWithUser() {

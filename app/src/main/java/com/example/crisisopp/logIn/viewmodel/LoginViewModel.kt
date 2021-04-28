@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.crisisopp.extensions.emailDomain
 import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.logIn.models.LoginResult
-import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.logIn.repository.LoginRepository
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException

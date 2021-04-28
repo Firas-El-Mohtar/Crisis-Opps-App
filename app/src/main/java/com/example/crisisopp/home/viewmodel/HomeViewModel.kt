@@ -1,5 +1,7 @@
 package com.example.crisisopp.home.viewmodel
 
+import android.content.Context
+import android.view.contentcapture.ContentCaptureCondition
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -41,6 +43,13 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     val selectedFilter: LiveData<Int>
         get() = _selectedFilter
 
+    private lateinit var mycontext: Context
+    fun setContext(context: Context){
+        mycontext = context
+    }
+    fun getContext():Context{
+        return mycontext
+    }
     private lateinit var parentForm: IForm
 
     //User Functions

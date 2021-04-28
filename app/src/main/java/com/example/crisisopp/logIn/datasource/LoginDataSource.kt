@@ -1,18 +1,15 @@
 package com.example.crisisopp.logIn.datasource
 
-import android.util.Log
 import com.example.crisisopp.logIn.models.LoggedInUser
 import com.example.crisisopp.logIn.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import java.io.IOException
 
 class LoginDataSource {
     private var auth: FirebaseAuth = Firebase.auth
