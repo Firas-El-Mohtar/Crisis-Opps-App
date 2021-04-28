@@ -121,7 +121,6 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
                 progressBar.visibility = VISIBLE
                 homeViewModel.approveForm()
                 homeViewModel.autoSendNotification(homeViewModel.getPcrForm()?.originatorId!!, true)
-                progressBar.visibility = GONE
             }
         }
         declineButton.setOnClickListener {
