@@ -1,11 +1,9 @@
-package com.example.crisisopp.login.view
+package com.example.crisisopp.logIn.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.crisisopp.R
-import com.example.crisisopp.logIn.view.LoginActivity
 
 class NeedHelpActivity : AppCompatActivity() {
 

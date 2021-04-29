@@ -12,15 +12,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.crisisopp.R
+import com.example.crisisopp.dialogs.HomecareContentDialog
 import com.example.crisisopp.home.view.HomeActivity
+import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.logIn.viewmodel.LoginViewModel
 import com.example.crisisopp.logIn.viewmodel.LoginViewModelFactory
-import com.example.crisisopp.login.view.LearnMoreActivity
-import com.example.crisisopp.login.view.NeedHelpActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import java.lang.Error
 import java.util.*
+import kotlin.Exception
 
 
 /**
@@ -38,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
     private var userType: String? = null
     private lateinit var learnMore: TextView
     private lateinit var needHelp: TextView
+
 
     // Initialize Firebase Auth
     val TAG = "1234"
@@ -57,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, LearnMoreActivity::class.java)
             startActivity(intent)
         }
-        
+
         val email = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val signInButton = findViewById<Button>(R.id.signup)
@@ -66,9 +72,41 @@ class LoginActivity : AppCompatActivity() {
 
 
         signInButton.setOnClickListener {
-            progressBar?.visibility = View.VISIBLE
-            viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
+            if (email.text.toString() != "") {
+                if (password.text.toString() != "") {
+                    progressBar?.visibility = View.VISIBLE
+                    viewModel.loginWithCoroutines(email.text.toString(), password.text.toString())
+                    viewModel.loginStaus.observe(this, Observer {
+                        if (it == -1) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                resources.getString(R.string.login_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            viewModel.resetLoginStatus()
+
+
+                            progressBar?.visibility = View.GONE
+                        } else if (it == 1) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                resources.getString(R.string.login_success_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+                } else Toast.makeText(
+                    this@LoginActivity,
+                    resources.getString(R.string.password_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else Toast.makeText(
+                this@LoginActivity,
+                resources.getString(R.string.email_error),
+                Toast.LENGTH_SHORT
+            ).show()
         }
+
         // checking if the user has an active session
         //skips login if true
         if (auth.currentUser != null) {

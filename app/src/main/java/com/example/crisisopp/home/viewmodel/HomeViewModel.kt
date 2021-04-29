@@ -1,7 +1,6 @@
 package com.example.crisisopp.home.viewmodel
 
 import android.content.Context
-import android.view.contentcapture.ContentCaptureCondition
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -2,7 +2,9 @@ package com.example.crisisopp.home.datasource
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.crisisopp.home.models.*
+import com.example.crisisopp.home.models.HomecareForm
+import com.example.crisisopp.home.models.IForm
+import com.example.crisisopp.home.models.PcrForm
 import com.example.crisisopp.logIn.models.User
 import com.example.crisisopp.notifications.NotificationData
 import com.example.crisisopp.notifications.PushNotification
@@ -15,7 +17,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
@@ -59,7 +60,6 @@ class HomeDataSource {
 
 
     fun refreshToken(){
-        val newToken: String? = null
         var auth = Firebase.auth
         var doc: DocumentSnapshot?
         var docObject: User?

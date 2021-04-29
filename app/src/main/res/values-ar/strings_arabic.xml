@@ -92,6 +92,13 @@
 
     <string name="dateNotYetSet">لم يتم تحديد التاريخ بعد!</string>
 
+    //login toasts
+
+    <string name="login_error_message">البريد الإلكتروني أو كلمة المرور التي أدخلتها غير صالحة</string>
+    <string name="login_success_message">تم تسجيل الدخول بنجاح!</string>
+    <string name="email_error">الرجاء إدخال عنوان البريد الإلكتروني الخاص بك</string>
+    <string name="password_error">الرجاء إدخال كلمة المرور الخاصة بك</string>
+
 
 
     //onborading

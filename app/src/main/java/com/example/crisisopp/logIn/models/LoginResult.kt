@@ -1,5 +1,6 @@
 package com.example.crisisopp.logIn.models
 
+
 /**
  * Authentication result : success (user details) or error message.
  */

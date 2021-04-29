@@ -57,6 +57,13 @@
     <string name="firas_name">Firas El Mohtar: </string>
     <string name="firas_email">mohtarfiras6711@gmail.com</string>
 
+    //login toasts
+
+    <string name="login_error_message">The email or password you entered is invalid</string>
+    <string name="login_success_message">Login Successful!</string>
+    <string name="email_error">Please enter your email address</string>
+    <string name="password_error">Please enter your password</string>
+
 
     //Need Help Text
 

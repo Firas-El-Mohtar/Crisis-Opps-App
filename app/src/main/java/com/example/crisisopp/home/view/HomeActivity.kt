@@ -21,7 +21,6 @@ import com.example.crisisopp.extensions.municipalityName
 import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.crisisopp.home.viewmodel.HomeViewModelFactory
 import com.example.crisisopp.logIn.view.LoginActivity
-import com.example.crisisopp.notifications.FirebaseService
 import com.example.crisisopp.recyclerview.HomeCareFormsFragment
 import com.example.crisisopp.viewpager.ViewPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
@@ -32,7 +31,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessagingService
 import java.util.*
 
 
