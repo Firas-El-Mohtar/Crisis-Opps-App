@@ -104,7 +104,7 @@ class CreateHomecareFormDialog(): DialogFragment() {
         btnAttach!!.setOnClickListener {
 //            val photoPickerDialog = PhotoPickerDialog()
 //            fragmentManager?.let { it1 -> photoPickerDialog.show(it1, "Fragment") }
-            ImagePicker.with(this).start()
+            ImagePicker.with(this).compress(1024).start()
             when(counter){
                 1 ->{
                     firstImageID = UUID.randomUUID().toString()

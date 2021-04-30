@@ -141,12 +141,17 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
                 val datePickerDialog =
                     DatePickerDialog(requireContext(), this, year, month, day)
                 datePickerDialog.show()
-                homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
+
             } else {
 
                 progressBar.visibility = VISIBLE
                 homeViewModel.approveForm()
-                homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
+                if(homeViewModel.isFarahUser()) {
+                    homeViewModel.autoSendNotification(
+                        homeViewModel.getHomeCareForm()?.originatorId!!,
+                        true
+                    )
+                }
             }
             progressBar.visibility = GONE
         }
@@ -154,7 +159,12 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
 
             progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
-            homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, false)
+            if(homeViewModel.isFarahUser()) {
+                homeViewModel.autoSendNotification(
+                    homeViewModel.getHomeCareForm()?.originatorId!!,
+                    false
+                )
+            }
             progressBar.visibility = GONE
         }
         return view
@@ -194,7 +204,8 @@ class HomecareContentDialog : DialogFragment(), DatePickerDialog.OnDateSetListen
             "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
         } else "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute
 
-        tAppointmentDate.text = "Appointment: " + appointment
+        tAppointmentDate.text = appointment
+        homeViewModel.autoSendNotification(homeViewModel.getHomeCareForm()?.originatorId!!, true)
         homeViewModel.uploadHomecareAppointment(homeViewModel.getHomeCareForm()?.formID!!, appointment)
     }
 }

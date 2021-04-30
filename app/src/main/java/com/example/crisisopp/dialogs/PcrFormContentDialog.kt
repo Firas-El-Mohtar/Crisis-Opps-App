@@ -102,6 +102,14 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
                 tAppointmentDate.text = it.appointment
             }
         }
+        if(homeViewModel.getUserType() == "ainwzein"){
+            val form = homeViewModel.getHomeCareForm()
+            if(form?.ainWzeinApproval == 1 || form?.ainWzeinApproval == -1){
+                approveButton.isEnabled = false
+                declineButton.isEnabled = false
+            }
+        }
+
 
         approveButton.setOnClickListener() {
             if (homeViewModel.isAynWZein()) {
@@ -114,19 +122,25 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
                 val datePickerDialog =
                     DatePickerDialog(requireContext(), this, year, month, day)
                 datePickerDialog.show()
-                homeViewModel.autoSendNotification(homeViewModel.getPcrForm()?.originatorId!!, true)
                 progressBar.visibility = GONE
             } else {
 
                 progressBar.visibility = VISIBLE
                 homeViewModel.approveForm()
-                homeViewModel.autoSendNotification(homeViewModel.getPcrForm()?.originatorId!!, true)
+                if(homeViewModel.isAynWZein()) {
+                    homeViewModel.autoSendNotification(
+                        homeViewModel.getPcrForm()?.originatorId!!,
+                        true
+                    )
+                }
             }
         }
         declineButton.setOnClickListener {
             progressBar.visibility = VISIBLE
             homeViewModel.declineForm()
-            homeViewModel.autoSendNotification(form.originatorId, false)
+            if(homeViewModel.isAynWZein()) {
+                homeViewModel.autoSendNotification(form.originatorId, false)
+            }
             progressBar.visibility = GONE
         }
         return view
@@ -170,7 +184,8 @@ class PcrFormContentDialog() : DialogFragment(), DatePickerDialog.OnDateSetListe
         appointment = if (minute <= 9){
             "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":0" + minute
         } else "" + myDay + "\\" + myMonth + "\\" + myYear + " " + myHour + ":" + minute
-        tAppointmentDate.text = "Appointment: " + appointment
+        tAppointmentDate.text = appointment
+        homeViewModel.autoSendNotification(homeViewModel.getPcrForm()?.originatorId!!, true)
         //"Year: " + myYear + "\\" + "Month: " + myMonth + "\\" + "Day: " + myDay + "\\" + "Hour: " + myHour + "\\" + "Minute: " + myMinute
         homeViewModel.uploadPcrAppointment(homeViewModel.getPcrForm()?.formID!!, appointment)
     }

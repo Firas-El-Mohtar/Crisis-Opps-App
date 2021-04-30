@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crisisopp.R
 import com.example.crisisopp.home.models.PcrForm
@@ -11,6 +12,7 @@ import com.example.crisisopp.home.viewmodel.HomeViewModel
 import com.example.testingthings.history.FirestoreAdapter
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
+import java.util.*
 
 
 class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
@@ -35,6 +37,7 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
         val approvedState: TextView = itemView.findViewById(R.id.approved_state_pcr)
         val requestedState: TextView = itemView.findViewById(R.id.requested_state_pcr)
         val rejectedState: TextView = itemView.findViewById(R.id.rejected_state_pcr)
+        val language = Locale.getDefault().displayLanguage
 
         init {
 
@@ -42,25 +45,76 @@ class PcrFormAdapter(private val homeViewModel: HomeViewModel) :
         }
 
         fun bind(snapshot: DocumentSnapshot) {
-            snapshot.toObject<PcrForm>()?.let {
-                val form = it
-                personName.text = form.fullName
-                placeOfResidency.text = form.placeOfResidence
-                phoneNumber.text = form.phoneNumber.toString()
-                dateOfinfection.text = form.dateOfInfection
-                if (it.ainWzeinApproval == 0) {
-                    requestedState.visibility = View.VISIBLE
-                    rejectedState.visibility = View.GONE
-                    approvedState.visibility = View.GONE
-                } else if (it.ainWzeinApproval == -1) {
-                    rejectedState.visibility = View.VISIBLE
-                    approvedState.visibility = View.GONE
-                    requestedState.visibility = View.GONE
-                } else if (it.ainWzeinApproval == 1) {
-                    approvedState.visibility = View.VISIBLE
-                    rejectedState.visibility = View.GONE
-                    requestedState.visibility = View.GONE
+            val form = snapshot.toObject<PcrForm>()
+            if (language == "العربية") {
+                approvedState.background = AppCompatResources.getDrawable(
+                    homeViewModel.getContext(),
+                    R.drawable.approved_arabic_background
+                )
+                requestedState.background = AppCompatResources.getDrawable(
+                    homeViewModel.getContext(),
+                    R.drawable.requested_arabic_background
+                )
+                rejectedState.background = AppCompatResources.getDrawable(
+                    homeViewModel.getContext(),
+                    R.drawable.rejected_arabic_background
+                )
+
+            }
+
+            personName.text = form?.fullName
+            placeOfResidency.text = form?.placeOfResidence
+            phoneNumber.text = form?.phoneNumber.toString()
+            dateOfinfection.text = form?.dateOfInfection
+            when (homeViewModel.getUserType()) {
+                "local" -> {
+                    if (form?.ainWzeinApproval == 0) {
+                        requestedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        approvedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == -1) {
+                        rejectedState.visibility = View.VISIBLE
+                        approvedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == 1) {
+                        approvedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    }
+
                 }
+                "ainwzein" -> {
+                    if (form?.ainWzeinApproval == 0) {
+                        requestedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        approvedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == -1) {
+                        rejectedState.visibility = View.VISIBLE
+                        approvedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == 1) {
+                        approvedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    }
+
+                }
+                "main" -> {
+                    if (form?.ainWzeinApproval == 0) {
+                        requestedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        approvedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == -1) {
+                        rejectedState.visibility = View.VISIBLE
+                        approvedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    } else if (form?.ainWzeinApproval == 1) {
+                        approvedState.visibility = View.VISIBLE
+                        rejectedState.visibility = View.GONE
+                        requestedState.visibility = View.GONE
+                    }
+                }
+
             }
         }
 

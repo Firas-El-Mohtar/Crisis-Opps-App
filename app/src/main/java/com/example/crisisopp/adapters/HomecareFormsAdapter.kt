@@ -48,7 +48,7 @@ class HomecareFormsAdapter(private val homeViewModel: HomeViewModel) :
             if(language == "العربية"){
                 approvedState.background = getDrawable(homeViewModel.getContext(), R.drawable.approved_arabic_background)
                 requestedState.background = getDrawable(homeViewModel.getContext(),R.drawable.requested_arabic_background)
-                requestedState.background = getDrawable(homeViewModel.getContext(), R.drawable.rejected_arabic_background)
+                rejectedState.background = getDrawable(homeViewModel.getContext(), R.drawable.rejected_arabic_background)
 
             }
             personName.text = form?.fullName
