@@ -20,9 +20,62 @@ Can set PCR appointments: Ain w Zein
 
 Can set Homecare appointments: Farah Foundations
 
-
 # This app was developed by:
 
 Jad Kaedbey: jkaedbey@gmail.com
 
 Firas El Mohtar: mohtarfiras6711@gmail.com
+
+# Login Screen
+
+<img src="images/Login%20Screenshot.jpeg" width  = "300">
+
+                                                               
+# Onboarding Screens 
+
+<table>
+  <tr>
+    <td>
+        
+   <img src="images/Onboarding%20Screen%201.jpeg" width = "300" >
+    </td>
+        
+   <td>
+    
+   <img src = "images/Onboarding%20Screen%202.jpeg" width = "300">
+    </td>
+    
+   <td>
+    
+  <img src = "images/Onboarding%20Screen%203.jpeg" width = "300">
+    </td>
+   
+ </tr>
+ </table>
+
+# Home Activity Screenshots
+
+<table>
+  <tr>
+    <td>
+        
+   <img src="images/Shouf%20Homecare%20Screenshot.jpeg" width = "300">
+    </td>
+        
+   <td>
+    
+   <img src="images/Shouf%20PCR%20Screenshot.jpeg" width = "300">
+    </td>
+    
+   <td>
+    
+  <img src="images/Farah%20Foundation%20screenshot.jpeg" width = "300">
+    </td>
+     
+   
+ </tr>
+ </table>
+
+# Learn More About Us Screen
+
+<img src="images/Learn%20More%20Screenshot.jpeg" width = "300">
