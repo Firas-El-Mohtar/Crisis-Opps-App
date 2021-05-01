@@ -1,0 +1,81 @@
+# Crisis-Opps-App
+
+This app serves as an interface between various municipalities of Lebanon's Shouf region, Ain W Zein Hospital and Farah Social Foundation. The app has 4 unique types of users: 
+Local Municipality User, Main Municipality User, Ain w Zein Hospital User and Farah Foundation User. Once the local municipality user is logged in, they can add 2 types of forms: PCR and
+Homecare requests. Homecare forms require 2 images attached to the form: an ID scan, and a doctor's prescription. The municipality can also view the forms previously issued by 
+this account ONLY, whereas other users can view all previously sent froms from all municipalities. PCR forms are managed by Ain w Zein only whereas Homecare forms are managed by all 3
+other users. Once the Homecare form gets approved by Ain w Zein Hospital & Main Municipality, the form then appears on Farah Foundation's list of forms where they then decide its
+fate and set an appointment. Upon setting an appintment, the user gets notified and is able to view the set appointment.
+
+
+The User Permissions are as follows:
+
+Can Add forms: Local Municipality
+
+Can accept/decline PCR Forms: Ain w Zein Hospital
+
+Can accept/decline Homecare Forms: Ain w Zein Hospital, Main Municipality, Farah Foundation
+
+Can set PCR appointments: Ain w Zein
+
+Can set Homecare appointments: Farah Foundations
+
+# This app was developed by:
+
+Jad Kaedbey: jkaedbey@gmail.com
+
+Firas El Mohtar: mohtarfiras6711@gmail.com
+
+# Login Screen
+
+<img src="images/Login%20Screenshot.jpeg" width  = "300">
+
+                                                               
+# Onboarding Screens 
+
+<table>
+  <tr>
+    <td>
+        
+   <img src="images/Onboarding%20Screen%201.jpeg" width = "300" >
+    </td>
+        
+   <td>
+    
+   <img src = "images/Onboarding%20Screen%202.jpeg" width = "300">
+    </td>
+    
+   <td>
+    
+  <img src = "images/Onboarding%20Screen%203.jpeg" width = "300">
+    </td>
+   
+ </tr>
+ </table>
+
+# Home Activity Screenshots
+
+<table>
+  <tr>
+    <td>
+        
+   <img src="images/Shouf%20Homecare%20Screenshot.jpeg" width = "300">
+    </td>
+        
+   <td>
+    
+   <img src="images/Shouf%20PCR%20Screenshot.jpeg" width = "300">
+    </td>
+    
+   <td>
+    
+  <img src="images/Farah%20Foundation%20screenshot.jpeg" width = "300">
+    </td>
+     
+   
+ </tr>
+ </table>
+
+# Learn More About Us Screen
+
+<img src="images/Learn%20More%20Screenshot.jpeg" width = "300">
